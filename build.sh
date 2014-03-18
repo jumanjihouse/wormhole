@@ -53,4 +53,4 @@ docker run -rm -volumes-from $user-data -u $user $user /bin/bash -c "echo $pubke
 docker run -rm -volumes-from $user-data -u $user $user chmod 0600 /home/$user/.ssh/authorized_keys
 
 # create a container from the user image
-docker run -d -volumes-from $user-data -P -h dev -name $user-run $user
+docker run -d -volumes-from $user-data -P -h dev.example.com -name $user-run $user
