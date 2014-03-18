@@ -1,6 +1,9 @@
 This repo is a temporary home to store a project
 while I work on getting it ready for open-source.
 
+The official upstream is https://github.com/jumanjiman/docker-devenv
+(and is private for the moment).
+
 
 ## Requirements
 
