@@ -2,7 +2,7 @@
 
 user=$1
 pubkey=$2
-if test -z $user -o -z $pubkey; then
+if test -z $user ; then
   echo "Usage: $(basename $0) <username> <pubkey>" 2> /dev/null
   exit 1
 fi
@@ -18,10 +18,7 @@ EOF
 cat > user <<EOF
 FROM    booga:latest
 RUN     useradd $user
-#USER   $user
 VOLUME  ["/home/$user"]
-WORKDIR /home/$user
-ENV     HOME /home/$user
 EOF
 
 # build new data image and remove intermediate containers
