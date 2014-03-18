@@ -1,3 +1,0 @@
-FROM    booga:latest
-RUN     useradd jumanjiman
-VOLUME  ["/home/jumanjiman"]

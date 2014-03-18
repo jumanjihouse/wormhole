@@ -1,4 +1,0 @@
-FROM   busybox
-RUN    mkdir -p /home/rismoney
-VOLUME ["/home/rismoney"]
-CMD    ["/bin/true"]
