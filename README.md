@@ -69,3 +69,35 @@ Rebuild the `booga` image as described above, then...
 ```
 ./upgrade.sh jumanjiman
 ```
+
+
+## User instructions
+
+It is probably useful to add these lines to your `~/.bashrc`:
+
+```
+# .bashrc
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+# User specific aliases and functions
+set -o vi
+alias c=clear
+export EDITOR=vim
+export GIT_EDITOR=vim
+function parse_git_dirty {
+  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
+}
+export CLICOLOR=1
+export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\$(parse_git_branch)\$ "
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export LC_CTYPE=UTF-8
+```
