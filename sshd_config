@@ -1,0 +1,298 @@
+# vim: set ts=2 sw=2 ai et:
+####################################################################
+# This is the sshd server system-wide configuration file.
+# See sshd_config(5) for more information.
+#
+# The local strategy for options in sshd_config is to
+# remove commented lines when we override values.
+# This strategy is intended to...
+#
+# * Promote unique lines in the config to
+#   avoid accidental conflicts or duplicates.
+# * Promote clarity.
+#
+# The upstream strategy for options in sshd_config
+# shipped with OpenSSH is to...
+#
+# * Specify options with their default value where possible,
+#   but leave them commented.
+# * Uncommented options change a default value.
+#
+# References to CCE and NIST mappings are from http://goo.gl/XmMkb
+# as published within http://usgcb.nist.gov/usgcb/rhel_content.html
+#
+# NIST 800-53 is available at
+# http://csrc.nist.gov/publications/PubsSPs.html
+#
+# /etc/ssh/sshd_config
+####################################################################
+# This sshd was compiled with PATH=/usr/local/bin:/bin:/usr/bin
+
+#Port 22
+#AddressFamily any
+#ListenAddress 0.0.0.0
+#ListenAddress ::
+
+
+
+
+# CCE-14491-5 Use appropriate ciphers for SSH
+# NIST 800-53 mapping: SC-13
+#
+# Enforce the use of ciphers which are FIPS-approved.
+#
+# The default is:
+#   aes128-ctr,aes192-ctr,aes256-ctr,arcfour256,arcfour128,
+#   aes128-cbc,3des-cbc,blowfish-cbc,cast128-cbc,aes192-cbc,
+#   aes256-cbc,arcfour
+#
+# Recommended:
+#   aes128-ctr,aes192-ctr,aes256-ctr
+#
+Ciphers aes128-ctr,aes192-ctr,aes256-ctr
+
+
+
+
+# CCE-4325-7 Disable SSH protocol version 1
+# NIST 800-53 mapping: CM-7
+#
+# Disable legacy (protocol version 1) support in the server for new
+# installations. In future the default will change to require explicit
+# activation of protocol 1
+#
+# The default is '2'.
+#
+Protocol 2
+
+
+
+
+# HostKeys for protocol version 2
+#HostKey /etc/ssh/ssh_host_rsa_key
+#HostKey /etc/ssh/ssh_host_dsa_key
+
+
+
+
+# Logging
+SyslogFacility AUTHPRIV
+
+
+
+
+# Authentication:
+#LoginGraceTime 2m
+#StrictModes yes
+#MaxAuthTries 6
+#MaxSessions 10
+#RSAAuthentication yes
+#PubkeyAuthentication yes
+#AuthorizedKeysFile	.ssh/authorized_keys
+#AuthorizedKeysCommand none
+#AuthorizedKeysCommandRunAs nobody
+
+
+
+
+
+# CCE-4370-3 Disable SSH host-based authentication
+# NIST 800-53 mapping: CM-7
+#
+# Prevent hosts from unilaterally trusting one another,
+# even within an organization.
+#
+# The default is 'no'.
+#
+HostbasedAuthentication no
+
+
+
+
+
+# CCE-4475-0 Disable emulation of the rsh command through the ssh server
+# NIST 800-53 mapping: SC-7
+#
+# Prevent SSH from emulating the behavior of the obsolete rsh
+# command, which would allow users to enable insecure access to
+# their accounts via .rhosts files.
+#
+# Don't read the user's ~/.rhosts and ~/.shosts files
+#
+# The default is 'yes'.
+#
+IgnoreRhosts yes
+
+
+
+
+# CCE-3660-8 Disable remote connections from accounts with empty passwords
+# NIST 800-53 mapping: AC-17, SC-7
+#
+# Prevent users with blank passwords from accessing the system remotely.
+# All user accounts should have complex passwords that meet password requirements.
+#
+# The default is 'no'.
+#
+PermitEmptyPasswords no
+
+# To disable tunneled clear text passwords, change to no here!
+PasswordAuthentication no
+
+GSSAPIAuthentication no
+KerberosAuthentication no
+
+# "no" means disable s/key passwords.
+ChallengeResponseAuthentication no
+
+
+
+
+# Set this to 'yes' to enable PAM authentication, account processing,
+# and session processing. If this is enabled, PAM authentication will
+# be allowed through the ChallengeResponseAuthentication and
+# PasswordAuthentication.  Depending on your PAM configuration,
+# PAM authentication via ChallengeResponseAuthentication may bypass
+# the setting of "PermitRootLogin without-password".
+#
+# If you just want the PAM account and session checks to run without
+# PAM authentication, then enable this but set PasswordAuthentication
+# and ChallengeResponseAuthentication to 'no'.
+UsePAM yes
+
+
+# Accept locale-related environment variables
+AcceptEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
+AcceptEnv XMODIFIERS
+
+
+
+AllowTcpForwarding no
+X11Forwarding no
+AllowAgentForwarding yes
+#GatewayPorts no
+#X11DisplayOffset 10
+#X11UseLocalhost yes
+#PrintMotd yes
+#PrintLastLog yes
+#TCPKeepAlive yes
+#UseLogin no
+#UsePrivilegeSeparation yes
+#Compression delayed
+#ShowPatchLevel no
+#PidFile /var/run/sshd.pid
+#MaxStartups 10
+#PermitTunnel no
+#ChrootDirectory none
+
+
+
+
+# CCE-3845-5 idle timeout interval should be set to an appropriate value
+# NIST 800-53 mapping: CM-7, AC-11
+#
+# Per CCE: An idle user should be automatically logged out after 5 minutes of inactivity.
+# This prevents the system from keeping open ssh connections that are not being used.
+#
+# Sets a timeout interval in seconds after which if no data has
+# been received from the client, sshd(8) will send a message through
+# the encrypted channel to request a response from the client.
+#
+# The default is 0, indicating that these messages will not be sent to the client.
+#
+# Recommended by CCE: 900
+#
+ClientAliveInterval 900
+
+
+
+# CCE-14061-6 'keep alive' message count should be set to an appropriate value.
+# NIST 800-53 mapping: SC-10
+#
+# Per CCE: An idle user should be automatically logged out after 5 minutes of inactivity.
+# This prevents the system from keeping open ssh connections that are not being used.
+#
+# The client alive mechanism is valuable when the client or server
+# depend on knowing when a connection has become inactive.
+# If ClientAliveInterval (see above) is set to 15, and
+# ClientAliveCountMax is left at the default, unresponsive SSH
+# clients will be disconnected after approximately 45 seconds.
+#
+# The default value is 3.
+#
+# Recommended by CCE: 0
+#
+ClientAliveCountMax 3
+
+
+
+# CCE-4431-3 SSH warning banner should be enabled
+# NIST 800-53 mapping: AC-3, CM-6, AC-8
+#
+# Users should see a message before they the logon process.
+#
+# The contents of the specified file are sent to the remote user
+# before authentication is allowed.
+# If the argument is 'none' then no banner is displayed.
+#
+# Default: none
+#
+# Recommended: /etc/issue
+#
+Banner /etc/issue.net
+
+
+
+
+# override default of no subsystems
+Subsystem	sftp	/usr/libexec/openssh/sftp-server
+
+
+# Use either IPv4 or IPv6.
+AddressFamily any
+
+
+
+
+
+# Specifies whether sshd(8) should look up the remote host name
+# and check that the resolved host name for the remote IP address
+# maps back to the very same IP address.
+UseDNS yes
+
+
+
+
+# CCE-4387-7 Disable root login via SSH
+# NIST 800-53 mapping: AC-17, SC-7
+#
+# Prevent the root user from logging in directly over the
+# network. It reduces auditable information about who ran privileged
+# commands on the system and allows direct attack attempts on
+# root's password
+#
+# The default is 'yes'.
+#
+# Recommended: 'no'
+#
+permitrootlogin no
+
+
+
+
+# CCE-14716-5 Users should not be allowed to set environment options
+# NIST 800-53 mapping: CM-7
+#
+# Prevents user from being able to present environment
+# options to the SSH daemon and potentially bypass some access
+# restrictions using mechanisms such as LD_PRELOAD.
+#
+# Prevent sshd(8) from procesesing:
+# * ~/.ssh/environment
+# environment= options in ~/.ssh/authorized_keys
+#
+# The default is 'no'.
+#
+PermitUserEnvironment no

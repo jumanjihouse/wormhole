@@ -31,6 +31,10 @@ ADD .bashrc /etc/skel/
 ADD .bash_logout /etc/skel/
 ADD .bash_profile /etc/skel/
 
+# Configure security.
+ADD sshd_config /etc/ssh/
+ADD issue.net /etc/
+
 EXPOSE 22
 ENV LANG C
 CMD /usr/sbin/sshd -D
