@@ -19,7 +19,7 @@ docker rm $user-run
 
 # build user image named $user
 docker rmi $user 2> /dev/null
-cat user | docker build -rm -t $user -
+cat user | docker build --rm -t $user -
 
 # create a runtime container from the user image
-docker run -d -volumes-from $user-data -p $port:22 -h dev -name $user-run $user
+docker run -d --volumes-from $user-data -p $port:22 -h dev --name $user-run $user
