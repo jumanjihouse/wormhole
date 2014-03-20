@@ -93,9 +93,13 @@ fi
 # export SYSTEMD_PAGER=
 # User specific aliases and functions
 set -o vi
+
 alias c=clear
+alias rake='bundle exec rake'
+
 export EDITOR=vim
 export GIT_EDITOR=vim
+
 function parse_git_dirty {
   [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
 }
