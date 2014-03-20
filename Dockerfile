@@ -14,6 +14,10 @@ RUN yum install -y \
     ruby ruby-devel rubygem-bundler \
     libcurl-devel libxslt-devel libxml2-devel \
     vim-enhanced bash-completion \
+    tree \
+    python-devel python-nose python-setuptools python-pep8 rpm-python \
+    python3-devel python3-nose python3-setuptools python3-pep8 rpm-python3 \
+    rpm-build libxslt createrepo git-annex \
     git tar patch diffutils which
 
 # Remove yum metadata to reduce image size.
