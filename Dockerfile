@@ -22,7 +22,11 @@ RUN yum clean all
 # Autocreate ssh host keys.
 RUN ssh-keygen -A
 
+# Populate /etc/skel
+ADD .bashrc /etc/skel/
+ADD .bash_logout /etc/skel/
+ADD .bash_profile /etc/skel/
+
 EXPOSE 22
 ENV LANG C
-#CMD ["/bin/bash"]
 CMD /usr/sbin/sshd -D
