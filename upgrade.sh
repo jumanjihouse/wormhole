@@ -8,7 +8,7 @@ if test -z $user -o -z $port; then
 fi
 
 cat > user <<EOF
-FROM    booga:latest
+FROM    jumanjiman/booga:latest
 RUN     useradd $user
 VOLUME  ["/home/$user"]
 EOF

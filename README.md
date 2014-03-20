@@ -18,8 +18,13 @@ The official upstream is https://github.com/jumanjiman/docker-devenv
 This image serves as a template for user images.
 
 ```
-docker build --rm -t booga --no-cache .
+docker build --rm -t jumanjiman/booga --no-cache .
 ```
+
+:warning: Use CoreOS to build image. Fedora kernel on DigitalOcean
+has an older LXC implementation that leads to inconsistent builds.
+For example, it sometimes builds the base image with bad perms on
+`/var` and other directories that *must* be `0755`.
 
 
 ### Build a user box
@@ -67,7 +72,7 @@ user data container.
 
 ### Upgrade user app container
 
-Rebuild the `booga` image as described above, then...
+Rebuild the `jumanjiman/booga` image as described above, then...
 
 ```
 ./upgrade.sh jumanjiman
