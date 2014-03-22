@@ -24,9 +24,6 @@ RUN yum install -y \
 # Remove yum metadata to reduce image size.
 RUN yum clean all
 
-# Autocreate ssh host keys.
-RUN ssh-keygen -A
-
 # Populate /etc/skel
 ADD .bashrc /etc/skel/
 ADD .bash_logout /etc/skel/
@@ -35,6 +32,9 @@ ADD .bash_profile /etc/skel/
 # Configure security.
 ADD sshd_config /etc/ssh/
 ADD issue.net /etc/
+
+# Autocreate ssh host keys.
+RUN ssh-keygen -A
 
 EXPOSE 22
 ENV LANG C
