@@ -31,6 +31,9 @@ ADD .bashrc /etc/skel/
 ADD .bash_logout /etc/skel/
 ADD .bash_profile /etc/skel/
 
+# Annoy user if they forget to set their username and email in git.
+ADD git_global.sh /etc/profile.d/
+
 # Create sandbox user.
 RUN useradd user
 
