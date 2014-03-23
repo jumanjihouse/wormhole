@@ -5,7 +5,7 @@ FROM mattdm/fedora:f20
 MAINTAINER Paul Morgan <jumanjiman@gmail.com>
 
 # Work around https://bugzilla.redhat.com/show_bug.cgi?id=1066983
-RUN yum remove -y vim-minimal
+RUN yum remove -y vim-minimal sudo
 
 # Install dependencies.
 RUN yum install -y \
