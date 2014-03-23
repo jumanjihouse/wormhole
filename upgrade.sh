@@ -1,11 +1,12 @@
 #!/bin/bash
 
 user=$1
-port=$2
-if test -z $user -o -z $port; then
+if test -z $user; then
   echo "Usage: $(basename $0) <username> <port>" 2> /dev/null
   exit 1
 fi
+
+port=$(docker port $user-run 22 | cut -d: -f2)
 
 # stop and throw away user runtime container
 docker stop $user-run
