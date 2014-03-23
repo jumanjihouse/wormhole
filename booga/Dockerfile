@@ -19,6 +19,8 @@ RUN yum install -y \
     python3-devel python3-nose python3-setuptools python3-pep8 rpm-python3 \
     rpm-build libxslt createrepo git-annex \
     tmux tmux-powerline reptyr \
+    golang golang-docs golang-cover golang-github-coreos-go-systemd-devel \
+    golang-godoc golang-vim golang-github-coreos-go-log-devel \
     git tar patch diffutils which
 
 # Remove yum metadata to reduce image size.
