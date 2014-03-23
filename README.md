@@ -18,6 +18,7 @@ The official upstream is https://github.com/jumanjiman/docker-devenv
 This image serves as a template for user images.
 
 ```
+cd booga/
 docker build --rm -t jumanjiman/booga --no-cache .
 ```
 
