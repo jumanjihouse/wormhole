@@ -53,6 +53,19 @@ b2dd80d4893a        jstrong:latest      /bin/sh -c /usr/sbin   About an hour ago
 689479673e8e        jumanjiman:latest   /bin/sh -c /usr/sbin   About an hour ago   Up About an hour    0.0.0.0:49153->22/tcp   jumanjiman-run      
 ```
 
+:warning: The scripts limit each app container to 512 MiB memory.
+
+You can view the current limit for a container via the sys filesystem.
+For example, here is a container that was started with a 1 MiB limit:
+
+```
+$ cat /sys/fs/cgroup/memory/lxc/<hash>/memory.limit_in_bytes
+1048576
+```
+
+If a PID inside a container gets killed due to the memory limit,
+you can view details in `dmesg` output.
+
 
 ### Backup 
 

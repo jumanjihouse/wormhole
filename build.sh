@@ -40,7 +40,7 @@ docker run --rm --volumes-from $user-data -u user $base_image /bin/bash -c "echo
 docker run --rm --volumes-from $user-data -u user $base_image chmod 0600 /home/user/.ssh/authorized_keys
 
 # create a container from the user image
-docker run -d -t --volumes-from $user-data -P -h wormhole.example.com --name $user-run $base_image
+docker run -d -t -m 512m --volumes-from $user-data -P -h wormhole.example.com --name $user-run $base_image
 port=$(docker port $user-run 22 | cut -d: -f2)
 ip=$(ip -4 address show dev eth0 | awk '/inet/ {print $2}' | cut -d/ -f1)
 echo ssh -p $port -i path/to/privkey user@$ip

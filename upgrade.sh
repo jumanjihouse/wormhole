@@ -13,4 +13,4 @@ docker stop $user-run
 docker rm $user-run
 
 # create a runtime container from the base image
-docker run -d -t --volumes-from $user-data -p $port:22 -h wormhole.example.com --name $user-run jumanjiman/booga
+docker run -d -t -m 512m --volumes-from $user-data -p $port:22 -h wormhole.example.com --name $user-run jumanjiman/booga
