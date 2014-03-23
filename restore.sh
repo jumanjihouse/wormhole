@@ -6,5 +6,5 @@ if test -z $user; then
   exit 1
 fi
 
-docker run -v /home/$user -name $user-data busybox true
+docker run -v /home/user -name $user-data busybox true
 docker run --rm --volumes-from $user-data -v $(pwd):/backup busybox tar xvf /backup/$user-data.tar

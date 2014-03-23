@@ -7,19 +7,9 @@ if test -z $user -o -z $port; then
   exit 1
 fi
 
-cat > user <<EOF
-FROM    jumanjiman/booga:latest
-RUN     useradd $user
-VOLUME  ["/home/$user"]
-EOF
-
 # stop and throw away user runtime container
 docker stop $user-run
 docker rm $user-run
 
-# build user image named $user
-docker rmi $user 2> /dev/null
-cat user | docker build --rm -t $user -
-
-# create a runtime container from the user image
-docker run -d -t --volumes-from $user-data -p $port:22 -h dev --name $user-run $user
+# create a runtime container from the base image
+docker run -d -t --volumes-from $user-data -p $port:22 -h wormhole.example.com --name $user-run jumanjiman/booga

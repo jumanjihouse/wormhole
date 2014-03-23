@@ -29,6 +29,12 @@ ADD .bashrc /etc/skel/
 ADD .bash_logout /etc/skel/
 ADD .bash_profile /etc/skel/
 
+# Create sandbox user.
+RUN useradd user
+
+# Do not track changes in /home/user.
+VOLUME ["/home/user"]
+
 # Configure security.
 ADD sshd_config /etc/ssh/
 ADD issue.net /etc/
