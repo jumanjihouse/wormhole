@@ -8,7 +8,12 @@ or testing within the workspace.
 * Serious testing is the duty of a continuous integration server.
 * Serious compilation is the duty of a build server.
 
-The upstream is https://github.com/jumanjiman/devenv
+[![image](https://d207aa93qlcgug.cloudfront.net/img/icons/framed-icon-checked-repository.svg)](https://index.docker.io/u/jumanjiman/devenv/)
+
+[**Trusted Build**](https://index.docker.io/u/jumanjiman/devenv/)
+
+Please add any issues you find with this software
+to the upstream [devenv](https://github.com/jumanjiman/devenv/issues).
 
 
 ## Requirements
