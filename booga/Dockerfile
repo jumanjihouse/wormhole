@@ -37,15 +37,12 @@ ADD git_global.sh /etc/profile.d/
 # Create sandbox user.
 RUN useradd user
 
-# Do not track changes in /home/user.
-VOLUME ["/home/user"]
+# Do not track changes in volumes.
+VOLUME ["/home/user", "/media/state/etc/ssh"]
 
 # Configure security.
 ADD sshd_config /etc/ssh/
 ADD issue.net /etc/
-
-# Autocreate ssh host keys.
-RUN ssh-keygen -A
 
 EXPOSE 22
 ENV LANG C

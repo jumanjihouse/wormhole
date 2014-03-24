@@ -12,7 +12,7 @@ base_image=jumanjiman/booga
 cat > data <<EOF
 FROM   busybox
 RUN    mkdir -p /home/user
-VOLUME ["/home/user"]
+VOLUME ["/home/user", "/media/state/etc/ssh"]
 CMD    ["/bin/true"]
 EOF
 
@@ -22,7 +22,7 @@ cat data | docker build --rm -t data -
 
 # create tiny data container named $user-data
 docker rm $user-data 2> /dev/null
-docker run -v /home/user --name $user-data busybox true
+docker run -v /home/user -v /media/state/etc/ssh --name $user-data busybox true
 
 # remove the data image since we no longer need it
 docker rmi data
@@ -32,6 +32,10 @@ docker run --rm --volumes-from $user-data -u root $base_image cp /etc/skel/.bash
 
 # fix ownership of homedir
 docker run --rm --volumes-from $user-data -u root $base_image chown -R user:user /home/user
+
+# add sshd host keys
+docker run --rm --volumes-from $user-data -u root $base_image ssh-keygen -q -f /media/state/etc/ssh/ssh_host_rsa_key -N '' -t dsa
+docker run --rm --volumes-from $user-data -u root $base_image ssh-keygen -q -f /media/state/etc/ssh/ssh_host_rsa_key -N '' -t rsa
 
 # add ssh keys
 docker run --rm --volumes-from $user-data -u user $base_image mkdir -p /home/user/.ssh
