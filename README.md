@@ -1,3 +1,13 @@
+## Overview
+
+Provide docker-based development environments to support
+100-500 concurrent workspaces on a single server. The idea
+is for developers to edit code and perform light compilation
+or testing within the workspace.
+
+* Serious testing is the duty of a continuous integration server.
+* Serious compilation is the duty of a build server.
+
 The upstream is https://github.com/jumanjiman/devenv
 
 
