@@ -1,28 +1,27 @@
-This repo is a temporary home to store a project
-while I work on getting it ready for open-source.
-
-The official upstream is https://github.com/jumanjiman/docker-devenv
-(and is private for the moment).
+The upstream is https://github.com/jumanjiman/devenv
 
 
 ## Requirements
 
-* Must run on CoreOS. Therefore no outside dependencies.
+* Must be capable of running on CoreOS. Therefore no outside dependencies.
 * User data must reside in data container separate from apps.
+* ssh host key must persist across upgrades of app container.
 
 
 ## Brief instructions
 
 ### Build an image for the app container
 
-This image serves as a template for user images.
+This image serves as a template for an app container.
 
 ```
 cd devenv/
 docker build --rm -t jumanjiman/devenv --no-cache .
 ```
 
-:warning: Use CoreOS to build image. Fedora kernel on DigitalOcean
+:warning: Use CoreOS to build image.
+
+Fedora kernel on DigitalOcean
 has an older LXC implementation that leads to inconsistent builds.
 For example, it sometimes builds the base image with bad perms on
 `/var` and other directories that *must* be `0755`.
@@ -48,8 +47,6 @@ A runtime container should be up on a random ssh port:
 $ docker ps
 
 CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                   NAMES
-b2dd80d4893a        jstrong:latest      /bin/sh -c /usr/sbin   About an hour ago   Up About an hour    0.0.0.0:49155->22/tcp   jstrong-run  
-       
 689479673e8e        jumanjiman:latest   /bin/sh -c /usr/sbin   About an hour ago   Up About an hour    0.0.0.0:49153->22/tcp   jumanjiman-run      
 ```
 
@@ -95,6 +92,6 @@ Rebuild the `jumanjiman/devenv` image as described above, then...
 
 ## User instructions
 
-New containers now begin life with a git-suitable
+New containers begin life with a git-suitable
 [`~/.bashrc`](https://github.com/ISEexchange/docker-devenv/blob/master/.bashrc).
 This is only the initial bashrc; you can modify it at any time.
