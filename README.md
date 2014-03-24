@@ -18,8 +18,8 @@ The official upstream is https://github.com/jumanjiman/docker-devenv
 This image serves as a template for user images.
 
 ```
-cd booga/
-docker build --rm -t jumanjiman/booga --no-cache .
+cd devenv/
+docker build --rm -t jumanjiman/devenv --no-cache .
 ```
 
 :warning: Use CoreOS to build image. Fedora kernel on DigitalOcean
@@ -86,7 +86,7 @@ user data container.
 
 ### Upgrade user app container
 
-Rebuild the `jumanjiman/booga` image as described above, then...
+Rebuild the `jumanjiman/devenv` image as described above, then...
 
 ```
 ./upgrade.sh jumanjiman

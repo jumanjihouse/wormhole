@@ -7,7 +7,7 @@ if test -z $user ; then
   exit 1
 fi
 
-base_image=jumanjiman/booga
+base_image=jumanjiman/devenv
 
 cat > data <<EOF
 FROM   busybox
