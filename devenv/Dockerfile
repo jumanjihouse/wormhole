@@ -26,6 +26,9 @@ RUN yum install -y \
 # Remove yum metadata to reduce image size.
 RUN yum clean all
 
+# Break su for everybody but root.
+ADD su /etc/pam.d/
+
 # Populate /etc/skel
 ADD .bashrc /etc/skel/
 ADD .bash_logout /etc/skel/
