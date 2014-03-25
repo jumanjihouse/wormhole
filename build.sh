@@ -34,7 +34,7 @@ docker run --rm --volumes-from $user-data -u root $base_image cp /etc/skel/.bash
 docker run --rm --volumes-from $user-data -u root $base_image chown -R user:user /home/user
 
 # add sshd host keys
-docker run --rm --volumes-from $user-data -u root $base_image ssh-keygen -q -f /media/state/etc/ssh/ssh_host_rsa_key -N '' -t dsa
+docker run --rm --volumes-from $user-data -u root $base_image ssh-keygen -q -f /media/state/etc/ssh/ssh_host_dsa_key -N '' -t dsa
 docker run --rm --volumes-from $user-data -u root $base_image ssh-keygen -q -f /media/state/etc/ssh/ssh_host_rsa_key -N '' -t rsa
 
 # add ssh keys
