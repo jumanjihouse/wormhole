@@ -2,8 +2,8 @@
 
 Provide docker-based development environments to support
 100-500 concurrent workspaces on a single server. The idea
-is for developers to edit code and perform light compilation
-or testing within the workspace.
+is for developers to **edit code** and perform
+**light compilation or testing** within the workspace.
 
 * Serious testing is the duty of a continuous integration server.
 * Serious compilation is the duty of a build server.
@@ -16,31 +16,61 @@ Please add any issues you find with this software
 to the upstream [devenv](https://github.com/jumanjiman/devenv/issues).
 
 
-## Requirements
+## Architectural considerations
+
+![user](https://f.cloud.github.com/assets/332496/2528015/529d5c36-b50b-11e3-9e89-707062e47b36.png)
+source: [`docs/uml.md`](https://github.com/jumanjiman/devenv/blob/master/docs/uml.md)
+
+**Notes**:
+
+* User data lives in a data container and
+  persists across upgrades of the app container.
+
+* sshd is restrictive:
+  - ssh host key persists across upgrades of the app container.
+  - Password authentication is disabled.
+  - `sudo` is not available; `su` works only for root
+    (but container only allows non-root to login).
+  - Tunnels are disabled.
+
+* Network ports:
+  - sshd runs on TCP port 22 inside the container and is mapped
+    to an ephemeral port on the docker host.
+  - No other ports are mapped. This means the container cannot
+    expose services to the outside world.
+
+* Weak firewall allows:
+  - inbound from Internet to wormhole ephemeral TCP ports
+  - outbound from wormhole to Internet on all ports
+
+* Strong firewall allows:
+  - inbound from wormhole IP to internal TCP 22
+  - no outbound connections other than return traffic for inbound connections
 
 * Must be capable of running on CoreOS. Therefore no outside dependencies.
-* User data must reside in data container separate from apps.
-* ssh host key must persist across upgrades of app container.
+
+* Internal infrastructure should use appropriate access control mechanisms
+  based on risk evaluation of the wormhole.
 
 
-## Brief instructions
 
-### Build an image for the app container
+## User instructions
 
-This image serves as a template for an app container.
+New containers begin life with a git-suitable
+[`~/.bashrc`](https://github.com/ISEexchange/docker-devenv/blob/master/.bashrc).
+This is only the initial bashrc; you can modify it at any time.
 
-```
-cd devenv/
-docker build --rm -t jumanjiman/devenv --no-cache .
-```
+Inside the container, your user account is literally named `user`.
+That means, with default build options, your prompt inside the container is:
 
-:warning: Use CoreOS to build image.
+    user@wormhole:~$
 
-Fedora kernel on DigitalOcean
-has an older LXC implementation that leads to inconsistent builds.
-For example, it sometimes builds the base image with bad perms on
-`/var` and other directories that *must* be `0755`.
+Connect to your container with info provided by admin:
 
+    ssh -i path/to/privkey -p <your port> user@<ip>
+
+
+## Admin instructions
 
 ### Build a user box
 
@@ -105,8 +135,20 @@ Rebuild the `jumanjiman/devenv` image as described above, then...
 ```
 
 
-## User instructions
+### Build an image for the app container
 
-New containers begin life with a git-suitable
-[`~/.bashrc`](https://github.com/ISEexchange/docker-devenv/blob/master/.bashrc).
-This is only the initial bashrc; you can modify it at any time.
+This image serves as a template for an app container.<br/>
+You can build the image locally or use the
+[**Trusted Build**](https://index.docker.io/u/jumanjiman/devenv/).
+
+```
+cd devenv/
+docker build --rm -t jumanjiman/devenv --no-cache .
+```
+
+:warning: Use CoreOS to build image.
+
+Fedora kernel on DigitalOcean
+has an older LXC implementation that leads to inconsistent builds.
+For example, it sometimes builds the base image with bad perms on
+`/var` and other directories that *must* be `0755`.
