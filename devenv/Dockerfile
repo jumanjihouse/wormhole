@@ -46,6 +46,7 @@ VOLUME ["/home/user", "/media/state/etc/ssh"]
 # Configure security.
 ADD sshd_config /etc/ssh/
 ADD issue.net /etc/
+ADD sshd /etc/pam.d/
 
 EXPOSE 22
 ENV LANG C
