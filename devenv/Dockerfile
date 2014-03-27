@@ -49,4 +49,4 @@ ADD issue.net /etc/
 
 EXPOSE 22
 ENV LANG C
-CMD /usr/sbin/sshd -D
+CMD /usr/sbin/sshd -D -e
