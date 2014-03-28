@@ -8,18 +8,18 @@ is for developers to **edit code** and perform
 * Serious testing is the duty of a continuous integration server.
 * Serious compilation is the duty of a build server.
 
-[![image](https://d207aa93qlcgug.cloudfront.net/img/icons/framed-icon-checked-repository.svg)](https://index.docker.io/u/jumanjiman/devenv/)
+[![image](https://d207aa93qlcgug.cloudfront.net/img/icons/framed-icon-checked-repository.svg)](https://index.docker.io/u/jumanjiman/wormhole/)
 
-[**Trusted Build**](https://index.docker.io/u/jumanjiman/devenv/)
+[**Trusted Build**](https://index.docker.io/u/jumanjiman/wormhole/)
 
 Please add any issues you find with this software
-to the upstream [devenv](https://github.com/jumanjiman/devenv/issues).
+to the upstream [wormhole](https://github.com/jumanjiman/wormhole/issues).
 
 
 ## Architectural considerations
 
 ![user](https://f.cloud.github.com/assets/332496/2528015/529d5c36-b50b-11e3-9e89-707062e47b36.png)
-source: [`docs/uml.md`](https://github.com/jumanjiman/devenv/blob/master/docs/uml.md)
+source: [`docs/uml.md`](https://github.com/jumanjiman/wormhole/blob/master/docs/uml.md)
 
 **Notes**:
 
@@ -57,7 +57,7 @@ source: [`docs/uml.md`](https://github.com/jumanjiman/devenv/blob/master/docs/um
 ## User instructions
 
 New containers begin life with a git-suitable
-[`~/.bashrc`](https://github.com/ISEexchange/docker-devenv/blob/master/.bashrc).
+[`~/.bashrc`](https://github.com/ISEexchange/docker-wormhole/blob/master/.bashrc).
 This is only the initial bashrc; you can modify it at any time.
 
 Inside the container, your user account is literally named `user`.
@@ -128,7 +128,7 @@ user data container.
 
 ### Upgrade user app container
 
-Rebuild the `jumanjiman/devenv` image as described above, then...
+Rebuild the `jumanjiman/wormhole` image as described above, then...
 
 ```
 ./upgrade.sh jumanjiman
@@ -139,11 +139,11 @@ Rebuild the `jumanjiman/devenv` image as described above, then...
 
 This image serves as a template for an app container.<br/>
 You can build the image locally or use the
-[**Trusted Build**](https://index.docker.io/u/jumanjiman/devenv/).
+[**Trusted Build**](https://index.docker.io/u/jumanjiman/wormhole/).
 
 ```
-cd devenv/
-docker build --rm -t jumanjiman/devenv --no-cache .
+cd wormhole/
+docker build --rm -t jumanjiman/wormhole --no-cache .
 ```
 
 :warning: Use CoreOS to build image.
