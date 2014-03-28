@@ -21,7 +21,8 @@ export GIT_EDITOR=vim
 
 # Customize the prompt for git.
 function parse_git_dirty {
-  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+  regex="nothing to commit.*working directory clean"
+  [[ $(git status 2> /dev/null | tail -n1) =~ $regex ]] || echo "*"
 }
 function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
