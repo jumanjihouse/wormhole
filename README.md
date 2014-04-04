@@ -18,6 +18,8 @@ to the upstream [wormhole](https://github.com/jumanjiman/wormhole/issues).
 
 ## Architectural considerations
 
+![admin](https://cloud.githubusercontent.com/assets/332496/2618648/4c55d0b8-bc24-11e3-9413-8ba57442c11a.png)
+
 ![user](https://f.cloud.github.com/assets/332496/2528015/529d5c36-b50b-11e3-9e89-707062e47b36.png)
 source: [`docs/uml.md`](https://github.com/jumanjiman/wormhole/blob/master/docs/uml.md)
 
