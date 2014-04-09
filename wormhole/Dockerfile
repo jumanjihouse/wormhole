@@ -11,6 +11,7 @@ RUN yum remove -y vim-minimal sudo
 RUN yum install -y \
     openssh-server openssh-clients \
     gcc gcc-c++ \
+    gnupg \
     ruby ruby-devel rubygem-bundler \
     libcurl-devel libxslt-devel libxml2-devel \
     vim-enhanced bash-completion \
