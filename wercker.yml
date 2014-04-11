@@ -1,0 +1,12 @@
+box: wercker-labs/docker
+build:
+  steps:
+    - script:
+        name: print the docker version
+        code: docker version
+    - script:
+        name: build a wormhole image
+        code: |
+          pushd wormhole
+          docker build --rm -t jumanjiman/wormhole .
+          popd
