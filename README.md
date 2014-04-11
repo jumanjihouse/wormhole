@@ -9,6 +9,7 @@ is for developers to **edit code** and perform
 * Serious compilation is the duty of a build server.
 
 [![image](https://d207aa93qlcgug.cloudfront.net/img/icons/framed-icon-checked-repository.svg)](https://index.docker.io/u/jumanjiman/wormhole/)
+[![wercker status](https://app.wercker.com/status/9a37e953c64d4c74a2b91d81b3fff338/m/master "wercker status")](https://app.wercker.com/project/bykey/9a37e953c64d4c74a2b91d81b3fff338)
 
 [**Trusted Build**](https://index.docker.io/u/jumanjiman/wormhole/)
 
