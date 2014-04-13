@@ -55,6 +55,9 @@ source: [`docs/uml.md`](https://github.com/jumanjiman/wormhole/blob/master/docs/
 * Internal infrastructure should use appropriate access control mechanisms
   based on risk evaluation of the wormhole.
 
+
+## Test harness
+
 RSpec documents key behaviors and assures no regressions:
 
 ```
@@ -115,10 +118,8 @@ Connect to your container with info provided by admin:
 
 ### Build a user box
 
-Given...
-
-* user github handle, such as jumanjiman
-* user ssh pubkey
+Use the build script with a unique user id (such as github handle)
+and the user ssh pubkey to create a runtime container:
 
 ```
 user=jumanjiman
