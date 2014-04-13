@@ -1,12 +1,34 @@
 box: wercker-labs/docker
 build:
   steps:
+    - install-packages:
+        packages: ruby2.0 ruby2.0-dev
+    - script:
+        name: print the ruby version
+        code: ruby --version
+    - script:
+        name: install bundler
+        code: sudo gem install bundler
+    - script:
+        name: print bundler version
+        code: bundle --version
+    - bundle-install
+    - script:
+        name: check ruby files for style consistency
+        code: bundle exec rake rubocop
     - script:
         name: print the docker version
         code: docker version
+    - script:
+        name: print system-wide docker info
+        code: docker info
     - script:
         name: build a wormhole image
         code: |
           pushd wormhole
           docker build --rm -t jumanjiman/wormhole .
           popd
+    - script:
+        name: run the test suite
+        code: |
+          bundle exec rake spec
