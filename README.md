@@ -55,6 +55,44 @@ source: [`docs/uml.md`](https://github.com/jumanjiman/wormhole/blob/master/docs/
 * Internal infrastructure should use appropriate access control mechanisms
   based on risk evaluation of the wormhole.
 
+RSpec documents key behaviors and assures no regressions:
+
+```
+jumanjiman/wormhole
+  image
+    should be available
+  config
+    should expose ssh port and only ssh port
+    should run sshd with logging
+
+sshd config
+  auth
+    should use privilege separation
+    should use pam
+    should allow pubkeyauthentication
+    should deny passwordauthentication
+    should deny gssapiauthentication
+    should deny kerberosauthentication
+    should deny challengeresponseauthentication
+  tunnels and forwarding
+    should deny ssh tunnels
+    should deny TCP forwarding
+    should deny X11 forwarding
+    should deny gateway ports
+  Common Configuration Enumeration (CCE)
+    CCE-3660-8 Disable remote ssh from accounts with empty passwords
+    CCE-3845-5 idle timeout interval should be set appropriately
+    CCE-4325-7 Disable SSH protocol version 1
+    CCE-4370-3 Disable SSH host-based authentication
+    CCE-4387-7 Disable root login via SSH
+    CCE-4431-3 SSH warning banner should be enabled
+    CCE-4475-0 Disable emulation of rsh command through sshd
+    CCE-14061-6 "keep alive" msg count should be set appropriately
+    CCE-14491-5 Use appropriate ciphers for SSH
+    CCE-14716-5 Users should not be allowed to set env options
+  obscurity
+    should hide patch level
+```
 
 
 ## User instructions

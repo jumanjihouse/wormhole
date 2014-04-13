@@ -224,7 +224,7 @@ ClientAliveInterval 900
 #
 # Recommended by CCE: 0
 #
-ClientAliveCountMax 3
+ClientAliveCountMax 0
 
 
 
