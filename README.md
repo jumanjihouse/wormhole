@@ -51,6 +51,9 @@ source: [`docs/uml.md`](https://github.com/jumanjiman/wormhole/blob/master/docs/
 RSpec documents key behaviors and assures no regressions:
 
 ```
+contributor friction
+  there should not be any
+
 jumanjiman/wormhole
   image
     should be available

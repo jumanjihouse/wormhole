@@ -1,0 +1,24 @@
+#!/bin/sh
+
+set -e
+
+function err() {
+  echo "[ERROR] $1" >&2
+  exit 1
+}
+
+function smitty() {
+  echo; echo
+  echo "[INFO] $@"
+  $@
+}
+
+git remote show upstream &> /dev/null || smitty git remote add upstream https://github.com/jumanjiman/wormhole.git
+
+smitty bundle update 2> /dev/null || smitty bundle install --path=~/.bundle
+if [[ $? -ne 0 ]]; then
+  echo 'Please see the troubleshooting section of docs/guides/bundle.md' >&2
+  rc=1
+fi
+
+exit $rc
