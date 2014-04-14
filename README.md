@@ -61,6 +61,9 @@ jumanjiman/wormhole
     should have volume /media/state/etc/ssh
   packages
     should not have sudo installed
+  user convenience
+    man -k returns results
+    locate returns the path for issue.net
 
 sshd config
   auth

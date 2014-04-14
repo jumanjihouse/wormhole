@@ -10,6 +10,7 @@ RUN yum remove -y vim-minimal sudo
 # Install dependencies.
 RUN yum install -y \
     openssh-server openssh-clients \
+    man-pages mlocate \
     gcc gcc-c++ \
     gnupg \
     ruby ruby-devel rubygem-bundler \
@@ -49,6 +50,10 @@ VOLUME ["/home/user", "/media/state/etc/ssh"]
 ADD sshd_config /etc/ssh/
 ADD issue.net /etc/
 ADD sshd /etc/pam.d/
+
+# Update system databases for user convenience.
+RUN mandb
+RUN updatedb
 
 EXPOSE 22
 ENV LANG C
