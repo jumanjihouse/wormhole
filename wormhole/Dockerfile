@@ -22,6 +22,7 @@ RUN yum install -y \
     tree \
     python-devel python-nose python-setuptools python-pep8 rpm-python \
     python3-devel python3-nose python3-setuptools python3-pep8 rpm-python3 \
+    pylint python3-pylint \
     rpm-build libxslt createrepo git-annex \
     tmux tmux-powerline reptyr \
     golang golang-docs golang-cover golang-github-coreos-go-systemd-devel \
