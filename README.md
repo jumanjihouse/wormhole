@@ -54,6 +54,30 @@ RSpec documents key behaviors and assures no regressions:
 contributor friction
   there should not be any
 
+admin scripts
+  given user handle="booga"
+    everybody knows pubkey
+    booga knows privkey
+  `build.sh $handle "$pubkey"` creates wormhole from 2 containers
+    "booga-data" is a persistent read-write container
+      should exist
+      should be stopped
+      should be created from busybox
+      should export /home/user volume read-write
+      should export /media/state/etc/ssh volume read-write
+      should not mount any volumes
+    "booga-run" is a read-only app container
+      should exist
+      should be running
+      should be created from jumanjiman/wormhole
+      should use volumes from booga-data
+      should have hostname wormhole.example.com
+      should be limited to 512 MiB RAM
+      should run sshd and only sshd
+      `docker logs` should show sshd running on sshd port
+      should expose internal sshd port and only sshd port
+      should map internal sshd port to an outside ephemeral port
+
 jumanjiman/wormhole
   image
     should be available
