@@ -21,7 +21,7 @@ describe 'jumanjiman/wormhole' do
     end
   end
 
-  describe 'config' do
+  describe 'docker' do
     before :each do
       @config = @image.json['config']
     end

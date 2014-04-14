@@ -64,7 +64,7 @@ RSpec documents key behaviors and assures no regressions:
 jumanjiman/wormhole
   image
     should be available
-  config
+  docker
     should expose ssh port and only ssh port
     should run sshd with logging
   packages
