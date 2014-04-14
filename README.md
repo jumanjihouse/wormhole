@@ -67,6 +67,8 @@ jumanjiman/wormhole
   docker
     should expose ssh port and only ssh port
     should run sshd with logging
+    should have volume /home/user
+    should have volume /media/state/etc/ssh
   packages
     should not have sudo installed
 

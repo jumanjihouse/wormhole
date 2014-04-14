@@ -33,6 +33,17 @@ describe 'jumanjiman/wormhole' do
     it 'should run sshd with logging' do
       @config['Cmd'].include?('/usr/sbin/sshd -D -e').should be_true
     end
+
+    volumes = %W(
+      /home/user
+      /media/state/etc/ssh
+    )
+
+    volumes.each do |vol|
+      it "should have volume #{vol}" do
+        @config['Volumes'].keys.include?(vol).should be_true
+      end
+    end
   end
 
   describe 'packages' do
