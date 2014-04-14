@@ -34,4 +34,18 @@ describe 'jumanjiman/wormhole' do
       @config['Cmd'].include?('/usr/sbin/sshd -D -e').should be_true
     end
   end
+
+  describe 'packages' do
+    prohibited_packages = %W(
+      sudo
+    )
+
+    prohibited_packages.each do |package|
+      it "should not have #{package} installed" do
+        dr = 'docker run --rm -i -t jumanjiman/wormhole'
+        output = %x(#{dr} rpm -q #{package} 2> /dev/null).split($RS)
+        output[0].chomp.should =~ /^package #{package} is not installed$/
+      end
+    end
+  end
 end

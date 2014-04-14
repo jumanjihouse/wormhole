@@ -67,6 +67,8 @@ jumanjiman/wormhole
   config
     should expose ssh port and only ssh port
     should run sshd with logging
+  packages
+    should not have sudo installed
 
 sshd config
   auth
