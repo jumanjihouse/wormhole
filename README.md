@@ -31,16 +31,8 @@ source: [`docs/uml.md`](https://github.com/jumanjiman/wormhole/blob/master/docs/
 
 * sshd is restrictive:
   - ssh host key persists across upgrades of the app container.
-  - Password authentication is disabled.
-  - `sudo` is not available; `su` works only for root
+  - `su` works only for root
     (but container only allows non-root to login).
-  - Tunnels are disabled.
-
-* Network ports:
-  - sshd runs on TCP port 22 inside the container and is mapped
-    to an ephemeral port on the docker host.
-  - No other ports are mapped. This means the container cannot
-    expose services to the outside world.
 
 * Weak firewall allows:
   - inbound from Internet to wormhole ephemeral TCP ports
@@ -64,9 +56,13 @@ RSpec documents key behaviors and assures no regressions:
 jumanjiman/wormhole
   image
     should be available
-  config
+  docker
     should expose ssh port and only ssh port
     should run sshd with logging
+    should have volume /home/user
+    should have volume /media/state/etc/ssh
+  packages
+    should not have sudo installed
 
 sshd config
   auth
@@ -95,6 +91,9 @@ sshd config
     CCE-14716-5 Users should not be allowed to set env options
   obscurity
     should hide patch level
+
+users with interactive shells
+  should only include "root" and "user"
 ```
 
 
