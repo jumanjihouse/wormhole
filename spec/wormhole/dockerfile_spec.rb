@@ -1,6 +1,5 @@
 # encoding: utf-8
 require 'spec_helper'
-require 'pp'
 
 describe 'jumanjiman/wormhole' do
   before :all do

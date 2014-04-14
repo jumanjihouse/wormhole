@@ -3,6 +3,8 @@ require 'minitest'
 require 'mocha/setup'
 require 'English'
 require 'docker'
+require 'tempfile'
+require 'pp'
 
 RSpec.configure do |c|
   c.mock_with 'mocha'
@@ -58,7 +60,6 @@ RSpec.configure do |c|
 
     # After all tests have run, pretty print the values.
     c.after :suite do
-      require 'pp'
       2.times { puts '' }
       puts 'Garbage collector stats (see spec_helper.rb for helpful links)'
       puts '--------------------------------------------------------------'
