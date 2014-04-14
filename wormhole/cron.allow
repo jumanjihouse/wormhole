@@ -1,0 +1,30 @@
+# @see crontab(1)
+#
+# The format of this file is a list of usernames, one on each line.
+# Whitespace is not permitted.
+#
+# * The superuser may ALWAYS use at and cron.
+#
+# * If /etc/cron.allow exists, user must be in the file
+#   in order to be allowed to use the cron command.
+#
+# SNAC LinuxGuide:
+#   3.4
+#   3.4.2
+#   3.4.3
+#
+# CCERef#:
+#   CCE-4304-2, CCE-3833-1, CCE-3604-6, CCE-3626-9, CCE-4022-0
+#   CCE-3851-3, CCE-3481-9, CCE-4322-4, CCE-4203-6, CCE-4379-4
+#   CCE-4054-3, CCE-4441-2, CCE-4250-7, CCE-4331-5, CCE-4106-1
+#   CCE-4450-3, CCE-4388-5, CCE-3983-4, CCE-4380-2, CCE-4212-7,
+#   CCE-4251-5
+#
+# SNAC GuideSection 3.4.2 states:
+#   Cron and anacron make use of a number of configuration
+#   files and directories. The system crontabs need only be edited
+#   by root, and user crontabs are edited using the setuid root
+#   crontab command. If unprivileged users can modify system
+#   cron configuration files, they may be able to gain elevated
+#   privileges, so all unnecessary access to these files should
+#   be disabled.

@@ -59,8 +59,16 @@ jumanjiman/wormhole
     should run sshd with logging
     should have volume /home/user
     should have volume /media/state/etc/ssh
-  packages
+  prohibited packages
+    should not have at installed
     should not have sudo installed
+  prohibited commands
+    should not have the at command
+    should not have the crond command
+    should not have the crontab command
+  user convenience
+    man -k returns results
+    locate returns the path for issue.net
 
 sshd config
   auth

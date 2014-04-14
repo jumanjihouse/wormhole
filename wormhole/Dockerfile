@@ -5,11 +5,15 @@ FROM mattdm/fedora:f20
 MAINTAINER Paul Morgan <jumanjiman@gmail.com>
 
 # Work around https://bugzilla.redhat.com/show_bug.cgi?id=1066983
-RUN yum remove -y vim-minimal sudo
+# and remove prohibited packages.
+RUN yum remove -y vim-minimal \
+    at \
+    sudo
 
 # Install dependencies.
 RUN yum install -y \
     openssh-server openssh-clients \
+    man-pages mlocate \
     gcc gcc-c++ \
     gnupg \
     ruby ruby-devel rubygem-bundler \
@@ -31,6 +35,11 @@ RUN yum clean all
 # Break su for everybody but root.
 ADD su /etc/pam.d/
 
+# Break cron for everybody.
+ADD cron.allow /etc/
+RUN chmod 0400 /usr/bin/crontab
+RUN chmod 0400 /usr/sbin/crond
+
 # Populate /etc/skel
 ADD .bashrc /etc/skel/
 ADD .bash_logout /etc/skel/
@@ -49,6 +58,10 @@ VOLUME ["/home/user", "/media/state/etc/ssh"]
 ADD sshd_config /etc/ssh/
 ADD issue.net /etc/
 ADD sshd /etc/pam.d/
+
+# Update system databases for user convenience.
+RUN mandb
+RUN updatedb
 
 EXPOSE 22
 ENV LANG C
