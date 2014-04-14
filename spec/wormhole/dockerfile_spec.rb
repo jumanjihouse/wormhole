@@ -46,8 +46,9 @@ describe 'jumanjiman/wormhole' do
     end
   end
 
-  describe 'packages' do
+  describe 'prohibited packages' do
     prohibited_packages = %W(
+      at
       sudo
     )
 
@@ -56,6 +57,25 @@ describe 'jumanjiman/wormhole' do
         dr = 'docker run --rm -i -t jumanjiman/wormhole'
         output = %x(#{dr} rpm -q #{package} 2> /dev/null).split($RS)
         output[0].chomp.should =~ /^package #{package} is not installed$/
+      end
+    end
+  end
+
+  # Multiple packages can provide some commands, so
+  # we check for the commands, too.
+  # Multiple CCE's recommend restricting at and cron.
+  describe 'prohibited commands' do
+    prohibited_commands = %W(
+      at
+      crond
+      crontab
+    )
+
+    prohibited_commands.each do |cmd|
+      it "should not have the #{cmd} command" do
+        dr = "docker run --rm -i -t jumanjiman/wormhole which #{cmd}"
+        output = %x(#{dr} 2> /dev/null).split($RS)
+        output[0].chomp.should =~ /no #{cmd} in/
       end
     end
   end

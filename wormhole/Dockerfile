@@ -5,7 +5,10 @@ FROM mattdm/fedora:f20
 MAINTAINER Paul Morgan <jumanjiman@gmail.com>
 
 # Work around https://bugzilla.redhat.com/show_bug.cgi?id=1066983
-RUN yum remove -y vim-minimal sudo
+# and remove prohibited packages.
+RUN yum remove -y vim-minimal \
+    at \
+    sudo
 
 # Install dependencies.
 RUN yum install -y \
@@ -31,6 +34,11 @@ RUN yum clean all
 
 # Break su for everybody but root.
 ADD su /etc/pam.d/
+
+# Break cron for everybody.
+ADD cron.allow /etc/
+RUN chmod 0400 /usr/bin/crontab
+RUN chmod 0400 /usr/sbin/crond
 
 # Populate /etc/skel
 ADD .bashrc /etc/skel/
