@@ -31,8 +31,6 @@ source: [`docs/uml.md`](https://github.com/jumanjiman/wormhole/blob/master/docs/
 
 * sshd is restrictive:
   - ssh host key persists across upgrades of the app container.
-  - `su` works only for root
-    (but container only allows non-root to login).
 
 * Weak firewall allows:
   - inbound from Internet to wormhole ephemeral TCP ports
@@ -94,6 +92,9 @@ sshd config
 
 users with interactive shells
   should only include "root" and "user"
+  su
+    "root" can su
+    "user" cannot su
 ```
 
 

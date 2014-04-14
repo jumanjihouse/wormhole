@@ -21,4 +21,20 @@ describe 'users with interactive shells' do
 
     users.should =~ %W(root user)
   end
+
+  describe 'su' do
+    before :each do
+      @dr = 'docker run --rm -i -t'
+    end
+
+    it '"root" can su' do
+      out = %x(#{@dr} -u root jumanjiman/wormhole su -l -c 'id -u')
+      out.lines.last.chomp.should =~ /^0$/
+    end
+
+    it '"user" cannot su' do
+      out = %x(#{@dr} -u user jumanjiman/wormhole su -l -c 'id -u')
+      out.lines.last.chomp.should =~ /^su: Authentication failure$/
+    end
+  end
 end
