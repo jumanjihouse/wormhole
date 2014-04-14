@@ -97,6 +97,9 @@ sshd config
     CCE-14716-5 Users should not be allowed to set env options
   obscurity
     should hide patch level
+
+users with interactive shells
+  should only include "root" and "user"
 ```
 
 
