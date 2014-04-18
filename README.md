@@ -50,87 +50,85 @@ source: [`docs/uml.md`](https://github.com/jumanjiman/wormhole/blob/master/docs/
 
 RSpec documents key behaviors and assures no regressions:
 
-```
-contributor friction
-  there should not be any
+    contributor friction
+      there should not be any
 
-admin scripts
-  given user handle="booga"
-    everybody knows pubkey
-    booga knows privkey
-  `build.sh $handle "$pubkey"` creates wormhole from 2 containers
-    "booga-data" is a persistent read-write container
-      should exist
-      should be stopped
-      should be created from busybox
-      should export /home/user volume read-write
-      should export /media/state/etc/ssh volume read-write
-      should not mount any volumes
-    "booga-run" is a read-only app container
-      should exist
-      should be running
-      should be created from jumanjiman/wormhole
-      should use volumes from booga-data
-      should have hostname wormhole.example.com
-      should be limited to 512 MiB RAM
-      should run sshd and only sshd
-      `docker logs` should show sshd running on sshd port
-      should expose internal sshd port and only sshd port
-      should map internal sshd port to an outside ephemeral port
+    admin scripts
+      given user handle="booga"
+        everybody knows pubkey
+        booga knows privkey
+      `build.sh $handle "$pubkey"` creates wormhole from 2 containers
+        "booga-data" is a persistent read-write container
+          should exist
+          should be stopped
+          should be created from busybox
+          should export /home/user volume read-write
+          should export /media/state/etc/ssh volume read-write
+          should not mount any volumes
+        "booga-run" is a read-only app container
+          should exist
+          should be running
+          should be created from jumanjiman/wormhole
+          should use volumes from booga-data
+          should have hostname wormhole.example.com
+          should be limited to 512 MiB RAM
+          should run sshd and only sshd
+          `docker logs` should show sshd running on sshd port
+          should expose internal sshd port and only sshd port
+          should map internal sshd port to an outside ephemeral port
 
-jumanjiman/wormhole
-  image
-    should be available
-  docker
-    should expose ssh port and only ssh port
-    should run sshd with logging
-    should have volume /home/user
-    should have volume /media/state/etc/ssh
-  prohibited packages
-    should not have at installed
-    should not have sudo installed
-  prohibited commands
-    should not have the at command
-    should not have the crond command
-    should not have the crontab command
-  user convenience
-    man -k returns results
-    locate returns the path for issue.net
+    jumanjiman/wormhole
+      image
+        should be available
+      docker
+        should expose ssh port and only ssh port
+        should run sshd with logging
+        should have volume /home/user
+        should have volume /media/state/etc/ssh
+      prohibited packages
+        should not have at installed
+        should not have sudo installed
+      prohibited commands
+        should not have the at command
+        should not have the crond command
+        should not have the crontab command
+      user convenience
+        man -k returns results
+        locate returns the path for issue.net
 
-sshd config
-  auth
-    should use privilege separation
-    should use pam
-    should allow pubkeyauthentication
-    should deny passwordauthentication
-    should deny gssapiauthentication
-    should deny kerberosauthentication
-    should deny challengeresponseauthentication
-  tunnels and forwarding
-    should deny ssh tunnels
-    should deny TCP forwarding
-    should deny X11 forwarding
-    should deny gateway ports
-  Common Configuration Enumeration (CCE)
-    CCE-3660-8 Disable remote ssh from accounts with empty passwords
-    CCE-3845-5 idle timeout interval should be set appropriately
-    CCE-4325-7 Disable SSH protocol version 1
-    CCE-4370-3 Disable SSH host-based authentication
-    CCE-4387-7 Disable root login via SSH
-    CCE-4431-3 SSH warning banner should be enabled
-    CCE-4475-0 Disable emulation of rsh command through sshd
-    CCE-14061-6 "keep alive" msg count should be set appropriately
-    CCE-14491-5 Use appropriate ciphers for SSH
-    CCE-14716-5 Users should not be allowed to set env options
-  obscurity
-    should hide patch level
+    sshd config
+      auth
+        should use privilege separation
+        should use pam
+        should allow pubkeyauthentication
+        should deny passwordauthentication
+        should deny gssapiauthentication
+        should deny kerberosauthentication
+        should deny challengeresponseauthentication
+      tunnels and forwarding
+        should deny ssh tunnels
+        should deny TCP forwarding
+        should deny X11 forwarding
+        should deny gateway ports
+      Common Configuration Enumeration (CCE)
+        CCE-3660-8 Disable remote ssh from accounts with empty passwords
+        CCE-3845-5 idle timeout interval should be set appropriately
+        CCE-4325-7 Disable SSH protocol version 1
+        CCE-4370-3 Disable SSH host-based authentication
+        CCE-4387-7 Disable root login via SSH
+        CCE-4431-3 SSH warning banner should be enabled
+        CCE-4475-0 Disable emulation of rsh command through sshd
+        CCE-14061-6 "keep alive" msg count should be set appropriately
+        CCE-14491-5 Use appropriate ciphers for SSH
+        CCE-14716-5 Users should not be allowed to set env options
+      obscurity
+        should hide patch level
 
-users with interactive shells
-  should only include "root" and "user"
-  su
-    "root" can su
-    "user" cannot su
-```
+    users with interactive shells
+      should only include "root" and "user"
+      su
+        "root" can su
+        "user" cannot su
 
 
 ## User instructions
@@ -156,31 +154,25 @@ Connect to your container with info provided by admin:
 Use the build script with a unique user id (such as github handle)
 and the user ssh pubkey to create a runtime container:
 
-```
-user=jumanjiman
-pubkey="ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEArSm80/8UD/eMolUXU3j6geyNrxthnQxbE4dpwRhXU+F6fbQG+wk9SdWev9NcLLWg9a4zBUSMJUXrrU/8ik3WshSpZpqQary4ZiFFQKgSfYriouchc20S3wwFQZcbOJgH5t5wgGeNaDMzc2GRFhqbuuBiBBF+W5llk0X9CGE1o1iAlyVPAn4UfrJ4//5OXMhYwmU+fO9df3y5Kpn/0SY/lRwWuZeVVIXC+nZcFYXNzPyBVTNEooOXLVXivddtU82jfp65ggTMdLfUafZqia1/smfWQP23lU8F4ySayAOa1lhXXvrGtpxl3lu7vaSvdEg7+F4YaIhxnWZqt769joDraw== pmorgan@github"
+    user=jumanjiman
+    pubkey="ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEArSm80/8UD/eMolUXU3j6geyNrxthnQxbE4dpwRhXU+F6fbQG+wk9SdWev9NcLLWg9a4zBUSMJUXrrU/8ik3WshSpZpqQary4ZiFFQKgSfYriouchc20S3wwFQZcbOJgH5t5wgGeNaDMzc2GRFhqbuuBiBBF+W5llk0X9CGE1o1iAlyVPAn4UfrJ4//5OXMhYwmU+fO9df3y5Kpn/0SY/lRwWuZeVVIXC+nZcFYXNzPyBVTNEooOXLVXivddtU82jfp65ggTMdLfUafZqia1/smfWQP23lU8F4ySayAOa1lhXXvrGtpxl3lu7vaSvdEg7+F4YaIhxnWZqt769joDraw== pmorgan@github"
 
-./build.sh $user "$pubkey"
-```
+    ./build.sh $user "$pubkey"
 
 A runtime container should be up on a random ssh port:
 
-```
-$ docker ps
+    $ docker ps
 
-CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                   NAMES
-689479673e8e        jumanjiman:latest   /bin/sh -c /usr/sbin   About an hour ago   Up About an hour    0.0.0.0:49153->22/tcp   jumanjiman-run      
-```
+    CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                   NAMES
+    689479673e8e        jumanjiman:latest   /bin/sh -c /usr/sbin   About an hour ago   Up About an hour    0.0.0.0:49153->22/tcp   jumanjiman-run      
 
 :warning: The scripts limit each app container to 512 MiB memory.
 
 You can view the current limit for a container via the sys filesystem.
 For example, here is a container that was started with a 1 MiB limit:
 
-```
-$ cat /sys/fs/cgroup/memory/lxc/<hash>/memory.limit_in_bytes
-1048576
-```
+    $ cat /sys/fs/cgroup/memory/lxc/<hash>/memory.limit_in_bytes
+    1048576
 
 If a PID inside a container gets killed due to the memory limit,
 you can view details in `dmesg` output.
@@ -191,25 +183,19 @@ you can view details in `dmesg` output.
 Create a local file called `jumanjiman-data.tar` with contents of
 user data container.
 
-```
-./backup.sh jumanjiman
-```
+    ./backup.sh jumanjiman
 
 
 ### Restore user data container from backup
 
-```
-./restore.sh jumanjiman
-```
+    ./restore.sh jumanjiman
 
 
 ### Upgrade user app container
 
 Rebuild the `jumanjiman/wormhole` image as described above, then...
 
-```
-./upgrade.sh jumanjiman
-```
+    ./upgrade.sh jumanjiman
 
 
 ### Build an image for the app container
@@ -218,10 +204,8 @@ This image serves as a template for an app container.<br/>
 You can build the image locally or use the
 [**Trusted Build**](https://index.docker.io/u/jumanjiman/wormhole/).
 
-```
-cd wormhole/
-docker build --rm -t jumanjiman/wormhole --no-cache .
-```
+    cd wormhole/
+    docker build --rm -t jumanjiman/wormhole --no-cache .
 
 :warning: Use CoreOS to build image.
 
