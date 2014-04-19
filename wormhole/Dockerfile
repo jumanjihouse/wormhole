@@ -8,7 +8,8 @@ MAINTAINER Paul Morgan <jumanjiman@gmail.com>
 # and remove prohibited packages.
 RUN yum remove -y vim-minimal \
     at \
-    sudo
+    sudo \
+    ; yum clean all
 
 # Install dependencies.
 RUN yum install -y \
@@ -28,10 +29,8 @@ RUN yum install -y \
     golang golang-docs golang-cover golang-github-coreos-go-systemd-devel \
     golang-godoc golang-vim golang-github-coreos-go-log-devel \
     npm nodeunit \
-    git tar patch diffutils which
-
-# Remove yum metadata to reduce image size.
-RUN yum clean all
+    git tar patch diffutils which \
+    ; yum clean all
 
 # Break su for everybody but root.
 ADD su /etc/pam.d/
@@ -47,7 +46,13 @@ ADD .bash_logout /etc/skel/
 ADD .bash_profile /etc/skel/
 
 # Annoy user if they forget to set their username and email in git.
-ADD git_global.sh /etc/profile.d/
+ADD profile.d /etc/profile.d/
+
+# Install EiffelStudio. See LICENSE.eiffelstudio for terms.
+RUN yum -y install gtk2-devel.x86_64 libXtst-devel.x86_64 pangox-compat; yum clean all
+ADD http://ftp.eiffel.com/pub/download/13.11/Eiffel_13.11_gpl_93542-linux-x86-64.tar.bz2 /tmp/
+RUN tar xvjf /tmp/Eiffel_13.11_gpl_93542-linux-x86-64.tar.bz2 -C /usr/local/ \
+    ;  rm -f /tmp/Eiffel_13.11_gpl_93542-linux-x86-64.tar.bz2
 
 # Create sandbox user.
 RUN useradd user

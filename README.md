@@ -95,6 +95,8 @@ RSpec documents key behaviors and assures no regressions:
       user convenience
         man -k returns results
         locate returns the path for issue.net
+        has command-line eiffel compiler in path
+        has estudio in path
 
     sshd config
       auth
