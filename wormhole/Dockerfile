@@ -8,7 +8,8 @@ MAINTAINER Paul Morgan <jumanjiman@gmail.com>
 # and remove prohibited packages.
 RUN yum remove -y vim-minimal \
     at \
-    sudo
+    sudo \
+    ; yum clean all
 
 # Install dependencies.
 RUN yum install -y \
@@ -28,10 +29,8 @@ RUN yum install -y \
     golang golang-docs golang-cover golang-github-coreos-go-systemd-devel \
     golang-godoc golang-vim golang-github-coreos-go-log-devel \
     npm nodeunit \
-    git tar patch diffutils which
-
-# Remove yum metadata to reduce image size.
-RUN yum clean all
+    git tar patch diffutils which \
+    ; yum clean all
 
 # Break su for everybody but root.
 ADD su /etc/pam.d/
