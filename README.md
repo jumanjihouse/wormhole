@@ -68,6 +68,7 @@ RSpec documents key behaviors and assures no regressions:
         "booga-run" is a read-only app container
           should exist
           should be running
+          should run unprivileged
           should be created from jumanjiman/wormhole
           should use volumes from booga-data
           should have hostname wormhole.example.com

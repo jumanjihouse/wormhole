@@ -87,6 +87,11 @@ describe 'admin scripts' do
         @state['Running'].should be_true
       end
 
+      it 'should run unprivileged' do
+        priv = @app.json['HostConfig']['Privileged']
+        priv.should be_false
+      end
+
       it 'should be created from jumanjiman/wormhole' do
         id = @config['Image'].split(':').first
         id.should == 'jumanjiman/wormhole'
