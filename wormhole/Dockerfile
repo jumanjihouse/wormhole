@@ -30,6 +30,7 @@ RUN yum install -y \
     golang-godoc golang-vim golang-github-coreos-go-log-devel \
     npm nodeunit \
     bzr \
+    tito \
     git tar patch diffutils which \
     ; yum clean all
 
