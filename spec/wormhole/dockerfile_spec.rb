@@ -92,17 +92,5 @@ describe 'jumanjiman/wormhole' do
       output = %x(#{dr} 2> /dev/null).split($RS)
       output[0].chomp.should =~ %r{/etc/issue.net}
     end
-
-    it 'has command-line eiffel compiler in path' do
-      dr = 'docker run --rm -i -t jumanjiman/wormhole sh -l -c "which ec"'
-      output = %x(#{dr} 2> /dev/null).split($RS).last.chomp
-      output.should =~ %r{^/usr/local/Eiffel.*/bin/ec$}
-    end
-
-    it 'has estudio in path' do
-      dr = 'docker run --rm -i -t jumanjiman/wormhole sh -l -c "which estudio"'
-      output = %x(#{dr} 2> /dev/null).split($RS).last.chomp
-      output.should =~ %r{^/usr/local/Eiffel.*/bin/estudio$}
-    end
   end
 end
