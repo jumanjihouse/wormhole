@@ -5,11 +5,12 @@
 # In general, use the range version operators (<, >, <=, >=)
 # instead of the pessimistic version operator (~>) when possible.
 #
+require 'English'
 Gem::Specification.new do |gem|
   gem.name          = 'wormhole test suite'
   gem.homepage      = 'https://github.com/jumanjiman/wormhole'
-  gem.description   = %q{'This gemspec is a helper for Bundler so that we can have smarter environments'}
-  gem.summary       = %q{'Test harness for this repo'}
+  gem.description   = %q('Test harness for this repo')
+  gem.summary       = %q('Test harness for this repo')
   gem.license       = 'GPLv3'
 
   gem.add_development_dependency 'docker-api'
@@ -23,11 +24,11 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rubocop'
   gem.add_development_dependency 'friction'
 
-  gem.files         = `git ls-files`.split($/)
-  gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  gem.files         = `git ls-files`.split($RS)
+  gem.executables   = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
-  gem.authors       = `git log --format='%aN' | sort -u`.split($/)
-  gem.email         = `git log --format='%aE' | sort -u`.split($/)
+  gem.authors       = `git log --format='%aN' | sort -u`.split($RS)
+  gem.email         = `git log --format='%aE' | sort -u`.split($RS)
   gem.require_paths = ['lib']
   # Leave at zero
   gem.version       = '0.0.0'

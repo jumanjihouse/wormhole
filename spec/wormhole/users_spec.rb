@@ -19,7 +19,7 @@ describe 'users with interactive shells' do
       users << fields[0] if shells.include?(fields[6].chomp)
     end
 
-    users.should =~ %W(root user)
+    users.should =~ %w(root user)
   end
 
   describe 'su' do
