@@ -67,7 +67,7 @@ describe 'admin scripts' do
       end
 
       it 'should not mount any volumes' do
-        @config['Volumes'].each { |k, v| v.should be_empty }
+        @config['Volumes'].each { |_k, v| v.should be_empty }
         @config['VolumesFrom'].should be_empty
       end
     end

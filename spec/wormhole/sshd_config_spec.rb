@@ -8,11 +8,11 @@ describe 'sshd config' do
   end
 
   describe 'auth' do
-    allow_auth = %W(
+    allow_auth = %w(
       pubkeyauthentication
     )
 
-    deny_auth = %W(
+    deny_auth = %w(
       passwordauthentication
       gssapiauthentication
       kerberosauthentication
@@ -94,7 +94,7 @@ describe 'sshd config' do
     end
 
     it 'CCE-14491-5 Use appropriate ciphers for SSH' do
-      allowed_ciphers = %W(
+      allowed_ciphers = %w(
         aes128-ctr
         aes192-ctr
         aes256-ctr

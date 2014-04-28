@@ -33,7 +33,7 @@ describe 'jumanjiman/wormhole' do
       @config['Cmd'].include?('/usr/sbin/sshd -D -e').should be_true
     end
 
-    volumes = %W(
+    volumes = %w(
       /home/user
       /media/state/etc/ssh
     )
@@ -46,7 +46,7 @@ describe 'jumanjiman/wormhole' do
   end
 
   describe 'prohibited packages' do
-    prohibited_packages = %W(
+    prohibited_packages = %w(
       at
       sudo
     )
@@ -64,7 +64,7 @@ describe 'jumanjiman/wormhole' do
   # we check for the commands, too.
   # Multiple CCE's recommend restricting at and cron.
   describe 'prohibited commands' do
-    prohibited_commands = %W(
+    prohibited_commands = %w(
       at
       crond
       crontab

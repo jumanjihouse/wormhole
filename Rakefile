@@ -21,29 +21,14 @@ require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
 require 'fileutils'
 
-task :default => [:help]
+task default: [:help]
 
-desc "Display the list of available rake tasks"
+desc 'Display the list of available rake tasks'
 task :help do
-  system("rake -T")
+  system('rake -T')
 end
-
-desc 'Run all tests'
-task :spec => [
-  :spec_pre,
-  :spec_standalone,
-  :spec_post,
-]
 
 Rubocop::RakeTask.new
 
 desc 'Run rspec tests'
 RSpec::Core::RakeTask.new(:spec_standalone)
-
-desc 'Prepare the repo to run tests'
-task :spec_pre do |t|
-end
-
-desc 'Clean the repo after tests'
-task :spec_post do |t|
-end
