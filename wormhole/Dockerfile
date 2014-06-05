@@ -32,6 +32,7 @@ RUN yum install -y \
     bzr \
     tito \
     git tar patch diffutils which \
+    git-hg \
     ; yum clean all
 
 # Break su for everybody but root.
