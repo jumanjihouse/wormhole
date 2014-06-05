@@ -4,6 +4,8 @@ FROM mattdm/fedora:f20
 # http://jumanjiman.github.io/
 MAINTAINER Paul Morgan <jumanjiman@gmail.com>
 
+RUN yum update -y; yum clean all
+
 # Work around https://bugzilla.redhat.com/show_bug.cgi?id=1066983
 # and remove prohibited packages.
 RUN yum remove -y vim-minimal \
