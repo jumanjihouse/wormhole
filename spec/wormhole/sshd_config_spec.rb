@@ -4,7 +4,7 @@ require 'spec_helper'
 describe 'sshd config' do
   before :all do
     cmd = 'docker run --rm -i -t jumanjiman/wormhole sshd -T 2> /dev/null'
-    @config = %x(#{cmd})
+    @config = `#{cmd}`
   end
 
   describe 'auth' do

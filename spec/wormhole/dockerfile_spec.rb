@@ -54,7 +54,7 @@ describe 'jumanjiman/wormhole' do
     prohibited_packages.each do |package|
       it "should not have #{package} installed" do
         dr = 'docker run --rm -i -t jumanjiman/wormhole'
-        output = %x(#{dr} rpm -q #{package} 2> /dev/null).split($RS)
+        output = `#{dr} rpm -q #{package} 2> /dev/null`.split($RS)
         output[0].chomp.should =~ /^package #{package} is not installed$/
       end
     end
@@ -73,7 +73,7 @@ describe 'jumanjiman/wormhole' do
     prohibited_commands.each do |cmd|
       it "should not have the #{cmd} command" do
         dr = "docker run --rm -i -t jumanjiman/wormhole which #{cmd}"
-        output = %x(#{dr} 2> /dev/null).split($RS)
+        output = `#{dr} 2> /dev/null`.split($RS)
         output[0].chomp.should =~ /no #{cmd} in/
       end
     end
@@ -82,26 +82,26 @@ describe 'jumanjiman/wormhole' do
   describe 'user convenience' do
     it 'man -k returns results' do
       dr = 'docker run --rm -i -t jumanjiman/wormhole man -k git 2> /dev/null'
-      output = %x(#{dr} 2> /dev/null).split($RS)
+      output = `#{dr} 2> /dev/null`.split($RS)
       output.length.should >= 10
     end
 
     # @note This rspec also asserts that /etc/issue.net is available for sshd.
     it 'locate returns the path for issue.net' do
       dr = 'docker run --rm -i -t jumanjiman/wormhole locate issue.net'
-      output = %x(#{dr} 2> /dev/null).split($RS)
+      output = `#{dr} 2> /dev/null`.split($RS)
       output[0].chomp.should =~ %r{/etc/issue.net}
     end
 
     it 'has command-line eiffel compiler in path' do
       dr = 'docker run --rm -i -t jumanjiman/wormhole sh -l -c "which ec"'
-      output = %x(#{dr} 2> /dev/null).split($RS).last.chomp
+      output = `#{dr} 2> /dev/null`.split($RS).last.chomp
       output.should =~ %r{^/usr/local/Eiffel.*/bin/ec$}
     end
 
     it 'has estudio in path' do
       dr = 'docker run --rm -i -t jumanjiman/wormhole sh -l -c "which estudio"'
-      output = %x(#{dr} 2> /dev/null).split($RS).last.chomp
+      output = `#{dr} 2> /dev/null`.split($RS).last.chomp
       output.should =~ %r{^/usr/local/Eiffel.*/bin/estudio$}
     end
   end

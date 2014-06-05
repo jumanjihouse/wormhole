@@ -19,7 +19,7 @@ describe 'admin scripts' do
     system "ssh-keygen -q -t rsa -b 1024 -N '' -f #{@privkey}"
 
     pubkey = File.read(@pubkey)
-    %x(./build.sh #{handle} "#{pubkey}" 2> /dev/null)
+    `./build.sh #{handle} "#{pubkey}" 2> /dev/null`
     @app = Docker::Container.get("#{handle}-run")
     @data = Docker::Container.get("#{handle}-data")
   end
@@ -117,7 +117,7 @@ describe 'admin scripts' do
 
       it '`docker logs` should show sshd running on sshd port' do
         sleep 2 # allow for startup time
-        output = %x(docker logs #{@app.json['ID']})
+        output = `docker logs #{@app.json['ID']}`
         output.should =~ /Server listening on 0.0.0.0 port 22/
       end
 

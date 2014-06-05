@@ -8,12 +8,12 @@ describe 'users with interactive shells' do
 
   it 'should only include "root" and "user"' do
     # Which interactive shells are allowed in container?
-    shells = %x(#{@dr} cat /etc/shells 2> /dev/null).split($RS)
+    shells = `#{@dr} cat /etc/shells 2> /dev/null`.split($RS)
     shells.map! { |s| s.chomp }.reject! { |s| s.match %r{/sbin/nologin} }
 
     # Which users have an interactive shell?
     users = []
-    records = %x(#{@dr} getent passwd 2> /dev/null).split($RS)
+    records = `#{@dr} getent passwd 2> /dev/null`.split($RS)
     records.each do |r|
       fields = r.split(':')
       users << fields[0] if shells.include?(fields[6].chomp)
@@ -28,12 +28,12 @@ describe 'users with interactive shells' do
     end
 
     it '"root" can su' do
-      out = %x(#{@dr} -u root jumanjiman/wormhole su -l -c 'id -u')
+      out = `#{@dr} -u root jumanjiman/wormhole su -l -c 'id -u'`
       out.lines.last.chomp.should =~ /^0$/
     end
 
     it '"user" cannot su' do
-      out = %x(#{@dr} -u user jumanjiman/wormhole su -l -c 'id -u')
+      out = `#{@dr} -u user jumanjiman/wormhole su -l -c 'id -u'`
       out.lines.last.chomp.should =~ /^su: Authentication failure$/
     end
   end
