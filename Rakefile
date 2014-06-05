@@ -28,7 +28,7 @@ task :help do
   system('rake -T')
 end
 
-Rubocop::RakeTask.new
+RuboCop::RakeTask.new
 
 desc 'Run rspec tests'
 RSpec::Core::RakeTask.new(:spec_standalone)
