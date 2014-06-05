@@ -15,6 +15,7 @@ RUN yum remove -y vim-minimal \
 
 # Install dependencies.
 RUN yum install -y \
+    bind-utils \
     openssh-server openssh-clients \
     man-pages mlocate \
     gcc gcc-c++ \
