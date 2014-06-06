@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'minitest'
   gem.add_development_dependency 'mocha'
   gem.add_development_dependency 'rspec-core'
-  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'rspec', '>= 3.0', '<= 4.0'
   gem.add_development_dependency 'rspec-expectations'
   gem.add_development_dependency 'rspec-mocks'
   gem.add_development_dependency 'rubocop', '>= 0.23.0'

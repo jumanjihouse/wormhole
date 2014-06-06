@@ -31,4 +31,4 @@ build:
     - script:
         name: run the test suite
         code: |
-          bundle exec rake spec
+          bundle exec rake spec_standalone

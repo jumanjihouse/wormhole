@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe 'jumanjiman/wormhole' do
-  before :all do
+  before :context do
     @docker_version = Docker.version['Version']
     if Gem::Version.new(@docker_version) >= Gem::Version.new('0.9')
       key, repo = 'RepoTags', 'jumanjiman/wormhole:latest'
@@ -21,7 +21,7 @@ describe 'jumanjiman/wormhole' do
   end
 
   describe 'docker' do
-    before :each do
+    before :example do
       @config = @image.json['config']
     end
 
@@ -30,7 +30,7 @@ describe 'jumanjiman/wormhole' do
     end
 
     it 'should run sshd with logging' do
-      @config['Cmd'].include?('/usr/sbin/sshd -D -e').should be_true
+      @config['Cmd'].include?('/usr/sbin/sshd -D -e').should be_truthy
     end
 
     volumes = %w(
@@ -40,7 +40,7 @@ describe 'jumanjiman/wormhole' do
 
     volumes.each do |vol|
       it "should have volume #{vol}" do
-        @config['Volumes'].keys.include?(vol).should be_true
+        @config['Volumes'].keys.include?(vol).should be_truthy
       end
     end
   end

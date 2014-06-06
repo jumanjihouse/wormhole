@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe 'users with interactive shells' do
-  before :all do
+  before :context do
     @dr = 'docker run --rm -i -t jumanjiman/wormhole'
   end
 
@@ -23,7 +23,7 @@ describe 'users with interactive shells' do
   end
 
   describe 'su' do
-    before :each do
+    before :example do
       @dr = 'docker run --rm -i -t'
     end
 

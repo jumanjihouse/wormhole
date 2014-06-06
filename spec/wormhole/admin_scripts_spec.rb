@@ -6,7 +6,7 @@ require 'spec_helper'
 handle = 'booga'
 
 describe 'admin scripts' do
-  before :all do
+  before :context do
     # Ensure ssh dir exists.
     ssh_dir = File.join(Dir.home, '.ssh')
     Dir.mkdir(ssh_dir, 0700) unless Dir.exist?(ssh_dir)
@@ -26,17 +26,17 @@ describe 'admin scripts' do
 
   describe "given user handle=\"#{handle}\"" do
     it 'everybody knows pubkey' do
-      File.exist?(@pubkey).should be_true
+      File.exist?(@pubkey).should be_truthy
     end
 
     it "#{handle} knows privkey" do
-      File.exist?(@privkey).should be_true
+      File.exist?(@privkey).should be_truthy
     end
   end
 
   describe '`build.sh $handle "$pubkey"` creates wormhole from 2 containers' do
     describe "\"#{handle}-data\" is a persistent read-write container" do
-      before :all do
+      before :context do
         @config = @data.json['Config']
         @state  = @data.json['State']
         pp @data.json unless @config && @state
@@ -47,7 +47,7 @@ describe 'admin scripts' do
       end
 
       it 'should be stopped' do
-        @state['Running'].should be_false
+        @state['Running'].should be_falsy
       end
 
       it 'should be created from busybox' do
@@ -56,14 +56,14 @@ describe 'admin scripts' do
       end
 
       it 'should export /home/user volume read-write' do
-        @config['Volumes'].keys.include?('/home/user').should be_true
-        @data.json['VolumesRW'].key?('/home/user').should be_true
-        @data.json['VolumesRW']['/home/user'].should be_true
+        @config['Volumes'].keys.include?('/home/user').should be_truthy
+        @data.json['VolumesRW'].key?('/home/user').should be_truthy
+        @data.json['VolumesRW']['/home/user'].should be_truthy
       end
 
       it 'should export /media/state/etc/ssh volume read-write' do
-        @data.json['VolumesRW'].key?('/media/state/etc/ssh').should be_true
-        @data.json['VolumesRW']['/media/state/etc/ssh'].should be_true
+        @data.json['VolumesRW'].key?('/media/state/etc/ssh').should be_truthy
+        @data.json['VolumesRW']['/media/state/etc/ssh'].should be_truthy
       end
 
       it 'should not mount any volumes' do
@@ -73,7 +73,7 @@ describe 'admin scripts' do
     end
 
     describe "\"#{handle}-run\" is a read-only app container" do
-      before :all do
+      before :context do
         @config = @app.json['Config']
         @state  = @app.json['State']
         pp @app.json unless @config && @state
@@ -84,12 +84,12 @@ describe 'admin scripts' do
       end
 
       it 'should be running' do
-        @state['Running'].should be_true
+        @state['Running'].should be_truthy
       end
 
       it 'should run unprivileged' do
         priv = @app.json['HostConfig']['Privileged']
-        priv.should be_false
+        priv.should be_falsy
       end
 
       it 'should be created from jumanjiman/wormhole' do
@@ -112,7 +112,7 @@ describe 'admin scripts' do
       end
 
       it 'should run sshd and only sshd' do
-        @config['Cmd'].include?('/usr/sbin/sshd -D -e').should be_true
+        @config['Cmd'].include?('/usr/sbin/sshd -D -e').should be_truthy
       end
 
       it '`docker logs` should show sshd running on sshd port' do
@@ -132,7 +132,7 @@ describe 'admin scripts' do
     end
   end
 
-  after :all do
+  after :context do
     File.delete @privkey, @pubkey
     @app.kill
     @app.delete(true)

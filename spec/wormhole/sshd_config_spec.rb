@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe 'sshd config' do
-  before :all do
+  before :context do
     cmd = 'docker run --rm -i -t jumanjiman/wormhole sshd -T 2> /dev/null'
     @config = `#{cmd}`
   end

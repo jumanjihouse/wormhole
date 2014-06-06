@@ -12,4 +12,4 @@ popd 2> /dev/null
 
 echo "===> Running rspec"
 bundle exec rake rubocop
-bundle exec rake spec
+bundle exec rake spec_standalone
