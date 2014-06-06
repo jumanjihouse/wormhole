@@ -15,10 +15,5 @@ function smitty() {
 
 git remote show upstream &> /dev/null || smitty git remote add upstream https://github.com/jumanjiman/wormhole.git
 
+rm -f Gemfile.lock
 smitty bundle update 2> /dev/null || smitty bundle install --path=~/.bundle
-if [[ $? -ne 0 ]]; then
-  echo 'Please see the troubleshooting section of docs/guides/bundle.md' >&2
-  rc=1
-fi
-
-exit $rc
