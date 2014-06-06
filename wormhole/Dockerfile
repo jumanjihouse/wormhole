@@ -52,9 +52,10 @@ ADD profile.d /etc/profile.d/
 
 # Install EiffelStudio. See LICENSE.eiffelstudio for terms.
 RUN yum -y install gtk2-devel.x86_64 libXtst-devel.x86_64 pangox-compat; yum clean all
-ADD http://ftp.eiffel.com/pub/download/13.11/Eiffel_13.11_gpl_93542-linux-x86-64.tar.bz2 /tmp/
-RUN tar xvjf /tmp/Eiffel_13.11_gpl_93542-linux-x86-64.tar.bz2 -C /usr/local/ \
-    ;  rm -f /tmp/Eiffel_13.11_gpl_93542-linux-x86-64.tar.bz2
+RUN cd /tmp ;\
+    curl -O ftp://ftp.eiffel.com/pub/download/13.11/Eiffel_13.11_gpl_93542-linux-x86-64.tar.bz2 ;\
+    tar xvjf /tmp/Eiffel_13.11_gpl_93542-linux-x86-64.tar.bz2 -C /usr/local/ ;\
+    rm -f /tmp/Eiffel_13.11_gpl_93542-linux-x86-64.tar.bz2
 
 # Create sandbox user.
 RUN useradd user
