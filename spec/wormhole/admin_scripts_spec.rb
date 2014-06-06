@@ -38,6 +38,7 @@ describe 'admin scripts' do
     describe "\"#{handle}-data\" is a persistent read-write container" do
       before :context do
         @config = @data.json['Config']
+        @hostconfig = @data.json['HostConfig']
         @state  = @data.json['State']
         pp @data.json unless @config && @state
       end
@@ -68,13 +69,14 @@ describe 'admin scripts' do
 
       it 'should not mount any volumes' do
         @config['Volumes'].each { |_k, v| v.should be_empty }
-        @config['VolumesFrom'].should be_empty
+        @hostconfig['VolumesFrom'].should be_nil
       end
     end
 
     describe "\"#{handle}-run\" is a read-only app container" do
       before :context do
         @config = @app.json['Config']
+        @hostconfig = @app.json['HostConfig']
         @state  = @app.json['State']
         pp @app.json unless @config && @state
       end
@@ -98,7 +100,7 @@ describe 'admin scripts' do
       end
 
       it "should use volumes from #{handle}-data" do
-        @config['VolumesFrom'].should == "#{handle}-data"
+        @hostconfig['VolumesFrom'].should =~ ["#{handle}-data"]
       end
 
       it 'should have hostname wormhole.example.com' do
