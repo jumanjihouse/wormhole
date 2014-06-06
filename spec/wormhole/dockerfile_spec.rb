@@ -4,7 +4,7 @@ require 'spec_helper'
 describe 'jumanjiman/wormhole' do
   before :all do
     @docker_version = Docker.version['Version']
-    if @docker_version >= '0.9'
+    if Gem::Version.new(@docker_version) >= Gem::Version.new('0.9')
       key, repo = 'RepoTags', 'jumanjiman/wormhole:latest'
       @image = Docker::Image.all.find { |i| i.info[key].include?(repo) }
     else
