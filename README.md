@@ -98,6 +98,9 @@ RSpec documents key behaviors and assures no regressions:
         locate returns the path for issue.net
         has command-line eiffel compiler in path
         has estudio in path
+      BZ1099206
+        go get should work
+
 
     sshd config
       auth
