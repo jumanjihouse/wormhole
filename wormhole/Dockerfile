@@ -18,6 +18,7 @@ RUN yum install -y \
     bind-utils \
     bc \
     dictd \
+    diction \
     ftp tftp \
     openssh-server openssh-clients \
     man-pages mlocate \
