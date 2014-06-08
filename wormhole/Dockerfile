@@ -39,6 +39,9 @@ RUN yum install -y \
     git-hg \
     ; yum clean all
 
+# https://github.com/jumanjiman/bz1099206
+RUN yum -y reinstall golang golang-pkg* golang-src
+
 # Break su for everybody but root.
 ADD su /etc/pam.d/
 

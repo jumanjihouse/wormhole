@@ -43,6 +43,15 @@ a [topic branch](http://progit.org/book/ch3-4.html) of your fork.
    ```
 
 
+Diff churn
+----------
+
+Please minimize diff churn to enhance git history commands.
+
+* Arrays should usually be multi-line with trailing commas.
+
+Update `.rubocop.yml` if necessary to favor minimal churn.
+
 
 Linear history
 --------------

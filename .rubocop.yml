@@ -1,0 +1,5 @@
+---
+
+# Avoid diff-churn!
+Style/TrailingComma:
+  EnforcedStyleForMultiline: comma
