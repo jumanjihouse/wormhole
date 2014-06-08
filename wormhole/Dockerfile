@@ -17,6 +17,7 @@ RUN yum remove -y vim-minimal \
 RUN yum install -y \
     bind-utils \
     bc \
+    dictd \
     ftp tftp \
     openssh-server openssh-clients \
     man-pages mlocate \
