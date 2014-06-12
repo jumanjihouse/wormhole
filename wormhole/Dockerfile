@@ -13,6 +13,12 @@ RUN yum remove -y vim-minimal \
     sudo \
     ; yum clean all
 
+# Work around https://bugzilla.redhat.com/show_bug.cgi?id=1105901
+# Reproducer is at https://github.com/jumanjiman/bz1099206
+RUN yum install -y \
+    gcc \
+    ; yum clean all
+
 # Install dependencies.
 RUN yum install -y \
     bind-utils \
@@ -42,9 +48,6 @@ RUN yum install -y \
     git-hg \
     git-svn \
     ; yum clean all
-
-# https://github.com/jumanjiman/bz1099206
-RUN yum -y reinstall golang golang-pkg* golang-src
 
 # Break su for everybody but root.
 ADD su /etc/pam.d/
