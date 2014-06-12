@@ -40,6 +40,7 @@ RUN yum install -y \
     tito \
     git tar patch diffutils which \
     git-hg \
+    git-svn \
     ; yum clean all
 
 # https://github.com/jumanjiman/bz1099206
