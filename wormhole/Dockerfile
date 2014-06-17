@@ -47,6 +47,7 @@ RUN yum install -y \
     git tar patch diffutils which \
     git-hg \
     git-svn \
+    make \
     ; yum clean all
 
 # Break su for everybody but root.
