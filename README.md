@@ -65,7 +65,7 @@ RSpec documents key behaviors and assures no regressions:
           should export /home/user volume read-write
           should export /media/state/etc/ssh volume read-write
           should not mount any volumes
-        "booga-run" is a read-only app container
+        "booga" is a read-only app container
           should exist
           should be running
           should run unprivileged
@@ -170,7 +170,7 @@ A runtime container should be up on a random ssh port:
     $ docker ps
 
     CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                   NAMES
-    689479673e8e        jumanjiman:latest   /bin/sh -c /usr/sbin   About an hour ago   Up About an hour    0.0.0.0:49153->22/tcp   jumanjiman-run      
+    689479673e8e        jumanjiman:latest   /bin/sh -c /usr/sbin   About an hour ago   Up About an hour    0.0.0.0:49153->22/tcp   jumanjiman
 
 :warning: The scripts limit each app container to 512 MiB memory.
 
@@ -184,7 +184,7 @@ If a PID inside a container gets killed due to the memory limit,
 you can view details in `dmesg` output.
 
 
-### Backup 
+### Backup
 
 Create a local file called `jumanjiman-data.tar` with contents of
 user data container.

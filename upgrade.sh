@@ -8,11 +8,11 @@ fi
 
 source ./global.conf
 
-port=$(docker port $user-run 22 | cut -d: -f2)
+port=$(docker port $user 22 | cut -d: -f2)
 
 # stop and throw away user runtime container
-docker stop $user-run
-docker rm $user-run
+docker stop $user
+docker rm $user
 
 # create a runtime container from the base image
-docker run -d -t -m $max_ram --volumes-from $user-data -p $port:22 -h $sandbox_hostname --name $user-run $base_image
+docker run -d -t -m $max_ram --volumes-from $user-data -p $port:22 -h $sandbox_hostname --name $user $base_image

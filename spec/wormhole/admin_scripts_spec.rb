@@ -20,7 +20,7 @@ describe 'admin scripts' do
 
     pubkey = File.read(@pubkey)
     `./build.sh #{handle} "#{pubkey}" 2> /dev/null`
-    @app = Docker::Container.get("#{handle}-run")
+    @app = Docker::Container.get("#{handle}")
     @data = Docker::Container.get("#{handle}-data")
   end
 
@@ -73,7 +73,7 @@ describe 'admin scripts' do
       end
     end
 
-    describe "\"#{handle}-run\" is a read-only app container" do
+    describe "\"#{handle}\" is a read-only app container" do
       before :context do
         @config = @app.json['Config']
         @hostconfig = @app.json['HostConfig']
