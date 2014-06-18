@@ -5,6 +5,10 @@ require 'spec_helper'
 # We use top-scope to allow show in rspec subject.
 handle = 'booga'
 
+def systemd?
+  system('which systemctl')
+end
+
 describe 'admin scripts' do
   before :context do
     # Ensure ssh dir exists.
@@ -20,8 +24,20 @@ describe 'admin scripts' do
 
     pubkey = File.read(@pubkey)
     `./build.sh #{handle} "#{pubkey}" 2> /dev/null`
+    unless systemd?
+      # The build script uses systemd to start the container, so
+      # we have to kludge on test host that doesn't have systemd.
+      # rubocop:disable LineLength
+      `docker run -d -t -m 512m --volumes-from #{handle}-data -P -h wormhole.example.com --name #{handle} jumanjiman/wormhole`
+      # rubocop:enable LineLength
+    end
+    sleep 5
     @app = Docker::Container.get("#{handle}")
     @data = Docker::Container.get("#{handle}-data")
+  end
+
+  after :context do
+    `docker stop #{handle}`
   end
 
   describe "given user handle=\"#{handle}\"" do

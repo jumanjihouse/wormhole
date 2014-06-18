@@ -1,0 +1,15 @@
+[Unit]
+Description=%i app container
+After=docker.service
+Requires=docker.service
+
+[Service]
+EnvironmentFile=/etc/wormhole/%i.conf
+ExecStartPre=/bin/bash -c '/usr/bin/docker inspect %i &> /dev/null && /usr/bin/docker rm %i || :'
+ExecStart=/usr/bin/docker run --rm -t -m 512m --volumes-from %i-data -p ${PORT}:22 -h wormhole.example.com --name %i jumanjiman/wormhole
+ExecStop=/usr/bin/docker stop %i
+RestartSec=5s
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

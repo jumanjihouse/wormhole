@@ -172,6 +172,25 @@ A runtime container should be up on a random ssh port:
     CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                   NAMES
     689479673e8e        jumanjiman:latest   /bin/sh -c /usr/sbin   About an hour ago   Up About an hour    0.0.0.0:49153->22/tcp   jumanjiman
 
+The build script depends on systemd and enables a "wormhole@<username>"
+service to start at boot-time for the container you just created and
+persists the port as an environment variable in `/etc/wormhole/<username>.conf`.
+For example: If the username is jumanjiman, you can run
+`sudo systemctl status wormhole@jumanjiman` to see:
+
+    ● wormhole@jumanjiman.service - jumanjiman app container
+       Loaded: loaded (/etc/systemd/system/wormhole@.service; enabled)
+       Active: active (running) since Wed 2014-06-18 14:08:05 UTC; 3h 18min ago
+     Main PID: 701 (docker)
+       CGroup: /system.slice/system-wormhole.slice/wormhole@jumanjiman.service
+               └─701 /usr/bin/docker run --rm -t -m 512m --volumes-from jumanjiman-data -p 49153:22 -h wormhole.example.com --name jumanjiman...
+
+
+    Jun 18 14:08:05 ip-192-168-254-21 bash[478]: jumanjiman
+    Jun 18 14:08:05 ip-192-168-254-21 systemd[1]: Started jumanjiman app container.
+    Jun 18 14:08:09 ip-192-168-254-21 docker[701]: Server listening on 0.0.0.0 port 22.
+    Jun 18 14:08:09 ip-192-168-254-21 docker[701]: Server listening on :: port 22.
+
 :warning: The scripts limit each app container to 512 MiB memory.
 
 You can view the current limit for a container via the sys filesystem.

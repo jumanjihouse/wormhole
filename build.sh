@@ -46,5 +46,14 @@ docker run --rm --volumes-from $user-data -u user $base_image chmod 0600 /home/u
 # create a container from the user image
 docker run -d -t -m $max_ram --volumes-from $user-data -P -h $sandbox_hostname --name $user $base_image
 port=$(docker port $user 22 | cut -d: -f2)
-ip=$(ip -4 address show dev eth0 | awk '/inet/ {print $2}' | cut -d/ -f1)
-echo ssh -p $port -i path/to/privkey user@$ip
+docker stop $user
+docker rm $user
+
+# Make the container persistent.
+sudo cp -f wormhole@.service /etc/systemd/system/
+sudo mkdir -p /etc/wormhole || :
+echo -e "PORT=$port\n" | sudo tee /etc/wormhole/$user
+sudo systemctl enable wormhole@$user
+sudo systemctl start wormhole@$user
+sleep 2
+sudo systemctl status wormhole@$user
