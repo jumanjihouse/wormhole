@@ -165,6 +165,12 @@ and the user ssh pubkey to create a runtime container:
 
     ./build.sh $user "$pubkey"
 
+:warning: The build script attempts to fetch the github user's
+ssh pubkeys and place them into the data container as authorized keys.
+This is *really* bad if you create a devenv for somebody based on
+a name that is *not* their github handle and the name is a valid
+github handle for somebody else!
+
 A runtime container should be up on a random ssh port:
 
     $ docker ps
