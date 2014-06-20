@@ -29,6 +29,7 @@ RUN yum install -y \
     openssh-server openssh-clients \
     man-pages mlocate \
     gcc gcc-c++ \
+    glibc-static \
     gnupg \
     ruby ruby-devel rubygem-bundler \
     libcurl-devel libxslt-devel libxml2-devel \
