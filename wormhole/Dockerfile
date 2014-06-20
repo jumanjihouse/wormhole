@@ -48,6 +48,7 @@ RUN yum install -y \
     git-hg \
     git-svn \
     make \
+    jwhois \
     ; yum clean all
 
 # Break su for everybody but root.
