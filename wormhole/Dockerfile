@@ -71,8 +71,8 @@ ADD profile.d /etc/profile.d/
 # Install EiffelStudio. See LICENSE.eiffelstudio for terms.
 RUN yum -y install gtk2-devel.x86_64 libXtst-devel.x86_64 pangox-compat; yum clean all
 RUN cd /tmp ;\
-    curl -O ftp://ftp.eiffel.com/pub/download/14.05/Eiffel_14.05_gpl_95220-linux-x86-64.tar.bz2 ;\
-    tar xvjf /tmp/Eiffel_14.05_gpl_95220-linux-x86-64.tar.bz2 -C /usr/local/ ;\
+    curl -s -O ftp://ftp.eiffel.com/pub/download/14.05/Eiffel_14.05_gpl_95220-linux-x86-64.tar.bz2 ;\
+    tar xjf /tmp/Eiffel_14.05_gpl_95220-linux-x86-64.tar.bz2 -C /usr/local/ ;\
     rm -f /tmp/Eiffel_14.05_gpl_95220-linux-x86-64.tar.bz2
 
 # Create sandbox user.
@@ -87,8 +87,8 @@ ADD issue.net /etc/
 ADD sshd /etc/pam.d/
 
 # Update system databases for user convenience.
-RUN mandb
-RUN updatedb
+RUN mandb &> /dev/null
+RUN updatedb &> /dev/null
 
 EXPOSE 22
 ENV LANG C
