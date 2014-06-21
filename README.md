@@ -16,6 +16,13 @@ is for developers to **edit code** and perform
 Please add any issues you find with this software
 to the upstream [wormhole](https://github.com/jumanjiman/wormhole/issues).
 
+[Architectural considerations](#architectural-considerations)<br/>
+[Test harness](#test-harness)<br/>
+[User instructions](#user-instructions)<br/>
+[Admin instructions](#admin-instructions)<br/>
+[Contributing](https://github.com/jumanjiman/wormhole/blob/master/CONTRIBUTING.md)<br/>
+[License](https://github.com/jumanjiman/wormhole/blob/master/LICENSE)<br/>
+
 
 ## Architectural considerations
 
