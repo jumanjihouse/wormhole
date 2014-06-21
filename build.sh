@@ -8,7 +8,11 @@ if test -z $user ; then
   exit 1
 fi
 
-source ./global.conf
+global_config=/etc/wormhole/global.conf
+
+sudo mkdir -p /etc/wormhole || :
+[[ -r $global_config ]] || sudo cp -f global.conf /etc/wormhole/
+source $global_config
 
 cat > data <<EOF
 FROM   busybox

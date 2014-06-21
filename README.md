@@ -155,6 +155,13 @@ Connect to your container with info provided by admin:
 
 ## Admin instructions
 
+### Edit global configuration
+
+Clone this repo, then inspect and optionally modify `global.conf`.
+When you build a user box for the first time, the build script
+copies `global.conf` into `/etc/wormhole/global.conf`.
+
+
 ### Build a user box
 
 Use the build script with a unique user id (such as github handle)
@@ -197,7 +204,8 @@ For example: If the username is jumanjiman, you can run
     Jun 18 14:08:09 ip-192-168-254-21 docker[701]: Server listening on 0.0.0.0 port 22.
     Jun 18 14:08:09 ip-192-168-254-21 docker[701]: Server listening on :: port 22.
 
-:warning: The scripts limit each app container to 512 MiB memory.
+:warning: The default `global.conf` limits each app container to 512 MiB memory.
+You can override this for a single user in `/etc/wormhole/<username>.conf`.
 
 You can view the current limit for a container via the sys filesystem.
 For example, here is a container that was started with a 1 MiB limit:

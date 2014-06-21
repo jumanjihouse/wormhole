@@ -4,9 +4,18 @@ After=docker.service
 Requires=docker.service
 
 [Service]
+# Enable %i.conf to override global.conf
+# as described in systemd.exec(5).
+EnvironmentFile=/etc/wormhole/global.conf
 EnvironmentFile=/etc/wormhole/%i.conf
 ExecStartPre=/bin/bash -c '/usr/bin/docker inspect %i &> /dev/null && /usr/bin/docker rm %i || :'
-ExecStart=/usr/bin/docker run --rm -t -m 512m --volumes-from %i-data -p ${PORT}:22 -h wormhole.example.com --name %i jumanjiman/wormhole
+ExecStart=/usr/bin/docker run --rm -t \
+  -m ${max_ram} \
+  --volumes-from %i-data \
+  -p ${PORT}:22 \
+  -h ${sandbox_hostname} \
+  --name %i \
+  ${base_image}
 ExecStop=/usr/bin/docker stop %i
 RestartSec=5s
 Restart=always
