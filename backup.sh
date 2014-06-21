@@ -1,4 +1,8 @@
 #!/bin/bash
+set -e
+
+# Import smitty.
+source script/functions
 
 user=$1
 if test -z $user; then
@@ -6,4 +10,4 @@ if test -z $user; then
   exit 1
 fi
 
-docker run --rm --volumes-from $user-data -v $(pwd):/backup busybox tar cvf /backup/$user-data.tar /home/user /media/state/etc/ssh
+smitty docker run --rm --volumes-from $user-data -v $(pwd):/backup busybox tar cvf /backup/$user-data.tar /home/user /media/state/etc/ssh

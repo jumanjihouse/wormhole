@@ -1,0 +1,5 @@
+function smitty() {
+  echo; echo
+  echo -e "[INFO] $@"
+  "$@"
+}
