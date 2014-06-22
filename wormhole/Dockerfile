@@ -85,6 +85,7 @@ VOLUME ["/home/user", "/media/state/etc/ssh"]
 ADD sshd_config /etc/ssh/
 ADD issue.net /etc/
 ADD sshd /etc/pam.d/
+ADD password-auth /etc/pam.d/
 
 # Update system databases for user convenience.
 RUN mandb &> /dev/null
