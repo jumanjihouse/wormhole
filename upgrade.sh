@@ -11,6 +11,7 @@ if test -z $user; then
 fi
 
 smitty docker pull jumanjiman/wormhole
+smitty sudo cp -f wormhole@.service /etc/systemd/system/
 smitty sudo systemctl restart wormhole@$user
 smitty sleep 2
 smitty sudo systemctl status wormhole@$user
