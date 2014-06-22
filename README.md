@@ -19,7 +19,7 @@ to the upstream [wormhole](https://github.com/jumanjiman/wormhole/issues).
 
 ## Architectural considerations
 
-![admin](https://cloud.githubusercontent.com/assets/332496/2618648/4c55d0b8-bc24-11e3-9413-8ba57442c11a.png)
+![admin](https://cloud.githubusercontent.com/assets/332496/3352907/edec295c-fa65-11e3-8044-f80d3f0af3c0.png)
 
 ![user](https://f.cloud.github.com/assets/332496/2528015/529d5c36-b50b-11e3-9e89-707062e47b36.png)
 source: [`docs/uml.md`](https://github.com/jumanjiman/wormhole/blob/master/docs/uml.md)
@@ -235,6 +235,13 @@ user data container.
 Rebuild the `jumanjiman/wormhole` image as described above, then...
 
     ./upgrade.sh jumanjiman
+
+
+### Destroy a user app+data container
+
+Backup, then discard both the app and data containers for a user.
+
+    ./destroy.sh jumanjiman
 
 
 ### Build an image for the app container

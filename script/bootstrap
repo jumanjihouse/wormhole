@@ -4,11 +4,6 @@ set -e
 # Import smitty.
 source script/functions
 
-function err() {
-  echo "[ERROR] $1" >&2
-  exit 1
-}
-
 git remote show upstream &> /dev/null || smitty git remote add upstream https://github.com/jumanjiman/wormhole.git
 
 rm -f Gemfile.lock
