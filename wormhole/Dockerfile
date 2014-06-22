@@ -75,6 +75,15 @@ RUN cd /tmp ;\
     tar xjf /tmp/Eiffel_14.05_gpl_95220-linux-x86-64.tar.bz2 -C /usr/local/ ;\
     rm -f /tmp/Eiffel_14.05_gpl_95220-linux-x86-64.tar.bz2
 
+# Install duo for multifactor authentication.
+ADD duo.repo /etc/yum.repos.d/
+RUN rpm --import https://www.duosecurity.com/RPM-GPG-KEY-DUO ;\
+    yum -y install duo_unix; yum clean all
+# Avoid error `Only root may specify -c or -f` when using
+# ForceCommand with `-f` option at non-root ssh login.
+# https://www.duosecurity.com/docs/duounix-faq#can-i-use-login_duo-to-protect-non-root-shared-accounts,-or-can-i-do-an-install-without-root-privileges?
+RUN chmod u-s /usr/sbin/login_duo
+
 # Create sandbox user.
 RUN useradd user
 
@@ -86,6 +95,8 @@ ADD sshd_config /etc/ssh/
 ADD issue.net /etc/
 ADD sshd /etc/pam.d/
 ADD password-auth /etc/pam.d/
+ADD password-auth.patch /etc/pam.d/
+ADD start.sh /usr/sbin/
 
 # Update system databases for user convenience.
 RUN mandb &> /dev/null
@@ -93,4 +104,4 @@ RUN updatedb &> /dev/null
 
 EXPOSE 22
 ENV LANG C
-CMD /usr/sbin/sshd -D -e
+CMD /usr/sbin/start.sh

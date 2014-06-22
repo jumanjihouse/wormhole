@@ -80,7 +80,6 @@ RSpec documents key behaviors and assures no regressions:
           should use volumes from booga-data
           should have hostname wormhole.example.com
           should be limited to 512 MiB RAM
-          should run sshd and only sshd
           `docker logs` should show sshd running on sshd port
           should expose internal sshd port and only sshd port
           should map internal sshd port to an outside ephemeral port
@@ -90,7 +89,6 @@ RSpec documents key behaviors and assures no regressions:
         should be available
       docker
         should expose ssh port and only ssh port
-        should run sshd with logging
         should have volume /home/user
         should have volume /media/state/etc/ssh
       prohibited packages
@@ -107,7 +105,6 @@ RSpec documents key behaviors and assures no regressions:
         has estudio in path
       BZ1099206
         go get should work
-
 
     sshd config
       auth
@@ -167,6 +164,19 @@ Connect to your container with info provided by admin:
 Clone this repo, then inspect and optionally modify `global.conf`.
 When you build a user box for the first time, the build script
 copies `global.conf` into `/etc/wormhole/global.conf`.
+
+
+### Edit duo configuration
+
+This step is optional. The default configuration **does not use Duo**.
+If you want to use Duo Security for multi-factor authentication,
+you must edit both `global.conf` and `login_duo.conf`.
+
+* When you build your first user box (see below), these two files
+  are copied into `/etc/wormhole/`.
+
+* If you modify `/etc/wormhole/*.conf`, you must restart the user
+  app container(s).
 
 
 ### Build a user box

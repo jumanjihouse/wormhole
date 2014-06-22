@@ -129,10 +129,6 @@ describe 'admin scripts' do
         @config['Memory'].should == limit
       end
 
-      it 'should run sshd and only sshd' do
-        @config['Cmd'].include?('/usr/sbin/sshd -D -e').should be_truthy
-      end
-
       it '`docker logs` should show sshd running on sshd port' do
         sleep 2 # allow for startup time
         output = `docker logs #{@app.json['ID']}`

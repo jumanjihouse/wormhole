@@ -29,10 +29,6 @@ describe 'jumanjiman/wormhole' do
       @config['ExposedPorts'].keys.should =~ ['22/tcp']
     end
 
-    it 'should run sshd with logging' do
-      @config['Cmd'].include?('/usr/sbin/sshd -D -e').should be_truthy
-    end
-
     volumes = %w(
       /home/user
       /media/state/etc/ssh

@@ -18,6 +18,9 @@ sudo mkdir -p /etc/wormhole || :
 [[ -r $global_config ]] || sudo cp -f global.conf /etc/wormhole/
 source $global_config
 
+duo_config=/etc/wormhole/login_duo.conf
+[[ -r $duo_config ]] || sudo cp -f login_duo.conf /etc/wormhole/
+
 rm -f data
 cat >> data <<EOF
 FROM   busybox
