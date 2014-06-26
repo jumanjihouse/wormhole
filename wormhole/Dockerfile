@@ -34,11 +34,13 @@ RUN yum install -y \
     ruby ruby-devel rubygem-bundler \
     libcurl-devel libxslt-devel libxml2-devel \
     vim-enhanced bash-completion \
+    openssl openssl-devel crypto-utils \
     tree \
     python-devel python-nose python-setuptools python-pep8 rpm-python \
     python3-devel python3-nose python3-setuptools python3-pep8 rpm-python3 \
     pylint python3-pylint \
     rpm-build libxslt createrepo git-annex \
+    strace \
     tmux tmux-powerline reptyr \
     golang golang-docs golang-cover golang-github-coreos-go-systemd-devel \
     golang-godoc golang-vim golang-github-coreos-go-log-devel \
