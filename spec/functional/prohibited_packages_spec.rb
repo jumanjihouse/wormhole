@@ -9,9 +9,8 @@ describe 'prohibited packages' do
 
   prohibited_packages.each do |package|
     it "should not have #{package} installed" do
-      dr = 'docker run --rm -i -t jumanjiman/wormhole'
-      output = `#{dr} rpm -q #{package} 2> /dev/null`.split($RS)
-      output[0].chomp.should =~ /^package #{package} is not installed$/
+      output = ssh("rpm -q #{package} 2>&1")
+      output.should =~ /^package #{package} is not installed$/
     end
   end
 end
@@ -28,9 +27,8 @@ describe 'prohibited commands' do
 
   prohibited_commands.each do |cmd|
     it "should not have the #{cmd} command" do
-      dr = "docker run --rm -i -t jumanjiman/wormhole which #{cmd}"
-      output = `#{dr} 2> /dev/null`.split($RS)
-      output[0].chomp.should =~ /no #{cmd} in/
+      output = ssh("which #{cmd} 2>&1")
+      output.should =~ /no #{cmd} in/
     end
   end
 end

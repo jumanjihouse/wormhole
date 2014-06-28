@@ -1,3 +1,4 @@
+# encoding: utf-8
 # vim: set ts=2 sw=2 ai et:
 
 # Does the current user have root privileges?

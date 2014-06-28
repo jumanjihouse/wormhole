@@ -90,6 +90,9 @@ RUN chmod u-s /usr/sbin/login_duo
 # Create sandbox user.
 RUN useradd user
 
+# Ugly workaround. Really ugly.
+RUN usermod -aG slocate user
+
 # Do not track changes in volumes.
 VOLUME ["/home/user", "/media/state/etc/ssh"]
 

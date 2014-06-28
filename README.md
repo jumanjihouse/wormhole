@@ -96,8 +96,26 @@ RSpec documents key behaviors and assures no regressions:
       `arc` is in user path
       `arc version` is functional
 
-    BZ1099206
+    BZ1099206 (slow test)
+      home directory should exist
       go get should work
+
+    user convenience
+      man -k returns results
+      locate returns the path for issue.net
+
+    eiffelstudio
+      has command-line eiffel compiler in path
+      has estudio in path
+
+    prohibited packages
+      should not have at installed
+      should not have sudo installed
+
+    prohibited commands
+      should not have the at command
+      should not have the crond command
+      should not have the crontab command
 
     sshd config
       auth
@@ -127,28 +145,13 @@ RSpec documents key behaviors and assures no regressions:
       obscurity
         should hide patch level
 
-    user convenience
-      man -k returns results
-      locate returns the path for issue.net
-
-    eiffelstudio
-      has command-line eiffel compiler in path
-      has estudio in path
-
-    prohibited packages
-      should not have at installed
-      should not have sudo installed
-
-    prohibited commands
-      should not have the at command
-      should not have the crond command
-      should not have the crontab command
-
     users with interactive shells
       should only include "root" and "user"
       su
-        "root" can su
         "user" cannot su
+
+    Finished in 53.16 seconds (files took 0.43034 seconds to load)
+    55 examples, 0 failures
 
 
 ## User instructions
