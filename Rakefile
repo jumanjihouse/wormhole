@@ -33,6 +33,7 @@ RuboCop::RakeTask.new
 # Run unit tests before functional tests.
 desc 'Run rspec tests'
 task spec_standalone: [
+  :validate_bundle,
   :unit,
   :functional,
 ]
@@ -43,4 +44,13 @@ end
 
 RSpec::Core::RakeTask.new(:functional) do |t|
   t.pattern = 'spec/functional/**/*_spec.rb'
+end
+
+task :validate_bundle do
+  begin
+    require 'docker'
+    Docker.validate_version!
+  rescue Docker::Error::VersionError
+    abort '[ERROR] docker-api gem is incompatible with this version of Docker'
+  end
 end

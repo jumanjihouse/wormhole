@@ -1,6 +1,12 @@
 box: wercker-labs/docker
 build:
   steps:
+    - script:
+        name: print the docker version
+        code: docker version
+    - script:
+        name: print system-wide docker info
+        code: docker info
     - install-packages:
         packages: ruby2.0 ruby2.0-dev
     - script:
@@ -14,14 +20,11 @@ build:
         code: bundle --version
     - bundle-install
     - script:
+        name: validate bundle to fail early
+        code: bundle exec rake validate_bundle
+    - script:
         name: check ruby files for style consistency
         code: bundle exec rake rubocop
-    - script:
-        name: print the docker version
-        code: docker version
-    - script:
-        name: print system-wide docker info
-        code: docker info
     - script:
         name: build a wormhole image
         code: |
