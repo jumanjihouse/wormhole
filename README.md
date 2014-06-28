@@ -60,6 +60,14 @@ RSpec documents key behaviors and assures no regressions:
     contributor friction
       there should not be any
 
+    jumanjiman/wormhole
+      image
+        should be available
+      image properties
+        should expose ssh port and only ssh port
+        should have volume /home/user
+        should have volume /media/state/etc/ssh
+
     admin scripts
       given user handle="booga"
         everybody knows pubkey
@@ -84,29 +92,12 @@ RSpec documents key behaviors and assures no regressions:
           should expose internal sshd port and only sshd port
           should map internal sshd port to an outside ephemeral port
 
-    jumanjiman/wormhole
-      image
-        should be available
-      docker
-        should expose ssh port and only ssh port
-        should have volume /home/user
-        should have volume /media/state/etc/ssh
-      prohibited packages
-        should not have at installed
-        should not have sudo installed
-      prohibited commands
-        should not have the at command
-        should not have the crond command
-        should not have the crontab command
-      user convenience
-        man -k returns results
-        locate returns the path for issue.net
-        has command-line eiffel compiler in path
-        has estudio in path
-        has arcanist in path
-        `arc version` is functional
-      BZ1099206
-        go get should work
+    arcanist (phabricator client)
+      `arc` is in user path
+      `arc version` is functional
+
+    BZ1099206
+      go get should work
 
     sshd config
       auth
@@ -135,6 +126,23 @@ RSpec documents key behaviors and assures no regressions:
         CCE-14716-5 Users should not be allowed to set env options
       obscurity
         should hide patch level
+
+    user convenience
+      man -k returns results
+      locate returns the path for issue.net
+
+    eiffelstudio
+      has command-line eiffel compiler in path
+      has estudio in path
+
+    prohibited packages
+      should not have at installed
+      should not have sudo installed
+
+    prohibited commands
+      should not have the at command
+      should not have the crond command
+      should not have the crontab command
 
     users with interactive shells
       should only include "root" and "user"

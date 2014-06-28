@@ -30,5 +30,17 @@ end
 
 RuboCop::RakeTask.new
 
+# Run unit tests before functional tests.
 desc 'Run rspec tests'
-RSpec::Core::RakeTask.new(:spec_standalone)
+task spec_standalone: [
+  :unit,
+  :functional,
+]
+
+RSpec::Core::RakeTask.new(:unit) do |t|
+  t.pattern = 'spec/unit/**/*_spec.rb'
+end
+
+RSpec::Core::RakeTask.new(:functional) do |t|
+  t.pattern = 'spec/functional/**/*_spec.rb'
+end
