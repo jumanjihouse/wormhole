@@ -1,10 +1,10 @@
-function smitty() {
+smitty() {
   echo; echo
   echo -e "[INFO] $@"
   "$@"
 }
 
-function err() {
+err() {
   echo "[ERROR] $@" >&2
   exit 1
 }
