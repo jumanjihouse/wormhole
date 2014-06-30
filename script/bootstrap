@@ -2,7 +2,7 @@
 set -e
 
 # Import smitty.
-source script/functions
+. script/functions
 
 git remote show upstream &> /dev/null || smitty git remote add upstream https://github.com/jumanjiman/wormhole.git
 

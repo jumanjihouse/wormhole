@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
   gem.summary       = %q('Test harness for this repo')
   gem.license       = 'GPLv3'
 
-  gem.add_development_dependency 'docker-api', '>= 1.11'
+  gem.add_development_dependency 'docker-api', '>= 1.11', '< 1.13'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'minitest'
   gem.add_development_dependency 'mocha'
@@ -23,6 +23,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rspec-mocks'
   gem.add_development_dependency 'rubocop', '>= 0.23.0'
   gem.add_development_dependency 'friction'
+  gem.add_development_dependency 'net-ssh'
 
   gem.files         = `git ls-files`.split($RS)
   gem.executables   = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }

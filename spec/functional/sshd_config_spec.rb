@@ -3,8 +3,7 @@ require 'spec_helper'
 
 describe 'sshd config' do
   before :context do
-    cmd = 'docker run --rm -i -t jumanjiman/wormhole sshd -T 2> /dev/null'
-    @config = `#{cmd}`
+    @config = ssh('/usr/sbin/sshd -T 2> /dev/null')
   end
 
   describe 'auth' do
@@ -90,7 +89,7 @@ describe 'sshd config' do
     end
 
     it 'CCE-14061-6 "keep alive" msg count should be set appropriately' do
-      @config.should =~ /^clientalivecountmax 0\r$/
+      @config.should =~ /^clientalivecountmax 0\r*$/
     end
 
     it 'CCE-14491-5 Use appropriate ciphers for SSH' do

@@ -60,6 +60,14 @@ RSpec documents key behaviors and assures no regressions:
     contributor friction
       there should not be any
 
+    jumanjiman/wormhole
+      image
+        should be available
+      image properties
+        should expose ssh port and only ssh port
+        should have volume /home/user
+        should have volume /media/state/etc/ssh
+
     admin scripts
       given user handle="booga"
         everybody knows pubkey
@@ -84,27 +92,31 @@ RSpec documents key behaviors and assures no regressions:
           should expose internal sshd port and only sshd port
           should map internal sshd port to an outside ephemeral port
 
-    jumanjiman/wormhole
-      image
-        should be available
-      docker
-        should expose ssh port and only ssh port
-        should have volume /home/user
-        should have volume /media/state/etc/ssh
-      prohibited packages
-        should not have at installed
-        should not have sudo installed
-      prohibited commands
-        should not have the at command
-        should not have the crond command
-        should not have the crontab command
-      user convenience
-        man -k returns results
-        locate returns the path for issue.net
-        has command-line eiffel compiler in path
-        has estudio in path
-      BZ1099206
-        go get should work
+    arcanist (phabricator client)
+      `arc` is in user path
+      `arc version` is functional
+      uses bash autocompletion
+
+    BZ1099206 (slow test)
+      home directory should exist
+      go get should work
+
+    user convenience
+      man -k returns results
+      locate returns the path for issue.net
+
+    eiffelstudio
+      has command-line eiffel compiler in path
+      has estudio in path
+
+    prohibited packages
+      should not have at installed
+      should not have sudo installed
+
+    prohibited commands
+      should not have the at command
+      should not have the crond command
+      should not have the crontab command
 
     sshd config
       auth
@@ -137,8 +149,10 @@ RSpec documents key behaviors and assures no regressions:
     users with interactive shells
       should only include "root" and "user"
       su
-        "root" can su
         "user" cannot su
+
+    Finished in 53.16 seconds (files took 0.43034 seconds to load)
+    55 examples, 0 failures
 
 
 ## User instructions

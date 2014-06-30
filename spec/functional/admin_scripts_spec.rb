@@ -1,45 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-# Silly name for fake user.
-# We use top-scope to allow show in rspec subject.
-handle = 'booga'
-
-def systemd?
-  system('which systemctl')
-end
-
 describe 'admin scripts' do
-  before :context do
-    # Ensure ssh dir exists.
-    ssh_dir = File.join(Dir.home, '.ssh')
-    Dir.mkdir(ssh_dir, 0700) unless Dir.exist?(ssh_dir)
-
-    # Create temp ssh keypair.
-    key = Tempfile.new('id_rsa', ssh_dir)
-    @privkey = key.path
-    @pubkey = @privkey + '.pub'
-    key.close!
-    system "ssh-keygen -q -t rsa -b 1024 -N '' -f #{@privkey}"
-
-    pubkey = File.read(@pubkey)
-    `./build.sh #{handle} "#{pubkey}" 2> /dev/null`
-    unless systemd?
-      # The build script uses systemd to start the container, so
-      # we have to kludge on test host that doesn't have systemd.
-      # rubocop:disable LineLength
-      `docker run -d -t -m 512m --volumes-from #{handle}-data -P -h wormhole.example.com --name #{handle} jumanjiman/wormhole`
-      # rubocop:enable LineLength
-    end
-    sleep 5
-    @app = Docker::Container.get("#{handle}")
-    @data = Docker::Container.get("#{handle}-data")
-  end
-
-  after :context do
-    `docker stop #{handle}`
-  end
-
   describe "given user handle=\"#{handle}\"" do
     it 'everybody knows pubkey' do
       File.exist?(@pubkey).should be_truthy
@@ -144,12 +106,5 @@ describe 'admin scripts' do
         port.to_i.should > 1024
       end
     end
-  end
-
-  after :context do
-    File.delete @privkey, @pubkey
-    @app.kill
-    @app.delete(true)
-    @data.delete(true)
   end
 end

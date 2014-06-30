@@ -1,3 +1,4 @@
+# encoding: utf-8
 # vim: set ts=2 sw=2 ai et:
 
 # Does the current user have root privileges?
@@ -30,5 +31,27 @@ end
 
 RuboCop::RakeTask.new
 
+# Run unit tests before functional tests.
 desc 'Run rspec tests'
-RSpec::Core::RakeTask.new(:spec_standalone)
+task spec_standalone: [
+  :validate_bundle,
+  :unit,
+  :functional,
+]
+
+RSpec::Core::RakeTask.new(:unit) do |t|
+  t.pattern = 'spec/unit/**/*_spec.rb'
+end
+
+RSpec::Core::RakeTask.new(:functional) do |t|
+  t.pattern = 'spec/functional/**/*_spec.rb'
+end
+
+task :validate_bundle do
+  begin
+    require 'docker'
+    Docker.validate_version!
+  rescue Docker::Error::VersionError
+    abort '[ERROR] docker-api gem is incompatible with this version of Docker'
+  end
+end

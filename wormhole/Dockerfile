@@ -36,6 +36,7 @@ RUN yum install -y \
     vim-enhanced bash-completion \
     openssl openssl-devel crypto-utils \
     tree \
+    php \
     python-devel python-nose python-setuptools python-pep8 rpm-python \
     python3-devel python3-nose python3-setuptools python3-pep8 rpm-python3 \
     pylint python3-pylint \
@@ -89,6 +90,9 @@ RUN chmod u-s /usr/sbin/login_duo
 # Create sandbox user.
 RUN useradd user
 
+# Ugly workaround. Really ugly.
+RUN usermod -aG slocate user
+
 # Do not track changes in volumes.
 VOLUME ["/home/user", "/media/state/etc/ssh"]
 
@@ -99,6 +103,11 @@ ADD sshd /etc/pam.d/
 ADD password-auth /etc/pam.d/
 ADD password-auth.patch /etc/pam.d/
 ADD start.sh /usr/sbin/
+
+# Install arcanist.
+# https://secure.phabricator.com/book/phabricator/article/arcanist/
+ADD install-arc.sh /usr/local/sbin/install-arc.sh
+RUN /usr/local/sbin/install-arc.sh
 
 # Update system databases for user convenience.
 RUN mandb &> /dev/null
