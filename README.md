@@ -95,6 +95,7 @@ RSpec documents key behaviors and assures no regressions:
     arcanist (phabricator client)
       `arc` is in user path
       `arc version` is functional
+      uses bash autocompletion
 
     BZ1099206 (slow test)
       home directory should exist

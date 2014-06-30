@@ -14,4 +14,9 @@ describe 'arcanist (phabricator client)' do
     line = ssh('arc version')
     line.should =~ /^arcanist \w+/
   end
+
+  it 'uses bash autocompletion' do
+    line = ssh("arc vers\t")
+    line.should =~ /^arcanist \w+/
+  end
 end
