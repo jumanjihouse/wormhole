@@ -35,6 +35,7 @@ RUN yum install -y \
     ldc \
     libcurl-devel libxslt-devel libxml2-devel \
     vim-enhanced bash-completion \
+    java-1.7.0-openjdk-headless \
     openssl openssl-devel crypto-utils \
     tree \
     php \
