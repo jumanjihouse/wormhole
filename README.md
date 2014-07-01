@@ -109,6 +109,9 @@ RSpec documents key behaviors and assures no regressions:
       has command-line eiffel compiler in path
       has estudio in path
 
+    ldc D compiler
+      compiles a D program
+
     prohibited packages
       should not have at installed
       should not have sudo installed

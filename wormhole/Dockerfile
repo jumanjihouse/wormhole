@@ -32,6 +32,7 @@ RUN yum install -y \
     glibc-static \
     gnupg \
     ruby ruby-devel rubygem-bundler \
+    ldc \
     libcurl-devel libxslt-devel libxml2-devel \
     vim-enhanced bash-completion \
     openssl openssl-devel crypto-utils \
