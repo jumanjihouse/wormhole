@@ -4,6 +4,7 @@ require 'spec_helper'
 describe 'prohibited packages' do
   prohibited_packages = %w(
     at
+    prelink
     sudo
   )
 
@@ -23,11 +24,15 @@ describe 'prohibited commands' do
     at
     crond
     crontab
+    /usr/sbin/prelink
   )
 
   prohibited_commands.each do |cmd|
     it "should not have the #{cmd} command" do
       output = ssh("which #{cmd} 2>&1")
+      # `which' splits the cmd into path and basename components,
+      # such as `which: no prelink in (/usr/sbin)'
+      cmd = cmd.split('/').last
       output.should =~ /no #{cmd} in/
     end
   end

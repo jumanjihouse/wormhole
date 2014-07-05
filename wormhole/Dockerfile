@@ -44,6 +44,7 @@ RUN yum install -y \
     python3-devel python3-nose python3-setuptools python3-pep8 rpm-python3 \
     pylint python3-pylint \
     rpm-build libxslt createrepo git-annex \
+    scap-security-guide \
     strace \
     tmux tmux-powerline reptyr \
     golang golang-docs golang-cover golang-github-coreos-go-systemd-devel \
@@ -106,6 +107,8 @@ ADD sshd /etc/pam.d/
 ADD password-auth /etc/pam.d/
 ADD password-auth.patch /etc/pam.d/
 ADD start.sh /usr/sbin/
+ADD wormhole-devenv-xccdf.xml /usr/share/xml/scap/ssg/fedora/
+ADD oscap-remediate.sh /usr/sbin/
 
 # Install arcanist.
 # https://secure.phabricator.com/book/phabricator/article/arcanist/
@@ -115,6 +118,9 @@ RUN /usr/local/sbin/install-arc.sh
 # Update system databases for user convenience.
 RUN mandb &> /dev/null
 RUN updatedb &> /dev/null
+
+# Remediate security after all packages are installed.
+RUN /usr/sbin/oscap-remediate.sh
 
 EXPOSE 22
 ENV LANG C

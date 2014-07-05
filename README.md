@@ -112,14 +112,20 @@ RSpec documents key behaviors and assures no regressions:
     ldc D compiler
       compiles a D program
 
+    SCAP security checks (slow test)
+      should pass all tests
+      /etc/securetty should be a zero-size file
+
     prohibited packages
       should not have at installed
+      should not have prelink installed
       should not have sudo installed
 
     prohibited commands
       should not have the at command
       should not have the crond command
       should not have the crontab command
+      should not have the /usr/sbin/prelink command
 
     sshd config
       auth
@@ -154,8 +160,82 @@ RSpec documents key behaviors and assures no regressions:
       su
         "user" cannot su
 
-    Finished in 53.16 seconds (files took 0.43034 seconds to load)
-    55 examples, 0 failures
+    Finished in 1 minute 6.35 seconds (files took 0.45472 seconds to load)
+    61 examples, 0 failures
+
+
+The OpenSCAP test shown above uses a
+[tailoring file](wormhole/wormhole-devenv-xccdf.xml)
+to adjust the upstream checks.
+It expands to this inside the container:
+
+    Title   gpgcheck Enabled In Main Yum Configuration
+    Rule    ensure_gpgcheck_globally_activated
+    Result  pass
+
+    Title   gpgcheck Enabled For All Yum Package Repositories
+    Rule    ensure_gpgcheck_never_disabled
+    Result  pass
+
+    Title   Shared Library Files Have Restrictive Permissions
+    Rule    file_permissions_library_dirs
+    Result  pass
+
+    Title   Shared Library Files Have Root Ownership
+    Rule    file_ownership_library_dirs
+    Result  pass
+
+    Title   System Executables Have Restrictive Permissions
+    Rule    file_permissions_binary_dirs
+    Result  pass
+
+    Title   System Executables Have Root Ownership
+    Rule    file_ownership_binary_dirs
+    Result  pass
+
+    Title   Direct root Logins Not Allowed
+    Rule    no_direct_root_logins
+    Result  notchecked
+
+    Title   Virtual Console Root Logins Restricted
+    Rule    securetty_root_login_console_only
+    Result  pass
+
+    Title   Serial Port Root Logins Restricted
+    Rule    restrict_serial_port_logins
+    Result  pass
+
+    Title   Only Root Has UID 0
+    Rule    no_uidzero_except_root
+    Result  pass
+
+    Title   Log In to Accounts With Empty Password Impossible
+    Rule    no_empty_passwords
+    Result  pass
+
+    Title   Password Hashes For Each Account Shadowed
+    Rule    no_hashes_outside_shadow
+    Result  pass
+
+    Title   netrc Files Do Not Exist
+    Rule    no_netrc_files
+    Result  pass
+
+    Title   SSH Root Login Disabled
+    Rule    sshd_disable_root_login
+    Result  pass
+
+    Title   SSH Access via Empty Passwords Disabled
+    Rule    sshd_disable_empty_passwords
+    Result  pass
+
+    Title   SSH Idle Timeout Interval Used
+    Rule    sshd_set_idle_timeout
+    Result  pass
+
+    Title   SSH Client Alive Count Used
+    Rule    sshd_set_keepalive
+    Result  pass
 
 
 ## User instructions
