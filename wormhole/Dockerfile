@@ -115,6 +115,12 @@ ADD oscap-remediate.sh /usr/sbin/
 ADD install-arc.sh /usr/local/sbin/install-arc.sh
 RUN /usr/local/sbin/install-arc.sh
 
+# Install tools for validating xml.
+ADD jing /usr/local/bin/
+ADD trang /usr/local/bin/
+ADD install-jing.sh /usr/local/sbin/install-jing.sh
+RUN /usr/local/sbin/install-jing.sh
+
 # Update system databases for user convenience.
 RUN mandb &> /dev/null
 RUN updatedb &> /dev/null
