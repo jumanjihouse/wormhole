@@ -21,6 +21,7 @@ RUN yum install -y \
 
 # Install dependencies.
 RUN yum install -y \
+    asciinema \
     bind-utils \
     bc \
     dictd \
