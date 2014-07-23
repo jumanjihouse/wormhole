@@ -127,6 +127,10 @@ RSpec documents key behaviors and assures no regressions:
       should not have the crontab command
       should not have the /usr/sbin/prelink command
 
+    rhc (openshift client)
+      `rhc` is in user path
+      `rhc --version` is functional
+
     sshd config
       auth
         should use privilege separation

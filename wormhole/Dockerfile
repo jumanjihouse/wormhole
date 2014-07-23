@@ -60,6 +60,8 @@ RUN yum install -y \
     jwhois \
     ; yum clean all
 
+RUN gem install rhc
+
 # Break su for everybody but root.
 ADD su /etc/pam.d/
 
