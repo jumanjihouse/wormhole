@@ -44,6 +44,7 @@ RUN yum install -y \
     python-devel python-nose python-setuptools python-pep8 rpm-python \
     python3-devel python3-nose python3-setuptools python3-pep8 rpm-python3 \
     pylint python3-pylint \
+    pykickstart \
     rpm-build libxslt createrepo git-annex \
     scap-security-guide \
     strace \
