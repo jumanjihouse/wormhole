@@ -58,6 +58,7 @@ RUN yum install -y \
     git-svn \
     make \
     jwhois \
+    xmlstarlet \
     ; yum clean all
 
 RUN gem install rhc
