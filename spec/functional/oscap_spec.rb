@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'spec_helper'
 
-describe 'SCAP security checks (slow test)' do
+describe 'SCAP secure configuration checks (slow test)' do
   it 'should pass all tests' do
     cmds = '
       cd /usr/share/xml/scap/ssg/fedora/

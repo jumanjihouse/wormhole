@@ -17,6 +17,7 @@ Please add any issues you find with this software
 to the upstream [wormhole](https://github.com/jumanjiman/wormhole/issues).
 
 [Architectural considerations](#architectural-considerations)<br/>
+[OVAL vulnerability scan](#oval-vulnerability-scan)<br/>
 [Test harness](#test-harness)<br/>
 [User instructions](#user-instructions)<br/>
 [Admin instructions](#admin-instructions)<br/>
@@ -51,6 +52,76 @@ source: [`docs/uml.md`](https://github.com/jumanjiman/wormhole/blob/master/docs/
 
 * Internal infrastructure should use appropriate access control mechanisms
   based on risk evaluation of the wormhole.
+
+
+## OVAL vulnerability scan
+
+The Red Hat Security Response Team provides OVAL definitions
+for all vulnerabilities (identified by CVE name) that affect RHEL or Fedora.
+This enables users to perform a vulnerability scan and
+diagnose whether the system is vulnerable.
+
+The Dockerfile in this repo adds a script to download the latest
+OVAL definitions from Red Hat and perform a vulnerability scan
+against the image. If the image has one or more known vulnerabilies,
+the script exits non-zero, and the `docker build` fails.
+
+Implications:
+
+* We **must resolve all known vulnerabilities**
+  in order to successfully build an image.
+
+* The scan is time-dependent as of image build, so
+  we should rebuild the image when Red Hat updates the OVAL feed.
+
+* The vulnerability scan is distinct from the *SCAP secure configuration scan*
+  described [by the test harness](#test-harness).
+
+It is possible to scan an existing image:
+
+    docker run --rm -t jumanjiman/wormhole /usr/sbin/oval-vulnerability-scan.sh
+
+The exact output of the vulnerability scan varies according to the
+latest Red Hat OVAL feed, but it looks similar to this snapshot from August 2014:
+
+    -snip copious checks-
+
+    RHSA-2014:1051: flash-plugin security update (Critical)
+    oval-com.redhat.rhsa-def-20141051
+    CVE-2014-0538
+    CVE-2014-0540
+    CVE-2014-0541
+    CVE-2014-0542
+    CVE-2014-0543
+    CVE-2014-0544
+    CVE-2014-0545
+    pass
+
+    RHSA-2014:1052: openssl security update (Moderate)
+    oval-com.redhat.rhsa-def-20141052
+    CVE-2014-3505
+    CVE-2014-3506
+    CVE-2014-3507
+    CVE-2014-3508
+    CVE-2014-3509
+    CVE-2014-3510
+    CVE-2014-3511
+    pass
+
+    RHSA-2014:1053: openssl security update (Moderate)
+    oval-com.redhat.rhsa-def-20141053
+    CVE-2014-0221
+    CVE-2014-3505
+    CVE-2014-3506
+    CVE-2014-3508
+    CVE-2014-3510
+    pass
+
+    vulnerability scan exit status 0
+
+TODO: Implement some sort of CD system to poll the OVAL feed and rebuild
+the image on any update. https://github.com/jumanjiman/docker-gocd may be
+a candidate for the solution.
 
 
 ## Test harness
@@ -112,7 +183,7 @@ RSpec documents key behaviors and assures no regressions:
     ldc D compiler
       compiles a D program
 
-    SCAP security checks (slow test)
+    SCAP secure configuration checks (slow test)
       should pass all tests
       /etc/securetty should be a zero-size file
 
@@ -168,7 +239,7 @@ RSpec documents key behaviors and assures no regressions:
     61 examples, 0 failures
 
 
-The OpenSCAP test shown above uses a
+The OpenSCAP secure configuration test shown above uses a
 [tailoring file](wormhole/wormhole-devenv-xccdf.xml)
 to adjust the upstream checks.
 It expands to this inside the container:

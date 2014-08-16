@@ -114,6 +114,7 @@ ADD password-auth.patch /etc/pam.d/
 ADD start.sh /usr/sbin/
 ADD wormhole-devenv-xccdf.xml /usr/share/xml/scap/ssg/fedora/
 ADD oscap-remediate.sh /usr/sbin/
+ADD oval-vulnerability-scan.sh /usr/sbin/
 
 # Install arcanist.
 # https://secure.phabricator.com/book/phabricator/article/arcanist/
@@ -132,6 +133,12 @@ RUN updatedb &> /dev/null
 
 # Remediate security after all packages are installed.
 RUN /usr/sbin/oscap-remediate.sh
+
+# Run oval security scan after remediation.
+# This script exits non-zero if container is non-compliant,
+# so 'docker build' fails if container has known vulnerabilities.
+# IOW it's impossible to build an image with known vulnerabilities.
+RUN /usr/sbin/oval-vulnerability-scan.sh
 
 EXPOSE 22
 ENV LANG C
