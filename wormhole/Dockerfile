@@ -48,7 +48,7 @@ RUN yum install -y \
     scap-security-guide \
     strace \
     tmux tmux-powerline reptyr \
-    golang golang-docs golang-cover golang-github-coreos-go-systemd-devel \
+    golang golang-cover golang-github-coreos-go-systemd-devel \
     golang-godoc golang-vim golang-github-coreos-go-log-devel \
     npm nodeunit \
     bzr \
