@@ -25,3 +25,9 @@ chmod 0444 /etc/securetty
 
 # Disable empty password support from PAM.
 sed -r -i 's/\<nullok\>//g' /etc/pam.d/*
+
+# We disable password auth, but adjust these settings anyway
+# to avoid tailoring the SCAP benchmark.
+sed -i 's/^PASS_MAX_DAYS.*$/PASS_MAX_DAYS   60/' /etc/login.defs
+sed -i 's/^PASS_MIN_DAYS.*$/PASS_MIN_DAYS   7/'  /etc/login.defs
+sed -i 's/^PASS_MIN_LEN.*$/PASS_MIN_LEN    12/'  /etc/login.defs

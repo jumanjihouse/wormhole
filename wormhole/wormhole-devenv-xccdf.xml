@@ -34,34 +34,6 @@
       </remark>
     </select>
 
-    <select idref="accounts_password_minlen_login_defs" selected="false">
-      <remark>
-        We disable password as an authentication mechanism altogether.
-        Therefore we don't bother with the default password settings.
-      </remark>
-    </select>
-
-    <select idref="accounts_minimum_age_login_defs" selected="false">
-      <remark>
-        We disable password as an authentication mechanism altogether.
-        Therefore we don't bother with the default password settings.
-      </remark>
-    </select>
-
-    <select idref="accounts_maximum_age_login_defs" selected="false">
-      <remark>
-        We disable password as an authentication mechanism altogether.
-        Therefore we don't bother with the default password settings.
-      </remark>
-    </select>
-
-    <select idref="accounts_password_warn_age_login_defs" selected="false">
-      <remark>
-        We disable password as an authentication mechanism altogether.
-        Therefore we don't bother with the default password settings.
-      </remark>
-    </select>
-
     <select idref="service_ntpd_enabled" selected="false">
       <remark>
         It does not make sense to run ntpd inside a container, so
