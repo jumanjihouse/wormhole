@@ -442,6 +442,14 @@ You can build the image locally or use the
     cd wormhole/
     docker build --rm -t jumanjiman/wormhole --no-cache .
 
+Trigger a rebuild-and-test cycle to get latest updates:
+
+    cd wormhole/
+    date > REBUILD
+    git add REBUILD
+    git commit -m 'test build with latest package updates'
+    # Open pull request.
+
 :warning: Use CoreOS to build image.
 
 Fedora kernel on DigitalOcean
