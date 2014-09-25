@@ -9,7 +9,7 @@ describe 'users with interactive shells' do
   it 'should only include "root" and "user"' do
     # Which interactive shells are allowed in container?
     shells = ssh('cat /etc/shells').split($RS)
-    shells.map! { |s| s.chomp }.reject! { |s| s.match %r{/sbin/nologin} }
+    shells.map!(&:chomp).reject! { |s| s.match %r{/sbin/nologin} }
 
     # Which users have an interactive shell?
     users = []
