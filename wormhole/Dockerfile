@@ -34,6 +34,7 @@ RUN yum install -y \
     gnupg \
     ruby ruby-devel rubygem-bundler \
     sqlite-devel \
+    koji \
     ldc \
     libcurl-devel libxslt-devel libxml2-devel \
     vim-enhanced bash-completion \
@@ -60,6 +61,11 @@ RUN yum install -y \
     make \
     jwhois \
     xmlstarlet \
+    ; yum clean all
+
+# to-do: remove these commands after bash update is in stable.
+RUN koji download-build --arch=x86_64 bash-4.2.48-2.fc20 \
+    ; yum -y localinstall bash-4.2.48-2.fc20.x86_64.rpm \
     ; yum clean all
 
 RUN gem install rhc

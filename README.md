@@ -176,6 +176,10 @@ RSpec documents key behaviors and assures no regressions:
       man -k returns results
       locate returns the path for issue.net
 
+    shell-shock
+      should resolve CVE-014-6271
+      should resolve CVE-014-7169
+
     eiffelstudio
       has command-line eiffel compiler in path
       has estudio in path
