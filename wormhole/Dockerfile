@@ -24,6 +24,7 @@ RUN yum install -y \
     asciinema \
     bind-utils \
     bc \
+    devscripts-minimal \
     dictd \
     diction \
     ftp tftp \
