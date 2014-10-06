@@ -60,6 +60,7 @@ RUN yum install -y \
     git-hg \
     git-svn \
     make \
+    mutt \
     jwhois \
     xmlstarlet \
     ; yum clean all
