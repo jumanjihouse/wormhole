@@ -38,7 +38,7 @@ def handle
   'booga'
 end
 
-# rubocop:disable MethodLength
+# rubocop:disable MethodLength,AbcSize
 def ssh(cmd, port = @port, privkey = @privkey)
   abort '[ERROR] must provide command' unless cmd
   abort '[ERROR] must provide port' unless port
@@ -75,7 +75,7 @@ rescue Net::SSH::AuthenticationFailed => e
   )
   `ssh #{ssh_opts.join(' ')} #{username}@#{host} "#{cmd}" 2> /dev/null`
 end
-# rubocop:enable MethodLength
+# rubocop:enable MethodLength,AbcSize
 
 # Ugh, use global to persist value across contexts.
 # Create temp ssh dir and temp ssh keypair.
