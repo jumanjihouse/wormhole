@@ -1,5 +1,5 @@
 # https://index.docker.io/_/fedora/
-FROM fedora:20
+FROM fedora:21
 
 # http://jumanjiman.github.io/
 MAINTAINER Paul Morgan <jumanjiman@gmail.com>
@@ -16,12 +16,6 @@ RUN yum remove -y vim-minimal \
     sudo \
     ; yum clean all
 
-# Work around https://bugzilla.redhat.com/show_bug.cgi?id=1105901
-# Reproducer is at https://github.com/jumanjiman/bz1099206
-RUN yum install -y \
-    gcc \
-    ; yum clean all
-
 # Install dependencies.
 RUN yum install -y \
     asciinema \
@@ -32,13 +26,13 @@ RUN yum install -y \
     diction \
     ftp tftp \
     openssh-server openssh-clients \
+    man-db \
     man-pages mlocate \
     gcc gcc-c++ \
     glibc-static \
     gnupg \
     ruby ruby-devel rubygem-bundler \
     sqlite-devel \
-    koji \
     ldc \
     libcurl-devel libxslt-devel libxml2-devel \
     vim-enhanced bash-completion \
@@ -61,17 +55,12 @@ RUN yum install -y \
     bzr \
     tito \
     git tar patch diffutils which \
-    git-hg \
+    git-remote-hg \
     git-svn \
     make \
     mutt \
     jwhois \
     xmlstarlet \
-    ; yum clean all
-
-# to-do: remove these commands after bash update is in stable.
-RUN koji download-build --arch=x86_64 bash-4.2.48-2.fc20 \
-    ; yum -y localinstall bash-4.2.48-2.fc20.x86_64.rpm \
     ; yum clean all
 
 RUN gem install rhc
