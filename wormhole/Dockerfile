@@ -84,9 +84,10 @@ ADD profile.d /etc/profile.d/
 # Install EiffelStudio. See LICENSE.eiffelstudio for terms.
 RUN yum -y install gtk2-devel.x86_64 libXtst-devel.x86_64 pangox-compat; yum clean all
 RUN cd /tmp ;\
-    curl -s -O ftp://ftp.eiffel.com/pub/download/14.05/Eiffel_14.05_gpl_95220-linux-x86-64.tar.bz2 ;\
-    tar xjf /tmp/Eiffel_14.05_gpl_95220-linux-x86-64.tar.bz2 -C /usr/local/ ;\
-    rm -f /tmp/Eiffel_14.05_gpl_95220-linux-x86-64.tar.bz2
+    tarball='Eiffel_14.05_gpl_95417-linux-x86-64.tar.bz2' ;\
+    curl -s -O ftp://ftp.eiffel.com/pub/download/14.05/$tarball ;\
+    tar xjf /tmp/$tarball -C /usr/local/ ;\
+    rm -f /tmp/$tarball
 
 # Install duo for multifactor authentication.
 ADD duo.repo /etc/yum.repos.d/
