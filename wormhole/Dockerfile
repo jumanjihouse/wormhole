@@ -4,6 +4,9 @@ FROM fedora:20
 # http://jumanjiman.github.io/
 MAINTAINER Paul Morgan <jumanjiman@gmail.com>
 
+# Allow to install docs since this is a dev environment.
+RUN sed -i '/tsflags=nodocs/d' /etc/yum.conf
+
 RUN yum update -y; yum clean all
 
 # Work around https://bugzilla.redhat.com/show_bug.cgi?id=1066983
