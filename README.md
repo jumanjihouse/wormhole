@@ -187,6 +187,12 @@ RSpec documents key behaviors and assures no regressions:
     ldc D compiler
       compiles a D program
 
+    locale archive
+      supports C
+      supports POSIX
+      supports en_US.utf8
+      supports en_US.UTF-8
+
     SCAP secure configuration checks (slow test)
       should pass all tests
       /etc/securetty should be a zero-size file
