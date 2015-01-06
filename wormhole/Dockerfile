@@ -38,6 +38,7 @@ RUN yum install -y \
     sqlite-devel \
     ldc \
     libcurl-devel libxslt-devel libxml2-devel \
+    nano \
     vim-enhanced bash-completion \
     java-1.7.0-openjdk-headless \
     jq \
@@ -64,6 +65,35 @@ RUN yum install -y \
     mutt \
     jwhois \
     xmlstarlet \
+    python-pygraphviz-doc \
+    python-pygraphviz \
+    python-xdot \
+    python3-pygraphviz \
+    python-lxml-docs \
+    python-lxml \
+    python3-lxml \
+    python-requests-kerberos \
+    python-requests-mock \
+    python-requests-oauthlib \
+    python3-requests-mock \
+    python3-requests-oauthlib \
+    python-CacheControl \
+    python-pyramid-tm \
+    python-requests \
+    python3-CacheControl \
+    python3-pyramid-tm \
+    python3-requests \
+    python-pyasn1-modules \
+    python3-pyasn1-modules \
+    python-pyasn1 \
+    python3-pyasn1 \
+    python-psycopg2 \
+    python-psycopg2-debug \
+    python-psycopg2-doc \
+    python3-psycopg2.x86_64 \
+    python3-psycopg2-debug \
+    python-scp \
+    python-paramiko \
     ; yum clean all
 
 RUN gem install rhc
