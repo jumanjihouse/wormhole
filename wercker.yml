@@ -2,7 +2,7 @@ box: wercker-labs/docker
 build:
   steps:
     - install-packages:
-        packages: ruby2.0 ruby2.0-dev lxc-docker=1.2.0
+        packages: ruby2.0 ruby2.0-dev lxc-docker=1.4.1
     - script:
         name: print system-wide docker info
         code: |

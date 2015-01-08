@@ -2,27 +2,17 @@
 require 'spec_helper'
 
 describe 'jumanjiman/wormhole' do
-  before :context do
-    @docker_version = Docker.version['Version']
-    if Gem::Version.new(@docker_version) >= Gem::Version.new('0.9')
-      key, repo = 'RepoTags', 'jumanjiman/wormhole:latest'
-      @image = Docker::Image.all.find { |i| i.info[key].include?(repo) }
-    else
-      key, repo = 'Repository', 'jumanjiman/wormhole'
-      @image = Docker::Image.all.find { |i| i.info[key] == repo }
-    end
-    pp Docker::Image.all unless @image
+  it 'should use correct docker API version' do
+    Docker.validate_version!.should be_truthy
   end
 
-  describe 'image' do
-    it 'should be available' do
-      @image.should_not be_nil
-    end
+  it 'image should be available' do
+    Docker::Image.exist?('jumanjiman/wormhole').should be_truthy
   end
 
   describe 'image properties' do
-    before :example do
-      @config = @image.json['config']
+    before(:each) do
+      @config = Docker::Image.get('jumanjiman/wormhole').info['Config']
     end
 
     it 'should expose ssh port and only ssh port' do

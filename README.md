@@ -127,8 +127,8 @@ RSpec documents key behaviors and assures no regressions:
       there should not be any
 
     jumanjiman/wormhole
-      image
-        should be available
+      should use correct docker API version
+      image should be available
       image properties
         should expose ssh port and only ssh port
         should have volume /home/user

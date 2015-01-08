@@ -93,7 +93,7 @@ describe 'admin scripts' do
 
       it '`docker logs` should show sshd running on sshd port' do
         sleep 2 # allow for startup time
-        output = `docker logs #{@app.json['ID']}`
+        output = `docker logs #{handle}`
         output.should =~ /Server listening on 0.0.0.0 port 22/
       end
 
