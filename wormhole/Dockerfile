@@ -94,6 +94,27 @@ RUN yum install -y \
     python3-psycopg2-debug \
     python-scp \
     python-paramiko \
+    numpy \
+    python3-networkx-core \
+    python3-networkx-drawing \
+    python3-networkx-geo \
+    python3-networkx \
+    python3-numpydoc \
+    python3-numpy \
+    python3-PyYAML \
+    python3-scipy \
+    python-networkx-core \
+    python-networkx-doc \
+    python-networkx-drawing \
+    python-networkx-geo \
+    python-networkx \
+    python-numpydoc \
+    PyYAML \
+    scipy \
+    python-matplotlib-data-fonts \
+    python-matplotlib-doc \
+    python-matplotlib \
+    python3-matplotlib \
     ; yum clean all
 
 RUN gem install rhc
