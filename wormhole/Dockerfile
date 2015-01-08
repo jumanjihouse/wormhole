@@ -28,6 +28,7 @@ RUN yum install -y \
     dictd \
     diction \
     ftp tftp \
+    hostname \
     openssh-server openssh-clients \
     man-db \
     man-pages mlocate \
