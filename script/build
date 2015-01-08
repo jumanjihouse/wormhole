@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -e
+
+. script/functions
+
+pushd wormhole 2> /dev/null
+smitty docker build --rm -t jumanjiman/wormhole:${short_hash} .
+smitty docker tag jumanjiman/wormhole:${short_hash} jumanjiman/wormhole:latest
+popd 2> /dev/null

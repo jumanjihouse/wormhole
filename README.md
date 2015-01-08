@@ -8,10 +8,6 @@ is for developers to **edit code** and perform
 * Serious testing is the duty of a continuous integration server.
 * Serious compilation is the duty of a build server.
 
-[![trusted build](https://d207aa93qlcgug.cloudfront.net/img/icons/framed-icon-checked-repository.svg "Trusted Build")](https://index.docker.io/u/jumanjiman/wormhole/)
-
-[**Trusted Build**](https://index.docker.io/u/jumanjiman/wormhole/)
-
 Please add any issues you find with this software
 to the upstream [wormhole](https://github.com/jumanjihouse/wormhole/issues).
 
@@ -445,11 +441,9 @@ Backup, then discard both the app and data containers for a user.
 ### Build an image for the app container
 
 This image serves as a template for an app container.<br/>
-You can build the image locally or use the
-[**Trusted Build**](https://index.docker.io/u/jumanjiman/wormhole/).
+You can build the image locally:
 
-    cd wormhole/
-    docker build --rm -t jumanjiman/wormhole --no-cache .
+    script/build
 
 Trigger a rebuild-and-test cycle to get latest updates:
 

@@ -4,11 +4,11 @@ build:
     - install-packages:
         packages: ruby2.0 ruby2.0-dev lxc-docker=1.2.0
     - script:
-        name: print the docker version
-        code: docker version
-    - script:
         name: print system-wide docker info
-        code: docker info
+        code: |
+          docker version
+          docker info
+          docker images
     - script:
         name: print the ruby version
         code: ruby --version
@@ -27,11 +27,27 @@ build:
         code: bundle exec rake rubocop
     - script:
         name: build a wormhole image
-        code: |
-          pushd wormhole
-          docker build --rm -t jumanjiman/wormhole .
-          popd
+        code: script/build
+    - script:
+        name: list built images
+        code: docker images
     - script:
         name: run the test suite
         code: |
           bundle exec rake spec_standalone
+    - zvelo/docker-save:
+        image: jumanjiman/wormhole:${WERCKER_GIT_COMMIT:0:7}
+    - zvelo/docker-save:
+        image: jumanjiman/wormhole:latest
+deploy:
+  steps:
+    - zvelo/docker-hub-push:
+        image: jumanjiman/wormhole:${WERCKER_GIT_COMMIT:0:7}
+        email: ${email}
+        password: ${password}
+        username: jumanjiman
+    - zvelo/docker-hub-push:
+        image: jumanjiman/wormhole:latest
+        email: ${email}
+        password: ${password}
+        username: jumanjiman
