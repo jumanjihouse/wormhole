@@ -4,7 +4,7 @@ set -e
 # Import smitty.
 . script/functions
 
-git remote show upstream &> /dev/null || smitty git remote add upstream https://github.com/jumanjiman/wormhole.git
+git remote show upstream &> /dev/null || smitty git remote add upstream https://github.com/jumanjihouse/wormhole.git
 
 rm -f Gemfile.lock
 smitty bundle update 2> /dev/null || smitty bundle install --path=~/.bundle

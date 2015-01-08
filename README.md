@@ -9,20 +9,19 @@ is for developers to **edit code** and perform
 * Serious compilation is the duty of a build server.
 
 [![trusted build](https://d207aa93qlcgug.cloudfront.net/img/icons/framed-icon-checked-repository.svg "Trusted Build")](https://index.docker.io/u/jumanjiman/wormhole/)
-[![wercker status](https://app.wercker.com/status/9a37e953c64d4c74a2b91d81b3fff338/m/master "wercker status")](https://app.wercker.com/project/bykey/9a37e953c64d4c74a2b91d81b3fff338)
 
 [**Trusted Build**](https://index.docker.io/u/jumanjiman/wormhole/)
 
 Please add any issues you find with this software
-to the upstream [wormhole](https://github.com/jumanjiman/wormhole/issues).
+to the upstream [wormhole](https://github.com/jumanjihouse/wormhole/issues).
 
 [Architectural considerations](#architectural-considerations)<br/>
 [OVAL vulnerability scan](#oval-vulnerability-scan)<br/>
 [Test harness](#test-harness)<br/>
 [User instructions](#user-instructions)<br/>
 [Admin instructions](#admin-instructions)<br/>
-[Contributing](https://github.com/jumanjiman/wormhole/blob/master/CONTRIBUTING.md)<br/>
-[License](https://github.com/jumanjiman/wormhole/blob/master/LICENSE)<br/>
+[Contributing](https://github.com/jumanjihouse/wormhole/blob/master/CONTRIBUTING.md)<br/>
+[License](https://github.com/jumanjihouse/wormhole/blob/master/LICENSE)<br/>
 
 
 ## Architectural considerations
@@ -30,7 +29,7 @@ to the upstream [wormhole](https://github.com/jumanjiman/wormhole/issues).
 ![admin](https://cloud.githubusercontent.com/assets/332496/3352907/edec295c-fa65-11e3-8044-f80d3f0af3c0.png)
 
 ![user](https://f.cloud.github.com/assets/332496/2528015/529d5c36-b50b-11e3-9e89-707062e47b36.png)
-source: [`docs/uml.md`](https://github.com/jumanjiman/wormhole/blob/master/docs/uml.md)
+source: [`docs/uml.md`](https://github.com/jumanjihouse/wormhole/blob/master/docs/uml.md)
 
 **Notes**:
 
