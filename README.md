@@ -180,7 +180,7 @@ RSpec documents key behaviors and assures no regressions:
       has estudio in path
 
     ldc D compiler
-      compiles a D program
+      compiles a D program (PENDING: https://bugzilla.redhat.com/show_bug.cgi?id=1176361)
 
     locale archive
       supports C
