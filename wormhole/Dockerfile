@@ -163,6 +163,7 @@ RUN usermod -aG slocate user
 VOLUME ["/home/user", "/media/state/etc/ssh"]
 
 # Configure security.
+ADD ssh_config /etc/ssh/
 ADD sshd_config /etc/ssh/
 ADD issue.net /etc/
 ADD sshd /etc/pam.d/
