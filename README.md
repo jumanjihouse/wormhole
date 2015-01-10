@@ -119,7 +119,7 @@ the image on any update. https://github.com/jumanjiman/docker-gocd may be
 a candidate for the solution.
 
 
-## Test harness
+## Test harness [![wercker status](https://app.wercker.com/status/690a6e04aec0e9829f88dd26c8fae27f/s/master "wercker status")](https://app.wercker.com/project/bykey/690a6e04aec0e9829f88dd26c8fae27f)
 
 RSpec documents key behaviors and assures no regressions:
 
