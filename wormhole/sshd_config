@@ -278,6 +278,10 @@ UseDNS yes
 permitrootlogin no
 
 
+# Only the "user" user should have access to wormhole. Ever.
+AllowUsers user
+
+
 
 
 # CCE-14716-5 Users should not be allowed to set environment options
