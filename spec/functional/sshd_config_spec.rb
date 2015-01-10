@@ -18,6 +18,11 @@ describe 'sshd config' do
       challengeresponseauthentication
     )
 
+    allow_kex = %w(
+      curve25519-sha256@libssh.org
+      diffie-hellman-group-exchange-sha256
+    )
+
     it 'should use privilege separation' do
       @config.should =~ /^useprivilegeseparation yes\r*$/
     end
@@ -36,6 +41,10 @@ describe 'sshd config' do
       it "should deny #{deny}" do
         @config.should =~ /^#{deny} no\r*$/
       end
+    end
+
+    it 'should use strong, perfect forward secrecy for key exchange' do
+      @config.should =~ /^kexalgorithms #{allow_kex.join(',')}\r*$/
     end
   end
 
@@ -94,9 +103,12 @@ describe 'sshd config' do
 
     it 'CCE-14491-5 Use appropriate ciphers for SSH' do
       allowed_ciphers = %w(
-        aes128-ctr
-        aes192-ctr
+        chacha20-poly1305@openssh.com
+        aes256-gcm@openssh.com
+        aes128-gcm@openssh.com
         aes256-ctr
+        aes192-ctr
+        aes128-ctr
       )
       @config.should =~ /^ciphers #{allowed_ciphers.join(',')}\r*$/
     end

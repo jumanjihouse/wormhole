@@ -46,10 +46,6 @@ smitty docker run --rm --volumes-from $user-data -u root $base_image cp /etc/ske
 # fix ownership of homedir
 smitty docker run --rm --volumes-from $user-data -u root $base_image chown -R user:user /home/user
 
-# add sshd host keys
-smitty docker run --rm --volumes-from $user-data -u root $base_image ssh-keygen -q -f /media/state/etc/ssh/ssh_host_dsa_key -N '' -t dsa
-smitty docker run --rm --volumes-from $user-data -u root $base_image ssh-keygen -q -f /media/state/etc/ssh/ssh_host_rsa_key -N '' -t rsa
-
 # add ssh keys
 smitty docker run --rm --volumes-from $user-data -u user $base_image mkdir -p /home/user/.ssh
 smitty docker run --rm --volumes-from $user-data -u user $base_image chmod 0700 /home/user/.ssh

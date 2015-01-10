@@ -45,8 +45,28 @@
 # Recommended:
 #   aes128-ctr,aes192-ctr,aes256-ctr
 #
-Ciphers aes128-ctr,aes192-ctr,aes256-ctr
+# Symmetric ciphers are used to encrypt the data after the initial
+# key exchange and authentication is complete.
+Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr
 
+
+# Encryption provides confidentiality;
+# message authentication code provides integrity.
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com
+
+
+# Use strong, perfect forward secrecy for key exchange
+# to ensure that the server and the client
+# share a secret no one else knows.
+# See https://stribika.github.io/2015/01/04/secure-secure-shell.html
+# https://github.com/stribika/stribika.github.io/commits/master/_posts/2015-01-04-secure-secure-shell.md
+KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256
+
+
+
+# HostKeys
+HostKey /media/state/etc/ssh/ssh_host_rsa_key
+HostKey /media/state/etc/ssh/ssh_host_ed25519_key
 
 
 
@@ -67,12 +87,6 @@ AddressFamily any
 Port 22
 ListenAddress 0.0.0.0
 ListenAddress ::
-
-
-# HostKeys for protocol version 2
-HostKey /media/state/etc/ssh/ssh_host_rsa_key
-HostKey /media/state/etc/ssh/ssh_host_dsa_key
-
 
 
 

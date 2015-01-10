@@ -216,6 +216,7 @@ RSpec documents key behaviors and assures no regressions:
         should deny gssapiauthentication
         should deny kerberosauthentication
         should deny challengeresponseauthentication
+        should use strong, perfect forward secrecy for key exchange
       tunnels and forwarding
         should deny ssh tunnels
         should deny TCP forwarding
