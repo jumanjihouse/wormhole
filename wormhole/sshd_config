@@ -28,10 +28,6 @@
 ####################################################################
 # This sshd was compiled with PATH=/usr/local/bin:/bin:/usr/bin
 
-#Port 22
-#AddressFamily any
-#ListenAddress 0.0.0.0
-#ListenAddress ::
 
 
 
@@ -66,6 +62,11 @@ Ciphers aes128-ctr,aes192-ctr,aes256-ctr
 Protocol 2
 
 
+# Use either IPv4 or IPv6.
+AddressFamily any
+Port 22
+ListenAddress 0.0.0.0
+ListenAddress ::
 
 
 # HostKeys for protocol version 2
@@ -249,9 +250,6 @@ Banner /etc/issue.net
 # override default of no subsystems
 Subsystem	sftp	/usr/libexec/openssh/sftp-server
 
-
-# Use either IPv4 or IPv6.
-AddressFamily any
 
 
 
