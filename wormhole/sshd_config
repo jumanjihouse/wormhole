@@ -81,6 +81,8 @@ SyslogFacility AUTHPRIV
 LogLevel INFO
 
 
+# Be informative after successful login.
+PrintMotd yes
 
 
 # Authentication:
@@ -172,7 +174,6 @@ AllowAgentForwarding yes
 #GatewayPorts no
 #X11DisplayOffset 10
 #X11UseLocalhost yes
-#PrintMotd yes
 #PrintLastLog yes
 #TCPKeepAlive yes
 #UseLogin no

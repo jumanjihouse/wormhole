@@ -162,6 +162,9 @@ RUN usermod -aG slocate user
 # Do not track changes in volumes.
 VOLUME ["/home/user", "/media/state/etc/ssh"]
 
+# Be informative after successful login.
+RUN echo "App container image built on $(date)." > /etc/motd
+
 # Configure security.
 ADD ssh_config /etc/ssh/
 ADD sshd_config /etc/ssh/
