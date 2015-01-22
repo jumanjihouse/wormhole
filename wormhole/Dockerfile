@@ -50,6 +50,7 @@ RUN yum install -y \
     git-svn \
     make \
     jwhois \
+    go \
     ; yum clean all
 
 # Break su for everybody but root.
