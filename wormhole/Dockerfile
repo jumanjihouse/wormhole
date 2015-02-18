@@ -34,6 +34,7 @@ RUN yum install -y \
     man-pages mlocate \
     gcc gcc-c++ \
     glibc-static \
+    gflags gflags-devel \
     gnupg \
     ruby ruby-devel rubygem-bundler \
     sqlite-devel \
