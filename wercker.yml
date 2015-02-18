@@ -2,8 +2,16 @@ box: wercker-labs/docker
 no-response-timeout: 20
 build:
   steps:
+    - script:
+        name: show packages
+        code: |
+          sudo apt-get update
+          sudo apt-cache madison docker
     - install-packages:
-        packages: ruby2.0 ruby2.0-dev lxc-docker=1.4.1
+        packages: ruby2.0 ruby2.0-dev
+    - script:
+        name: install docker
+        code: curl -sSL https://get.docker.com/ubuntu/ | sudo sh
     - script:
         name: print system-wide docker info
         code: |
