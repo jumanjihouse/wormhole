@@ -7,7 +7,7 @@
 #
 require 'English'
 Gem::Specification.new do |gem|
-  gem.name          = 'wormhole test suite'
+  gem.name          = 'wormhole_test_suite'
   gem.homepage      = 'https://github.com/jumanjiman/wormhole'
   gem.description   = %q('Test harness for this repo')
   gem.summary       = %q('Test harness for this repo')
