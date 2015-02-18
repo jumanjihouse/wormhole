@@ -97,19 +97,10 @@ RUN yum install -y \
     python-scp \
     python-paramiko \
     numpy \
-    python3-networkx-core \
-    python3-networkx-drawing \
-    python3-networkx-geo \
-    python3-networkx \
     python3-numpydoc \
     python3-numpy \
     python3-PyYAML \
     python3-scipy \
-    python-networkx-core \
-    python-networkx-doc \
-    python-networkx-drawing \
-    python-networkx-geo \
-    python-networkx \
     python-numpydoc \
     PyYAML \
     scipy \
