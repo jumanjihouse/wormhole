@@ -38,7 +38,7 @@ def handle
   'booga'
 end
 
-# rubocop:disable MethodLength,AbcSize
+# rubocop:disable MethodLength,AbcSize,CyclomaticComplexity
 def ssh(cmd, port = @port, privkey = @privkey)
   abort '[ERROR] must provide command' unless cmd
   abort '[ERROR] must provide port' unless port
@@ -73,9 +73,15 @@ rescue Net::SSH::AuthenticationFailed => e
     -i #{privkey}
     -p #{port}
   )
-  `ssh #{ssh_opts.join(' ')} #{username}@#{host} "#{cmd}" 2> /dev/null`
+  s = `ssh #{ssh_opts.join(' ')} #{username}@#{host} "#{cmd}" 2> /dev/null`
+  # Wercker docker box is ubuntu, which only has ruby 2.0,
+  # and scrub method only appears in ruby 2.1+
+  unless s.valid_encoding?
+    s = s.encode('UTF-16be', invalid: :replace, replace: '?').encode('UTF-8')
+  end
+  s
 end
-# rubocop:enable MethodLength,AbcSize
+# rubocop:enable MethodLength,AbcSize,CyclomaticComplexity
 
 # Ugh, use global to persist value across contexts.
 # Create temp ssh dir and temp ssh keypair.

@@ -7,9 +7,6 @@ MAINTAINER Paul Morgan <jumanjiman@gmail.com>
 # Allow to install docs since this is a dev environment.
 RUN sed -i '/tsflags=nodocs/d' /etc/yum.conf
 
-# Generate /usr/lib/locale/locale-archive to support UTF8.
-RUN localedef -i en_US -c -f UTF-8 en_US.UTF-8
-
 RUN yum update -y; yum clean all
 
 # Work around https://bugzilla.redhat.com/show_bug.cgi?id=1066983

@@ -6,13 +6,17 @@ describe 'locale archive' do
     'C',
     'POSIX',
     'en_US.utf8',
-    'en_US.UTF-8',
   ]
+
+  before :all do
+    @all_locales = ssh('locale -a')
+  end
 
   locales.each do |locale|
     it "supports #{locale}" do
       output = ssh("export LANG=#{locale}; locale -a 2>&1")
       output.should_not =~ /Cannot/
+      @all_locales.should =~ /^#{locale}$/
     end
   end
 end
