@@ -39,7 +39,7 @@ RUN yum install -y \
     libcurl-devel libxslt-devel libxml2-devel \
     nano \
     vim-enhanced bash-completion \
-    java-1.7.0-openjdk-headless \
+    java-1.8.0-openjdk-headless \
     jq \
     openssl openssl-devel crypto-utils \
     tree \
