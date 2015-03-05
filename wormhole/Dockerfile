@@ -105,6 +105,7 @@ RUN yum install -y \
     python-matplotlib-doc \
     python-matplotlib \
     python3-matplotlib \
+    wget \
     ; yum clean all
 
 RUN gem install rhc
