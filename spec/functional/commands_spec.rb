@@ -2,9 +2,10 @@
 require 'spec_helper'
 
 describe 'useful commands' do
-  commands = [
-    'wget',
-  ]
+  commands = %w(
+    docker
+    wget
+  )
 
   commands.each do |cmd|
     it '${cmd} is in user path' do

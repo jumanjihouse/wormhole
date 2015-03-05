@@ -149,6 +149,10 @@ RUN useradd user
 # Ugly workaround. Really ugly.
 RUN usermod -aG slocate user
 
+# Install latest docker client.
+RUN curl -sS -L -o /usr/bin/docker https://get.docker.com/builds/Linux/x86_64/docker-latest ;\
+    chmod 0755 /usr/bin/docker
+
 # Do not track changes in volumes.
 VOLUME ["/home/user", "/media/state/etc/ssh"]
 
