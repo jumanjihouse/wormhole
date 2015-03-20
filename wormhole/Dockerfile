@@ -151,7 +151,11 @@ RUN usermod -aG slocate user
 
 # Install latest docker client.
 RUN curl -sS -L -o /usr/bin/docker https://get.docker.com/builds/Linux/x86_64/docker-latest ;\
-    chmod 0755 /usr/bin/docker
+    curl -sS -L -o /usr/bin/docker-compose https://github.com/docker/compose/releases/download/1.1.0/docker-compose-`uname -s`-`uname -m` ;\
+    chmod 0755 /usr/bin/docker*
+
+# https://www.npmjs.com/package/dockerlint
+RUN npm install -g dockerlint
 
 # Do not track changes in volumes.
 VOLUME ["/home/user", "/media/state/etc/ssh"]
