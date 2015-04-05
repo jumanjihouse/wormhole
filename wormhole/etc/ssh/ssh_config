@@ -26,10 +26,6 @@ Host *
     ForwardAgent no
     ForwardX11 no
     ForwardX11Trusted no
-    GSSAPIAuthentication no
-    GSSAPIDelegateCredentials no
-    GSSAPIKeyExchange no
-    GSSAPITrustDNS no
     HostbasedAuthentication no
     IdentityFile ~/.ssh/id_rsa
     KexAlgorithms curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256

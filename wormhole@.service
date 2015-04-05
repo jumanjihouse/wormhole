@@ -11,8 +11,9 @@ EnvironmentFile=/etc/wormhole/%i.conf
 ExecStartPre=/bin/bash -c '/usr/bin/docker inspect %i &> /dev/null && /usr/bin/docker rm %i || :'
 ExecStart=/usr/bin/docker run --rm -t \
   -m ${max_ram} \
+  -c 1023 \
   --volumes-from %i-data \
-  -p ${PORT}:22 \
+  -p ${PORT}:2222 \
   -h ${sandbox_hostname} \
   --name %i \
   -v /etc/wormhole/login_duo.conf:/etc/duo/login_duo.conf:ro \

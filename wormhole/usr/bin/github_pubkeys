@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Read user github handle.
+. /home/user/.wormholerc
+
+url=https://api.github.com/users/${GITHUB_HANDLE}/keys
+/usr/bin/curl -m 15 -sS -L -k ${url} | /usr/bin/jq -r '.[].key'
+:
