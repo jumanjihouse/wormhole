@@ -158,11 +158,6 @@ RSpec documents key behaviors and assures no regressions:
           should expose internal sshd port and only sshd port
           should map internal sshd port to an outside ephemeral port
 
-    arcanist (phabricator client)
-      `arc` is in user path
-      `arc version` is functional
-      uses bash autocompletion
-
     BZ1099206 (slow test)
       home directory should exist
       go get should work
