@@ -170,9 +170,6 @@ RSpec documents key behaviors and assures no regressions:
       should resolve CVE-014-6271
       should resolve CVE-014-7169
 
-    ldc D compiler
-      compiles a D program (PENDING: https://bugzilla.redhat.com/show_bug.cgi?id=1176361)
-
     locale archive
       supports C
       supports POSIX
