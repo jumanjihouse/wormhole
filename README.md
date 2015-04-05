@@ -175,10 +175,6 @@ RSpec documents key behaviors and assures no regressions:
       should resolve CVE-014-6271
       should resolve CVE-014-7169
 
-    eiffelstudio
-      has command-line eiffel compiler in path
-      has estudio in path
-
     ldc D compiler
       compiles a D program (PENDING: https://bugzilla.redhat.com/show_bug.cgi?id=1176361)
 

@@ -126,14 +126,6 @@ ADD .bash_profile /etc/skel/
 # Annoy user if they forget to set their username and email in git.
 ADD profile.d /etc/profile.d/
 
-# Install EiffelStudio. See LICENSE.eiffelstudio for terms.
-RUN yum -y install gtk2-devel.x86_64 libXtst-devel.x86_64 pangox-compat; yum clean all
-RUN cd /tmp ;\
-    tarball='Eiffel_14.05_gpl_95417-linux-x86-64.tar.bz2' ;\
-    curl -s -O ftp://ftp.eiffel.com/pub/download/14.05/$tarball ;\
-    tar xjf /tmp/$tarball -C /usr/local/ ;\
-    rm -f /tmp/$tarball
-
 # Install duo for multifactor authentication.
 ADD duo.repo /etc/yum.repos.d/
 RUN rpm --import https://www.duosecurity.com/RPM-GPG-KEY-DUO ;\
