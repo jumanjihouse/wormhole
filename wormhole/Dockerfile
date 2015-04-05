@@ -167,11 +167,6 @@ ADD wormhole-devenv-xccdf.xml /usr/share/xml/scap/ssg/fedora/
 ADD oscap-remediate.sh /usr/sbin/
 ADD oval-vulnerability-scan.sh /usr/sbin/
 
-# Install arcanist.
-# https://secure.phabricator.com/book/phabricator/article/arcanist/
-ADD install-arc.sh /usr/local/sbin/install-arc.sh
-RUN /usr/local/sbin/install-arc.sh
-
 # Install tools for validating xml.
 ADD jing /usr/local/bin/
 ADD trang /usr/local/bin/
