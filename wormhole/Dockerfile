@@ -35,7 +35,6 @@ RUN yum install -y \
     gnupg \
     ruby ruby-devel rubygem-bundler \
     sqlite-devel \
-    ldc \
     libcurl-devel libxslt-devel libxml2-devel \
     nano \
     vim-enhanced bash-completion \
