@@ -108,34 +108,17 @@ RUN yum install -y \
     wget \
     ; yum clean all
 
-RUN gem install rhc
-
 # Break su for everybody but root.
-ADD su /etc/pam.d/
-
 # Break cron for everybody.
-ADD cron.allow /etc/
+# Populate /etc/skel
+# Annoy user if they forget to set their username and email in git.
+# Configure security.
+# Install tools for validating xml.
+COPY . /
 RUN chmod 0400 /usr/bin/crontab
 RUN chmod 0400 /usr/sbin/crond
 
-# Populate /etc/skel
-ADD .bashrc /etc/skel/
-ADD .bash_logout /etc/skel/
-ADD .bash_profile /etc/skel/
-
-# Annoy user if they forget to set their username and email in git.
-ADD profile.d /etc/profile.d/
-
-# Install EiffelStudio. See LICENSE.eiffelstudio for terms.
-RUN yum -y install gtk2-devel.x86_64 libXtst-devel.x86_64 pangox-compat; yum clean all
-RUN cd /tmp ;\
-    tarball='Eiffel_14.05_gpl_95417-linux-x86-64.tar.bz2' ;\
-    curl -s -O ftp://ftp.eiffel.com/pub/download/14.05/$tarball ;\
-    tar xjf /tmp/$tarball -C /usr/local/ ;\
-    rm -f /tmp/$tarball
-
 # Install duo for multifactor authentication.
-ADD duo.repo /etc/yum.repos.d/
 RUN rpm --import https://www.duosecurity.com/RPM-GPG-KEY-DUO ;\
     yum -y install duo_unix; yum clean all
 # Avoid error `Only root may specify -c or -f` when using
@@ -163,27 +146,6 @@ VOLUME ["/home/user", "/media/state/etc/ssh"]
 # Be informative after successful login.
 RUN echo "App container image built on $(date)." > /etc/motd
 
-# Configure security.
-ADD ssh_config /etc/ssh/
-ADD sshd_config /etc/ssh/
-ADD issue.net /etc/
-ADD sshd /etc/pam.d/
-ADD password-auth /etc/pam.d/
-ADD password-auth.patch /etc/pam.d/
-ADD start.sh /usr/sbin/
-ADD wormhole-devenv-xccdf.xml /usr/share/xml/scap/ssg/fedora/
-ADD oscap-remediate.sh /usr/sbin/
-ADD oval-vulnerability-scan.sh /usr/sbin/
-
-# Install arcanist.
-# https://secure.phabricator.com/book/phabricator/article/arcanist/
-ADD install-arc.sh /usr/local/sbin/install-arc.sh
-RUN /usr/local/sbin/install-arc.sh
-
-# Install tools for validating xml.
-ADD jing /usr/local/bin/
-ADD trang /usr/local/bin/
-ADD install-jing.sh /usr/local/sbin/install-jing.sh
 RUN /usr/local/sbin/install-jing.sh
 
 # Update system databases for user convenience.

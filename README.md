@@ -158,11 +158,6 @@ RSpec documents key behaviors and assures no regressions:
           should expose internal sshd port and only sshd port
           should map internal sshd port to an outside ephemeral port
 
-    arcanist (phabricator client)
-      `arc` is in user path
-      `arc version` is functional
-      uses bash autocompletion
-
     BZ1099206 (slow test)
       home directory should exist
       go get should work
@@ -174,10 +169,6 @@ RSpec documents key behaviors and assures no regressions:
     shell-shock
       should resolve CVE-014-6271
       should resolve CVE-014-7169
-
-    eiffelstudio
-      has command-line eiffel compiler in path
-      has estudio in path
 
     ldc D compiler
       compiles a D program (PENDING: https://bugzilla.redhat.com/show_bug.cgi?id=1176361)
@@ -202,10 +193,6 @@ RSpec documents key behaviors and assures no regressions:
       should not have the crond command
       should not have the crontab command
       should not have the /usr/sbin/prelink command
-
-    rhc (openshift client)
-      `rhc` is in user path
-      `rhc --version` is functional
 
     sshd config
       auth
