@@ -36,7 +36,7 @@ if [[ ${DUO} == true ]]; then
   chown user:user /etc/duo/${instance}.conf
   chmod 0400 /etc/duo/${instance}.conf
 
-  /usr/sbin/sshd -D -e -o ForceCommand="/usr/sbin/login_duo -c /etc/duo/${instance}.conf -f ${instance}"
+  exec /usr/sbin/sshd -D -e -o ForceCommand="/usr/sbin/login_duo -c /etc/duo/${instance}.conf -f ${instance}"
 else
-  /usr/sbin/sshd -D -e
+  exec /usr/sbin/sshd -D -e
 fi
