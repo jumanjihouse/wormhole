@@ -10,7 +10,7 @@ describe 'useful commands' do
   commands.each do |cmd|
     it '${cmd} is in user path' do
       output = ssh("which #{cmd}").split($RS).last.chomp
-      output.should =~ /^.*bin\/#{cmd}$/
+      output.should =~ %r{^.*bin/#{cmd}$}
     end
   end
 end
