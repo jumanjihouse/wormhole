@@ -82,11 +82,10 @@ HostKey /media/state/etc/ssh/ssh_host_ed25519_key
 Protocol 2
 
 
-# Use either IPv4 or IPv6.
-AddressFamily any
-Port 22
+# Use IPv4 only.
+AddressFamily inet
+Port 2222
 ListenAddress 0.0.0.0
-ListenAddress ::
 
 
 
@@ -106,9 +105,17 @@ PrintMotd yes
 #MaxSessions 10
 #RSAAuthentication yes
 #PubkeyAuthentication yes
-#AuthorizedKeysFile	.ssh/authorized_keys
-#AuthorizedKeysCommand none
-#AuthorizedKeysCommandRunAs nobody
+
+
+
+AuthorizedKeysFile .ssh/authorized_keys
+
+
+
+# Caution: Do not run sshd in debug mode or else
+# this won't work as you expect.
+AuthorizedKeysCommand /usr/bin/github_pubkeys
+AuthorizedKeysCommandUser user
 
 
 
@@ -157,27 +164,9 @@ PermitEmptyPasswords no
 # To disable tunneled clear text passwords, change to no here!
 PasswordAuthentication no
 
-GSSAPIAuthentication no
-KerberosAuthentication no
 
 # "no" means disable s/key passwords.
 ChallengeResponseAuthentication no
-
-
-
-
-# Set this to 'yes' to enable PAM authentication, account processing,
-# and session processing. If this is enabled, PAM authentication will
-# be allowed through the ChallengeResponseAuthentication and
-# PasswordAuthentication.  Depending on your PAM configuration,
-# PAM authentication via ChallengeResponseAuthentication may bypass
-# the setting of "PermitRootLogin without-password".
-#
-# If you just want the PAM account and session checks to run without
-# PAM authentication, then enable this but set PasswordAuthentication
-# and ChallengeResponseAuthentication to 'no'.
-UsePAM yes
-
 
 
 
@@ -253,13 +242,13 @@ ClientAliveCountMax 0
 #
 # Recommended: /etc/issue
 #
-Banner /etc/issue.net
+Banner /etc/issue
 
 
 
 
 # override default of no subsystems
-Subsystem	sftp	/usr/libexec/openssh/sftp-server
+Subsystem sftp  /usr/libexec/openssh/sftp-server
 
 
 

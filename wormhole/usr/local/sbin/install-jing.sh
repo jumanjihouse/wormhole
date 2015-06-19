@@ -7,6 +7,6 @@ pushd /tmp/
 for app in jing trang; do
   curl -s -O https://jing-trang.googlecode.com/files/${app}-${version}.zip
   unzip -q ${app}-${version}.zip
-  mkdir /opt/$app || :
+  mkdir -p /opt/$app || :
   find ${app}-${version} -regex '.*\.jar' -exec cp -f {} /opt/$app/ \;
 done
