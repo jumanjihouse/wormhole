@@ -87,6 +87,7 @@ describe 'admin scripts' do
       end
 
       it 'should be limited to 512 MiB RAM' do
+        pending 'circleci does not support limits' if ENV['CIRCLECI']
         limit = 512 * 1024 * 1024
         @config['Memory'].should == limit
       end
