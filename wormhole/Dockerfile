@@ -1,23 +1,20 @@
 # https://index.docker.io/_/fedora/
-FROM fedora:21
+FROM fedora:22
 
 # http://jumanjiman.github.io/
 MAINTAINER Paul Morgan <jumanjiman@gmail.com>
 
-# Allow to install docs since this is a dev environment.
-RUN sed -i '/tsflags=nodocs/d' /etc/yum.conf
-
-RUN yum update -y; yum clean all
+RUN dnf update -y; dnf clean all
 
 # Work around https://bugzilla.redhat.com/show_bug.cgi?id=1066983
 # and remove prohibited packages.
-RUN yum remove -y vim-minimal \
+RUN dnf remove -y vim-minimal \
     at \
     sudo \
-    ; yum clean all
+    ; dnf clean all
 
 # Install dependencies.
-RUN yum install -y \
+RUN dnf install -y \
     asciinema \
     bind-utils \
     bc \
@@ -52,7 +49,7 @@ RUN yum install -y \
     strace \
     tmux tmux-powerline reptyr \
     golang golang-cover golang-github-coreos-go-systemd-devel \
-    golang-godoc golang-vim golang-github-coreos-go-log-devel \
+    golang-godoc golang-github-coreos-go-log-devel \
     npm nodeunit \
     bzr \
     tito \
@@ -105,7 +102,7 @@ RUN yum install -y \
     python-matplotlib \
     python3-matplotlib \
     wget \
-    ; yum clean all
+    && dnf clean all
 
 # Break su for everybody but root.
 # Break cron for everybody.
@@ -118,18 +115,16 @@ RUN chmod 0400 /usr/bin/crontab
 RUN chmod 0400 /usr/sbin/crond
 
 # Install duo for multifactor authentication.
-RUN rpm --import https://www.duosecurity.com/RPM-GPG-KEY-DUO ;\
-    yum -y install duo_unix; yum clean all
 # Avoid error `Only root may specify -c or -f` when using
 # ForceCommand with `-f` option at non-root ssh login.
 # https://www.duosecurity.com/docs/duounix-faq#can-i-use-login_duo-to-protect-non-root-shared-accounts,-or-can-i-do-an-install-without-root-privileges?
-RUN chmod u-s /usr/sbin/login_duo
+RUN rpm --import https://www.duosecurity.com/RPM-GPG-KEY-DUO && \
+    dnf -y install duo_unix && \
+    dnf clean all && \
+    chmod u-s /usr/sbin/login_duo
 
 # Create sandbox user.
 RUN useradd user
-
-# Ugly workaround. Really ugly.
-RUN usermod -aG slocate user
 
 # Install latest docker client.
 RUN curl -sS -L -o /usr/bin/docker https://get.docker.com/builds/Linux/x86_64/docker-latest ;\
