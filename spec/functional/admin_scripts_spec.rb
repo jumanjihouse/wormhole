@@ -17,7 +17,7 @@ describe 'admin scripts' do
       before :context do
         @config = @data.json['Config']
         @hostconfig = @data.json['HostConfig']
-        @state  = @data.json['State']
+        @state = @data.json['State']
         pp @data.json unless @config && @state
       end
 
@@ -55,7 +55,7 @@ describe 'admin scripts' do
       before :context do
         @config = @app.json['Config']
         @hostconfig = @app.json['HostConfig']
-        @state  = @app.json['State']
+        @state = @app.json['State']
         pp @app.json unless @config && @state
       end
 
