@@ -181,11 +181,9 @@ RSpec.configure do |c|
 
   # Collect and report stats from the Ruby garbage collector.
   #
-  # rubocop:disable LineLength
   # @see http://labs.goclio.com/tuning-ruby-garbage-collection-for-rspec/
   # @see http://37signals.com/svn/posts/2742-the-road-to-faster-tests
   # @see http://fredwu.me/post/60441991350/protip-ruby-devs-please-tweak-your-gc-settings-for
-  # rubocop:enable LineLength
   unless RUBY_VERSION =~ /^1/ && !debug?
     # Start with initial values.
     gc_stat = GC.stat.dup

@@ -14,6 +14,10 @@ dependencies:
     - docker version
     - ss -tulpn
     - bundle install
+    # Fail before build if we have a problem with ruby test code.
+    - bundle exec rake validate_bundle
+    - bundle exec rake rubocop
+    # Build takes a while!
     - script/build
 
 test:
