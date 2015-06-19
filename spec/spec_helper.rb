@@ -74,8 +74,7 @@ rescue Net::SSH::AuthenticationFailed => e
     -p #{port}
   )
   s = `ssh #{ssh_opts.join(' ')} #{username}@#{host} "#{cmd}" 2> /dev/null`
-  # Wercker docker box is ubuntu, which only has ruby 2.0,
-  # and scrub method only appears in ruby 2.1+
+  # scrub method only appears in ruby 2.1+
   unless s.valid_encoding?
     s = s.encode('UTF-16be', invalid: :replace, replace: '?').encode('UTF-8')
   end
@@ -160,19 +159,23 @@ RSpec.configure do |c|
   end
 
   # Clean up.
+  # @note CircleCI does not allow to delete containers, so
+  # we need to ensure container stays up through all tests.
   c.after :suite do
-    File.delete privkey, pubkey
-    if systemd?
-      path = "#{handle}-data.tar"
-      File.delete(path) if File.exist?(path)
-      run_command "./destroy.sh #{handle} 2> /dev/null"
-    else
-      app = Docker::Container.get(handle)
-      app.kill
-      app.delete(true)
+    unless ENV['CIRCLECI']
+      File.delete privkey, pubkey
+      if systemd?
+        path = "#{handle}-data.tar"
+        File.delete(path) if File.exist?(path)
+        run_command "./destroy.sh #{handle} 2> /dev/null"
+      else
+        app = Docker::Container.get(handle)
+        app.kill
+        app.delete(true)
 
-      data = Docker::Container.get("#{handle}-data")
-      data.delete(true)
+        data = Docker::Container.get("#{handle}-data")
+        data.delete(true)
+      end
     end
   end
 
