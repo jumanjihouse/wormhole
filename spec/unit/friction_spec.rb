@@ -9,7 +9,8 @@ require 'stringio'
 # @todo submit PR against friction.
 module Kernel
   def capture_stdout
-    real_out, out = $stdout, StringIO.new
+    real_out = $stdout
+    out = StringIO.new
     $stdout = out
     yield
     return out.string

@@ -2,11 +2,6 @@ box: wercker-labs/docker
 no-response-timeout: 20
 build:
   steps:
-    - script:
-        name: show packages
-        code: |
-          sudo apt-get update
-          sudo apt-cache madison docker
     - install-packages:
         packages: ruby2.0 ruby2.0-dev
     - script:
