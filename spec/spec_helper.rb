@@ -156,6 +156,13 @@ RSpec.configure do |c|
     @port = ssh_port_mapping(handle)
     @privkey = privkey
     @pubkey = pubkey
+    if debug?
+      pp @app
+      pp @data
+      pp @port
+      pp @privkey
+      pp @pubkey
+    end
   end
 
   # Clean up.
