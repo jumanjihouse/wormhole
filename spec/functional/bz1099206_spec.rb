@@ -16,6 +16,12 @@ describe 'BZ1099206 (slow test)' do
   end
 
   it 'home directory should exist' do
+    pending 'debug'
+    output = ssh('tree -a /home/user')
+    output.should =~ %r{^/home/user$}
+  end
+
+  it 'home directory should exist' do
     output = ssh('ls -d /home/user')
     output.should =~ %r{^/home/user$}
   end
