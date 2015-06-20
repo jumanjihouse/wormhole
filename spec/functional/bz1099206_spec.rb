@@ -6,6 +6,15 @@ require 'spec_helper'
 # We need golang-1.2.2-22.fc20 or later:
 # https://admin.fedoraproject.org/updates/FEDORA-2014-9424/golang-1.2.2-22.fc20
 describe 'BZ1099206 (slow test)' do
+  before :context do
+    @state = @app.json['State']
+    pp @state if debug?
+  end
+
+  it 'should be running' do
+    @state['Running'].should be_truthy
+  end
+
   it 'home directory should exist' do
     output = ssh('ls -d /home/user')
     output.should =~ %r{^/home/user$}
