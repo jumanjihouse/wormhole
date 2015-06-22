@@ -39,6 +39,10 @@ task spec_standalone: [
   :functional,
 ]
 
+RSpec::Core::RakeTask.new(:circleci) do |t|
+  t.pattern = 'spec/**/*_spec.rb'
+end
+
 RSpec::Core::RakeTask.new(:unit) do |t|
   t.pattern = 'spec/unit/**/*_spec.rb'
 end

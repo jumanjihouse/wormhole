@@ -1,6 +1,6 @@
 [duosecurity]
 name=Duo Security Repository
 # Duo doesn't provide binary rpm for Fedora, but this works.
-baseurl=http://pkg.duosecurity.com/CentOS/6/x86_64
+baseurl=http://pkg.duosecurity.com/CentOS/7/x86_64
 enabled=1
 gpgcheck=1

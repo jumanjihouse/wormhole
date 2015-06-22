@@ -1,0 +1,40 @@
+# https://circleci.com/docs/docker
+machine:
+  environment:
+    TAG: $(date +%Y%m%dT%H%M)-git-${CIRCLE_SHA1:0:7}
+  pre:
+    - sudo curl -L -o /usr/bin/docker 'http://s3-external-1.amazonaws.com/circle-downloads/docker-1.5.0-circleci'
+    - sudo chmod 0755 /usr/bin/docker
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker info
+    - docker version
+    - ss -tulpn
+    - bundle install
+    # Fail before build if we have a problem with ruby test code.
+    - bundle exec rake validate_bundle
+    - bundle exec rake rubocop
+    # Build takes a while!
+    - script/build
+
+test:
+  pre:
+    - docker ps -a
+  override:
+    - bundle exec rake circleci
+
+# https://circleci.com/docs/configuration#deployment
+# https://circleci.com/docs/environment-variables
+deployment:
+  master:
+    branch: master
+    owner: jumanjihouse
+    commands:
+      - docker login -e ${mail} -u ${user} -p ${pass}
+      - docker tag jumanjiman/wormhole jumanjiman/wormhole:${TAG}
+      - docker push jumanjiman/wormhole:${TAG}
+      - docker push jumanjiman/wormhole:latest
+      - docker logout
