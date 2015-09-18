@@ -34,7 +34,7 @@ a [topic branch](http://progit.org/book/ch3-4.html) of your fork.
    - Participate in [code review](https://github.com/features/projects/codereview)
    - Participate in [code comments](https://github.com/blog/42-commit-comments)
 
-1. [wercker](https://app.wercker.com/#applications/54aed6aa07fa3ea415014fea)
+1. CircleCI
    automatically runs the test harness against each pull request and push.
    You can also run tests locally via:
 
