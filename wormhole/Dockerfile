@@ -81,6 +81,7 @@ RUN apk add --no-cache \
 # Edge main packages.
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/main \
       'mutt>=1.6' \
+      py-psycopg2 \
     && :
 
 # Edge community packages.
@@ -100,7 +101,6 @@ RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
       py-kerberos \
       py-matplotlib \
       py-numpy \
-      py-psycopg2 \
       py-pyramid \
       py-rpm \
       py-scipy \
