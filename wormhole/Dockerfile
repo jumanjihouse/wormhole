@@ -78,11 +78,11 @@ RUN apk add --no-cache \
       wget
 
 # Edge community packages.
-RUN apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/community \
+RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/community \
       duo_unix
 
 # Edge testing packages.
-RUN apk add --no-cache -X http://dl-4.alpinelinux.org/alpine/edge/testing \
+RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
       asciinema \
       editorconfig \
       nmh \
