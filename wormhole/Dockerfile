@@ -66,7 +66,6 @@ RUN apk add --no-cache \
       tar patch diffutils \
       patchutils \
       make \
-      mutt \
       jwhois \
       graphviz \
       py-lxml \
@@ -76,6 +75,11 @@ RUN apk add --no-cache \
       py-paramiko \
       py-yaml \
       wget
+
+# Edge main packages.
+RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/main \
+      'mutt>=1.6' \
+    && :
 
 # Edge community packages.
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/community \
