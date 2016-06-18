@@ -30,10 +30,6 @@ RUN apk add --no-cache \
       docker-vim \
       docker \
       findutils \
-      git \
-      git-bash-completion \
-      git-perl \
-      git-svn \
       grep \
       less \
       libffi-dev \
@@ -80,6 +76,10 @@ RUN apk add --no-cache \
 
 # Edge main packages.
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/main \
+      'git>=2.9' \
+      git-bash-completion \
+      git-perl \
+      git-svn \
       'mutt>=1.6' \
       py-psycopg2 \
     && :
