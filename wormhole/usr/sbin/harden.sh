@@ -45,8 +45,8 @@ fi
 rm -fr /var/spool/cron
 
 # Remove world-writable permissions except for /tmp.
-find / -xdev -type d -a ! -name tmp -perm +0002 -exec chmod o-w {} +
-find / -xdev -type f -perm +0002 -exec chmod o-w {} +
+find / -xdev -type d -a ! -name tmp -perm /0002 -exec chmod o-w {} +
+find / -xdev -type f -perm /0002 -exec chmod o-w {} +
 
 # Remove unnecessary user accounts.
 sed -i -r '/^(user|root|sshd)/!d' /etc/group
@@ -68,7 +68,7 @@ find $sysdirs -xdev -type d \
   -exec chmod 0755 {} \;
 
 # Remove all suid files.
-find $sysdirs -xdev -type f -a -perm +4000 -delete
+find $sysdirs -xdev -type f -a -perm /4000 -delete
 
 # Remove other programs that could be dangerous.
 find $sysdirs -xdev \( \

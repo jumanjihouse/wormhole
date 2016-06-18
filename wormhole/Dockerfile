@@ -1,4 +1,4 @@
-FROM alpine:3.3
+FROM alpine:3.4
 
 # http://jumanjiman.github.io/
 MAINTAINER Paul Morgan <jumanjiman@gmail.com>
@@ -34,7 +34,6 @@ RUN apk add --no-cache \
       grep \
       less \
       libffi-dev \
-      tmux-bash-completion \
       ncurses \
       bind-tools \
       bc \
@@ -53,7 +52,7 @@ RUN apk add --no-cache \
       jq \
       openssl openssl-dev \
       tree \
-      php \
+      php5 \
       python-dev py-nose py-setuptools \
       python3-dev \
       py-simplejson \
@@ -112,6 +111,10 @@ RUN curl -sS -L -o /usr/bin/docker-latest https://get.docker.com/builds/Linux/x8
     curl -sS -L -o /usr/bin/docker https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION} && \
     curl -sS -L -o /usr/bin/docker-compose https://github.com/docker/compose/releases/download/1.2.0/docker-compose-`uname -s`-`uname -m`;\
     chmod 0755 /usr/bin/docker*
+
+# Get tmux-bash-completions.
+RUN curl -L -o /usr/share/bash-completion/completions/tmux \
+    https://raw.githubusercontent.com/imomaliev/tmux-bash-completion/master/completions/tmux
 
 # Do not track changes in volumes.
 VOLUME ["/home/user", "/media/state/etc/ssh"]
