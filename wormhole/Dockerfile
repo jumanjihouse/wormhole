@@ -34,9 +34,11 @@ RUN apk add --no-cache \
       git-bash-completion \
       git-perl \
       git-svn \
+      grep \
       less \
       libffi-dev \
       tmux-bash-completion \
+      ncurses \
       bind-tools \
       bc \
       openssh \
