@@ -3,6 +3,8 @@ FROM alpine:3.3
 # http://jumanjiman.github.io/
 MAINTAINER Paul Morgan <jumanjiman@gmail.com>
 
+ENV DOCKER_VERSION=1.10.3
+
 COPY . /
 
 RUN apk upgrade --no-cache --available
@@ -28,7 +30,6 @@ RUN apk add --no-cache \
       cyrus-sasl-gssapi \
       docker-bash-completion \
       docker-vim \
-      docker \
       findutils \
       grep \
       less \
@@ -108,6 +109,7 @@ RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
 
 # Install latest docker client as `docker-latest`.
 RUN curl -sS -L -o /usr/bin/docker-latest https://get.docker.com/builds/Linux/x86_64/docker-latest && \
+    curl -sS -L -o /usr/bin/docker https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION} && \
     curl -sS -L -o /usr/bin/docker-compose https://github.com/docker/compose/releases/download/1.2.0/docker-compose-`uname -s`-`uname -m`;\
     chmod 0755 /usr/bin/docker*
 
