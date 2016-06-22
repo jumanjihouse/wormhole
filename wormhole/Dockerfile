@@ -26,6 +26,7 @@ RUN apk add --no-cache \
       bash \
       bash-completion \
       checkbashisms \
+      coreutils \
       cyrus-sasl \
       cyrus-sasl-gssapi \
       docker-bash-completion \
