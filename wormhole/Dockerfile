@@ -56,6 +56,7 @@ RUN apk add --no-cache \
       php5 \
       python-dev py-nose py-setuptools \
       python3-dev \
+      py-pip \
       py-simplejson \
       strace \
       tmux \
@@ -95,7 +96,6 @@ RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
       editorconfig \
       nmh \
       pep8 \
-      pylint \
       rpm \
       rpmlint \
       rpm-dev \
@@ -106,6 +106,10 @@ RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
       py-rpm \
       py-scipy \
       vimpager
+
+RUN pip install \
+      pylint \
+      ;
 
 # Install latest docker client as `docker-latest`.
 RUN curl -sS -L -o /usr/bin/docker-latest https://get.docker.com/builds/Linux/x86_64/docker-latest && \
