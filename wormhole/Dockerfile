@@ -88,13 +88,13 @@ RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/main \
 
 # Edge community packages.
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/community \
+      asciinema \
+      nmh \
       duo_unix
 
 # Edge testing packages.
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-      asciinema \
       editorconfig \
-      nmh \
       pep8 \
       rpm \
       rpmlint \
