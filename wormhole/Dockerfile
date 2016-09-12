@@ -89,21 +89,21 @@ RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/main \
 # Edge community packages.
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/community \
       asciinema \
+      editorconfig \
       nmh \
+      py-numpy \
+      py-rpm \
+      rpm \
+      rpm-dev \
       duo_unix
 
 # Edge testing packages.
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-      editorconfig \
       pep8 \
-      rpm \
       rpmlint \
-      rpm-dev \
       py-kerberos \
       py-matplotlib \
-      py-numpy \
       py-pyramid \
-      py-rpm \
       py-scipy \
       vimpager
 
