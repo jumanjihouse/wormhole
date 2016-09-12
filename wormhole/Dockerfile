@@ -100,12 +100,11 @@ RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/community \
 # Edge testing packages.
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
       pep8 \
-      rpmlint \
       py-kerberos \
       py-matplotlib \
       py-pyramid \
       py-scipy \
-      vimpager
+      ;
 
 RUN pip install \
       pylint \
