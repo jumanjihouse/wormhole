@@ -54,10 +54,6 @@ RUN apk add --no-cache \
       openssl openssl-dev \
       tree \
       php5 \
-      python-dev py-nose py-setuptools \
-      python3-dev \
-      py-pip \
-      py-simplejson \
       strace \
       tmux \
       go \
@@ -68,12 +64,6 @@ RUN apk add --no-cache \
       make \
       jwhois \
       graphviz \
-      py-lxml \
-      py-mock \
-      py-oauthlib \
-      py-asn1 \
-      py-paramiko \
-      py-yaml \
       wget
 
 # Edge main packages.
@@ -83,7 +73,18 @@ RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/main \
       git-perl \
       git-svn \
       'mutt>=1.6' \
+      python2-dev py-nose py-setuptools \
+      python3-dev \
+      py-pip \
+      py-simplejson \
       py-psycopg2 \
+      py-lxml \
+      py-mock \
+      py-oauthlib \
+      py-asn1 \
+      py-paramiko \
+      py-yaml \
+      py2-tkinter \
     && :
 
 # Edge community packages.
