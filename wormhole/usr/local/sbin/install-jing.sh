@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+echo jing-trang has moved to https://github.com/relaxng/jing-trang
+echo and must be built from scratch.
+exit 0
+
 version='20091111'
 
 pushd /tmp/
