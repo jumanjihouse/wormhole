@@ -108,13 +108,13 @@ RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
       ;
 
 RUN pip install \
+      docker-compose \
       pylint \
       ;
 
 # Install latest docker client as `docker-latest`.
 RUN curl -sS -L -o /usr/bin/docker-latest https://get.docker.com/builds/Linux/x86_64/docker-latest && \
     curl -sS -L -o /usr/bin/docker https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION} && \
-    curl -sS -L -o /usr/bin/docker-compose https://github.com/docker/compose/releases/download/1.2.0/docker-compose-`uname -s`-`uname -m`;\
     chmod 0755 /usr/bin/docker*
 
 # Get tmux-bash-completions.
