@@ -1,3 +1,8 @@
+# Archived
+
+:warning: This git repo is superceded by **https://github.com/jumanjihouse/devenv**.
+
+
 ## Overview
 
 Provide docker-based development environments to support
