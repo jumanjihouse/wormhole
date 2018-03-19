@@ -5,5 +5,5 @@ set -e
 
 pushd wormhole 2> /dev/null
 smitty docker build --rm -t jumanjiman/wormhole:${short_hash} .
-smitty docker tag -f jumanjiman/wormhole:${short_hash} jumanjiman/wormhole:latest
+smitty docker tag jumanjiman/wormhole:${short_hash} jumanjiman/wormhole:wip2
 popd 2> /dev/null

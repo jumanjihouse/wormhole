@@ -10,18 +10,21 @@ COPY . /
 RUN apk upgrade --no-cache --available
 
 # We need an older ruby for puppet to avoid syck errors.
-RUN apk add --no-cache --repositories-file /etc/apk/repositories.ruby \
-      py-graphviz \
-      'ruby<2.2' \
-      ruby-dev \
-      ruby-bundler \
-      ruby-io-console \
-      ruby-irb \
-      && \
-    ln -s /usr/lib/ruby/gems/2.1.*/bin/bundle /bin/bundle
+#RUN apk add --no-cache --repositories-file /etc/apk/repositories.ruby \
+#      py-graphviz \
+#      'ruby<2.2' \
+#      ruby-dev \
+#      ruby-bundler \
+#      ruby-io-console \
+#      ruby-irb \
+#      && \
+#    ln -s /usr/lib/ruby/gems/2.1.*/bin/bundle /bin/bundle
 
 # Packages from stable main and community repos.
 RUN apk add --no-cache \
+      -X http://dl-cdn.alpinelinux.org/alpine/edge/main \
+      -X http://dl-cdn.alpinelinux.org/alpine/edge/community \
+      -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
       alpine-sdk \
       bash \
       bash-completion \
@@ -51,7 +54,7 @@ RUN apk add --no-cache \
       vim vimdiff \
       openjdk7 \
       jq \
-      openssl openssl-dev \
+      libressl libressl-dev \
       tree \
       php5 \
       strace \
@@ -68,6 +71,8 @@ RUN apk add --no-cache \
 
 # Edge main packages.
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/main \
+      -X http://dl-cdn.alpinelinux.org/alpine/edge/community \
+      -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
       'git>=2.9' \
       git-bash-completion \
       git-perl \
@@ -84,31 +89,23 @@ RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/main \
       py-asn1 \
       py-paramiko \
       py-yaml \
-      py2-tkinter \
     && :
 
 # Edge community packages.
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/community \
+      -X http://dl-cdn.alpinelinux.org/alpine/edge/main \
+      -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
       asciinema \
       editorconfig \
       nmh \
-      py-numpy \
       py-rpm \
       rpm \
       rpm-dev \
       duo_unix
 
-# Edge testing packages.
-RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-      pep8 \
-      py-kerberos \
-      py-matplotlib \
-      py-pyramid \
-      py-scipy \
-      ;
-
 RUN pip install \
       docker-compose \
+      pep8 \
       pylint \
       ;
 
